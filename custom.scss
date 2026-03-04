@@ -1,0 +1,120 @@
+/*-- scss:defaults --*/
+
+// FONTS
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono');
+
+/* Import Maple Mono font */
+$font-path: '/fonts/';
+
+@mixin font-face-maple($weight, $style, $file) {
+  @font-face {
+    font-family: 'Maple Mono';
+    src: url("#{$font-path}/Maple_Mono/#{$file}.ttf.woff2") format('woff2');
+    font-weight: $weight;
+    font-style: $style;
+    font-display: swap;
+  }
+}
+
+@include font-face-maple(100, normal, 'MapleMonoNormal-Thin');
+@include font-face-maple(200, normal, 'MapleMonoNormal-ExtraLight');
+@include font-face-maple(300, normal, 'MapleMonoNormal-Light');
+@include font-face-maple(400, normal, 'MapleMonoNormal-Regular');
+@include font-face-maple(500, normal, 'MapleMonoNormal-Medium');
+@include font-face-maple(600, normal, 'MapleMonoNormal-SemiBold');
+@include font-face-maple(700, normal, 'MapleMonoNormal-Bold');
+@include font-face-maple(800, normal, 'MapleMonoNormal-ExtraBold');
+@include font-face-maple(100, italic, 'MapleMonoNormal-ThinItalic');
+@include font-face-maple(200, italic, 'MapleMonoNormal-ExtraLightItalic');
+@include font-face-maple(300, italic, 'MapleMonoNormal-LightItalic');
+@include font-face-maple(400, italic, 'MapleMonoNormal-Italic');
+@include font-face-maple(500, italic, 'MapleMonoNormal-MediumItalic');
+@include font-face-maple(600, italic, 'MapleMonoNormal-SemiBoldItalic');
+@include font-face-maple(700, italic, 'MapleMonoNormal-BoldItalic');
+@include font-face-maple(800, italic, 'MapleMonoNormal-ExtraBoldItalic');
+
+// $font-family-sans-serif: JetBrains Mono, sans-serif !default;
+// $presentation-heading-font: "JetBrains Mono", sans-serif !default;
+$presentation-heading-font: "Maple Mono", "JetBrains Mono", sans-serif !default;
+
+
+/*-- scss:rules --*/
+
+// title and headings
+
+#title-slide {
+  text-align: center;
+
+  .title {
+    font-size: 2.2em;
+    font-weight: 350;
+  }
+
+  .subtitle {
+    font-style: italic;
+  }
+
+  .authors,
+  .author,
+  .quarto-title-author-name {
+    font-size: 1.0em;
+  }
+
+  .quarto-title-authors {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .institute,
+  .quarto-title-affiliation,
+  .quarto-title-author-email {
+    font-style: italic;
+    font-size: 80%;
+  }
+
+}
+
+/* Add spacing between columns */
+.reveal .columns {
+  gap: 1em;
+}
+
+/*-- vertically center columns (or any container) --*/
+.v-center-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+  gap: 1em;
+}
+
+
+/*-- Get rid of column margins - quarto revealjs has strange behaviour --*/
+.reveal .columns> {
+
+  .column,
+  .column:last-child {
+
+    > :not(ul, ol) {
+
+      margin-left: 0em;
+      margin-right: 0em;
+    }
+  }
+}
+
+/*-- add light background to transparent images --*/
+.transparent-image-wrapper {
+  background-color: #ffffff;
+  padding: 10px;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+/*-- Logo --*/
+.reveal .slide-logo {
+  max-width: unset !important;
+  max-height: 10% !important;
+}
