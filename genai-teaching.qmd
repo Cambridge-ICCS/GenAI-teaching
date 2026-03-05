@@ -11,8 +11,8 @@ format:
     highlight-style: a11y
     code-overflow: wrap
     code-line-numbers: true
-    logo: https://iccs.cam.ac.uk/files/iccs_ucam_combined_reverse_colour.png
-    theme: [dark, custom.scss]
+    logo: images/combined_logo.png
+    theme: [default, custom.scss]
     preview: true
     slide-number: true
     mermaid:
