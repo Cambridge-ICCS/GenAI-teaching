@@ -1,0 +1,35 @@
+
+## ML: The basics
+
+- Gradient descent
+- Loss functions
+- Overfitting
+
+## Transformers
+- Tokenization (word2vec, doc2vec, BPE, etc.)
+- Attention
+- Architecture:
+
+<!-- placeholder transformer image from shutterstock  -->
+![Transformer architecture](./images/transformer.jpeg)
+
+
+## Agentic AI
+- RL & Alignment
+- Reasoning
+- MCP - connecting models to the outside world (Tom...)
+
+## References & Further Reading
+**Foundational concepts**
+
+- 3Blue1Brown — [Neural Networks playlist](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi) [@3blue1brown_nn]
+- Andrej Karpathy — [Neural Networks: Zero to Hero](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ) [@karpathy_zero_to_hero]
+
+**Transformers**
+
+- Stanford CS25 — [Transformers United](https://web.stanford.edu/class/cs25/) [@stanford_cs25]
+
+**Reinforcement Learning & Alignment**
+
+- Hugging Face — [Deep RL Course](https://huggingface.co/learn/deep-rl-course) [@huggingface_deep_rl]
+- OpenAI — [Spinning Up in Deep RL](https://spinningup.openai.com) [@openai_spinningup]
