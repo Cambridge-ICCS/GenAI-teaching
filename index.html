@@ -30,7 +30,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="genai-teaching_files/libs/revealjs/dist/theme/quarto-35fd916c1112da6813df4aae704346e7.css">
   <link href="genai-teaching_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="genai-teaching_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -158,9 +178,69 @@ Matt Archer <a href="https://orcid.org/0009-0002-7043-6769" class="quarto-title-
 
   <p class="date">2026-04-01</p>
 </section>
-<section id="references" class="slide level2 smaller">
+<section id="ml-the-basics" class="slide level2">
+<h2>ML: The basics</h2>
+<ul>
+<li>Gradient descent</li>
+<li>Loss functions</li>
+<li>Overfitting</li>
+</ul>
+</section>
+<section id="transformers" class="slide level2">
+<h2>Transformers</h2>
+<ul>
+<li>Tokenization (word2vec, doc2vec, BPE, etc.)</li>
+<li>Attention</li>
+<li>Architecture:</li>
+</ul>
+<!-- placeholder transformer image from shutterstock  -->
+
+<img data-src="./images/transformer.jpeg" class="r-stretch quarto-figure-center"><p class="caption">Transformer architecture</p></section>
+<section id="agentic-ai" class="slide level2">
+<h2>Agentic AI</h2>
+<ul>
+<li>RL &amp; Alignment</li>
+<li>Reasoning</li>
+<li>MCP - connecting models to the outside world (Tom…)</li>
+</ul>
+</section>
+<section id="references-further-reading" class="slide level2">
+<h2>References &amp; Further Reading</h2>
+<p><strong>Foundational concepts</strong></p>
+<ul>
+<li>3Blue1Brown — <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">Neural Networks playlist</a> <span class="citation" data-cites="3blue1brown_nn">(<a href="#/references" role="doc-biblioref" onclick="">Sanderson 2017</a>)</span></li>
+<li>Andrej Karpathy — <a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">Neural Networks: Zero to Hero</a> <span class="citation" data-cites="karpathy_zero_to_hero">(<a href="#/references" role="doc-biblioref" onclick="">Karpathy 2022</a>)</span></li>
+</ul>
+<p><strong>Transformers</strong></p>
+<ul>
+<li>Stanford CS25 — <a href="https://web.stanford.edu/class/cs25/">Transformers United</a> <span class="citation" data-cites="stanford_cs25">(<a href="#/references" role="doc-biblioref" onclick="">Stanford University 2021</a>)</span></li>
+</ul>
+<p><strong>Reinforcement Learning &amp; Alignment</strong></p>
+<ul>
+<li>Hugging Face — <a href="https://huggingface.co/learn/deep-rl-course">Deep RL Course</a> <span class="citation" data-cites="huggingface_deep_rl">(<a href="#/references" role="doc-biblioref" onclick="">Hugging Face 2022</a>)</span></li>
+<li>OpenAI — <a href="https://spinningup.openai.com">Spinning Up in Deep RL</a> <span class="citation" data-cites="openai_spinningup">(<a href="#/references" role="doc-biblioref" onclick="">Achiam 2018</a>)</span></li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-openai_spinningup" class="csl-entry" role="listitem">
+Achiam, Joshua. 2018. <span>“Spinning up in Deep Reinforcement Learning.”</span> OpenAI. <a href="https://spinningup.openai.com">https://spinningup.openai.com</a>.
+</div>
+<div id="ref-huggingface_deep_rl" class="csl-entry" role="listitem">
+Hugging Face. 2022. <span>“Deep Reinforcement Learning Course.”</span> Online course. <a href="https://huggingface.co/learn/deep-rl-course">https://huggingface.co/learn/deep-rl-course</a>.
+</div>
+<div id="ref-karpathy_zero_to_hero" class="csl-entry" role="listitem">
+Karpathy, Andrej. 2022. <span>“Neural Networks: Zero to Hero.”</span> YouTube playlist. <a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ</a>.
+</div>
+<div id="ref-3blue1brown_nn" class="csl-entry" role="listitem">
+Sanderson, Grant. 2017. <span>“Neural Networks.”</span> YouTube playlist, 3Blue1Brown. <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi</a>.
+</div>
+<div id="ref-stanford_cs25" class="csl-entry" role="listitem">
+Stanford University. 2021. <span>“<span>CS25</span>: Transformers United.”</span> Stanford University Course. <a href="https://web.stanford.edu/class/cs25/">https://web.stanford.edu/class/cs25/</a>.
+</div>
+</div>
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
