@@ -1,7 +1,7 @@
 ---
 output-file: index
-title: "GenAI teaching"
-subtitle: "<br>A subtitle<br>"
+title: "An introduction to Generative AI for RSE "
+subtitle: "<br>Basic principles and tooling<br>"
 format:
   revealjs:
     embed-resources: false
@@ -24,7 +24,7 @@ author:
     orcid: 
   - name: "Matt Archer"
     orcid: 0009-0002-7043-6769
-date: "2026-04-01"
+date: "2026-03-30"
 bibliography: references.bib
 include-in-header:
   - text: |

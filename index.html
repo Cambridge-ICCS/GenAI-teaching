@@ -6,19 +6,22 @@
 <script src="genai-teaching_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="genai-teaching_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="genai-teaching_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="genai-teaching_files/libs/quarto-html/quarto-syntax-highlighting-b754b9fd3853d7e56faef54c29c5d52b.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.27">
+<link href="genai-teaching_files/libs/quarto-html/quarto-syntax-highlighting-975e726794ce811e14261b5ab5acfd7c.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.36">
 
   <meta name="author" content="Tom Meltzer">
   <meta name="author" content="Matt Archer">
-  <meta name="dcterms.date" content="2026-04-01">
-  <title>GenAI teaching</title>
+  <meta name="dcterms.date" content="2026-03-30">
+  <title>An introduction to Generative AI for RSE</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
   <link rel="stylesheet" href="genai-teaching_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="genai-teaching_files/libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -34,7 +37,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -51,7 +53,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="genai-teaching_files/libs/revealjs/dist/theme/quarto-35fd916c1112da6813df4aae704346e7.css">
+  <link rel="stylesheet" href="genai-teaching_files/libs/revealjs/dist/theme/quarto-e4523f2770f29e284f6b09cf2d02dfd6.css">
   <link href="genai-teaching_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="genai-teaching_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="genai-teaching_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -144,6 +146,10 @@
       margin-right: 0; 
     }
   </style>
+  <meta name="mermaid-theme" content="forest">
+  <script src="genai-teaching_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="genai-teaching_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="genai-teaching_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
   <style>
   #title-slide .title {
     font-size: 1.25em;
@@ -160,8 +166,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">GenAI teaching</h1>
-  <p class="subtitle"><br>A subtitle<br></p>
+  <h1 class="title">An introduction to Generative AI for RSE</h1>
+  <p class="subtitle"><br>Basic principles and tooling<br></p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -176,35 +182,131 @@ Matt Archer <a href="https://orcid.org/0009-0002-7043-6769" class="quarto-title-
 </div>
 </div>
 
-  <p class="date">2026-04-01</p>
+  <p class="date">2026-03-30</p>
 </section>
-<section id="ml-the-basics" class="slide level2">
+<section id="ml-the-basics" class="slide level2 smaller">
 <h2>ML: The basics</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
-<li>Gradient descent</li>
-<li>Loss functions</li>
-<li>Overfitting</li>
+<li><strong>Loss function</strong><br>
+measures how wrong the model is</li>
+<li><strong>Gradient descent</strong><br>
+nudge weights down the loss surface</li>
+<li><strong>Backpropagation</strong><br>
+efficiently compute gradients layer by layer</li>
+<li><strong>Overfitting</strong><br>
+learns training data <em>too well</em> — poor on new data</li>
 </ul>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 18, "rankSpacing": 22}}}%%
+flowchart TD
+    A[Training data] --&gt; B[Forward pass]
+    B --&gt; C[Compute loss]
+    C --&gt; D[Backpropagation]
+    D --&gt; E[Update weights]
+    E --&gt;|repeat| B
+    C --&gt;|loss small enough| F[Done ✓]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>Overfitting is a major concern in classical ML, but large transformer models largely sidestep it — somewhat paradoxically. They have billions of parameters (far more than training examples), yet generalise well. Key reasons: (1) vast and diverse training data makes true memorisation impractical; (2) regularisation techniques such as dropout and weight decay are baked in; (3) the double-descent phenomenon — very over-parameterised models can re-enter a good-generalisation regime; and (4) emergent representations learned across billions of tokens capture structure rather than surface patterns.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="transformers" class="slide level2">
-<h2>Transformers</h2>
+<section id="transformers-how-they-work" class="slide level2 smaller">
+<h2>Transformers: How they work</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
 <ul>
-<li>Tokenization (word2vec, doc2vec, BPE, etc.)</li>
-<li>Attention</li>
-<li>Architecture:</li>
+<li><strong>Tokenise</strong><br>
+text → sub-word tokens</li>
+<li><strong>Embed</strong><br>
+tokens → dense vectors</li>
+<li><strong>Positional encoding</strong><br>
+inject token order</li>
+<li><strong>Self-attention</strong><br>
+every token attends to every other <em>in parallel</em></li>
+<li><strong>Feed-forward</strong><br>
+per-token transform</li>
+<li>Repeat × N layers, then <strong>softmax → next token</strong></li>
 </ul>
-<!-- placeholder transformer image from shutterstock  -->
+</div><div class="column" style="width:45%;">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 15, "rankSpacing": 18}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
+flowchart TD
+    A([Input text]) --&gt; B[Tokenise]
+    B --&gt; C[Embed + pos. encoding]
+    C --&gt; D[Self-attention]
+    D --&gt; E[Feed-forward]
+    E --&gt;|repeat × N| D
+    E --&gt; F([Next token])
 
-<img data-src="./images/transformer.jpeg" class="r-stretch quarto-figure-center"><p class="caption">Transformer architecture</p></section>
+    classDef io     fill:#6c757d,stroke:#495057,color:#fff,rx:20
+    classDef prep   fill:#4b9cd3,stroke:#2c6e9e,color:#fff
+    classDef core   fill:#003b6f,stroke:#001f3f,color:#fff
+
+    class A,F io
+    class B,C prep
+    class D,E core
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>The crucial innovation is self-attention: rather than processing tokens in sequence (like an RNN), every token attends to every other token in parallel. This lets the model capture long-range dependencies and scales well on modern hardware.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="agentic-ai" class="slide level2">
 <h2>Agentic AI</h2>
 <ul>
 <li>RL &amp; Alignment</li>
 <li>Reasoning</li>
+</ul>
+</section>
+<section id="tooling" class="slide level2">
+<h2>Tooling</h2>
+<ul>
 <li>MCP - connecting models to the outside world (Tom…)</li>
 </ul>
 </section>
-<section id="references-further-reading" class="slide level2">
+<section id="references-further-reading" class="slide level2 smaller">
 <h2>References &amp; Further Reading</h2>
 <p><strong>Foundational concepts</strong></p>
 <ul>
@@ -224,21 +326,21 @@ Matt Archer <a href="https://orcid.org/0009-0002-7043-6769" class="quarto-title-
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-openai_spinningup" class="csl-entry" role="listitem">
-Achiam, Joshua. 2018. <span>“Spinning up in Deep Reinforcement Learning.”</span> OpenAI. <a href="https://spinningup.openai.com">https://spinningup.openai.com</a>.
+Achiam, Joshua. 2018. <em>Spinning up in Deep Reinforcement Learning</em>. OpenAI. <a href="https://spinningup.openai.com">https://spinningup.openai.com</a>.
 </div>
 <div id="ref-huggingface_deep_rl" class="csl-entry" role="listitem">
-Hugging Face. 2022. <span>“Deep Reinforcement Learning Course.”</span> Online course. <a href="https://huggingface.co/learn/deep-rl-course">https://huggingface.co/learn/deep-rl-course</a>.
+Hugging Face. 2022. <em>Deep Reinforcement Learning Course</em>. Online course. <a href="https://huggingface.co/learn/deep-rl-course">https://huggingface.co/learn/deep-rl-course</a>.
 </div>
 <div id="ref-karpathy_zero_to_hero" class="csl-entry" role="listitem">
-Karpathy, Andrej. 2022. <span>“Neural Networks: Zero to Hero.”</span> YouTube playlist. <a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ</a>.
+Karpathy, Andrej. 2022. <em>Neural Networks: Zero to Hero</em>. YouTube playlist. <a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ</a>.
 </div>
 <div id="ref-3blue1brown_nn" class="csl-entry" role="listitem">
-Sanderson, Grant. 2017. <span>“Neural Networks.”</span> YouTube playlist, 3Blue1Brown. <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi</a>.
+Sanderson, Grant. 2017. <em>Neural Networks</em>. YouTube playlist, 3Blue1Brown. <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi</a>.
 </div>
 <div id="ref-stanford_cs25" class="csl-entry" role="listitem">
-Stanford University. 2021. <span>“<span>CS25</span>: Transformers United.”</span> Stanford University Course. <a href="https://web.stanford.edu/class/cs25/">https://web.stanford.edu/class/cs25/</a>.
+Stanford University. 2021. <em><span>CS25</span>: Transformers United</em>. Stanford University Course. <a href="https://web.stanford.edu/class/cs25/">https://web.stanford.edu/class/cs25/</a>.
 </div>
 </div>
 </section>
