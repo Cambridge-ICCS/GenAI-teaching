@@ -196,7 +196,7 @@ nudge weights down the loss surface</li>
 <li><strong>Backpropagation</strong><br>
 efficiently compute gradients layer by layer</li>
 <li><strong>Overfitting</strong><br>
-learns training data <em>too well</em> — poor on new data</li>
+learns training data <em>too well</em>, poor on new data</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-reveal="true" data-layout-align="default">
@@ -204,14 +204,22 @@ learns training data <em>too well</em> — poor on new data</li>
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 18, "rankSpacing": 22}}}%%
+<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 15, "rankSpacing": 18}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
 flowchart TD
-    A[Training data] --&gt; B[Forward pass]
+    A([Training data]) --&gt; B["Forward pass (→ see next slide)"]
     B --&gt; C[Compute loss]
     C --&gt; D[Backpropagation]
     D --&gt; E[Update weights]
     E --&gt;|repeat| B
-    C --&gt;|loss small enough| F[Done ✓]
+    C --&gt;|loss small enough| F([Done ✓])
+
+    classDef io     fill:#6c757d,stroke:#495057,color:#fff
+    classDef step   fill:#4b9cd3,stroke:#2c6e9e,color:#fff
+    classDef key    fill:#003b6f,stroke:#001f3f,color:#fff
+
+    class A,F io
+    class B,C step
+    class D,E key
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -220,7 +228,7 @@ flowchart TD
 </div>
 </div></div>
 <aside class="notes">
-<p>Overfitting is a major concern in classical ML, but large transformer models largely sidestep it — somewhat paradoxically. They have billions of parameters (far more than training examples), yet generalise well. Key reasons: (1) vast and diverse training data makes true memorisation impractical; (2) regularisation techniques such as dropout and weight decay are baked in; (3) the double-descent phenomenon — very over-parameterised models can re-enter a good-generalisation regime; and (4) emergent representations learned across billions of tokens capture structure rather than surface patterns.</p>
+<p>Overfitting is a major concern in classical ML, but large transformer models largely sidestep it, somewhat paradoxically. They have billions of parameters (far more than training examples), yet generalise well. Key reasons: (1) vast and diverse training data makes true memorisation impractical; (2) regularisation techniques such as dropout and weight decay are baked in; (3) the double-descent phenomenon: very over-parameterised models can re-enter a good-generalisation regime; and (4) emergent representations learned across billions of tokens capture structure rather than surface patterns.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -233,48 +241,185 @@ flowchart TD
           display:block!important;
       }</style></aside>
 </section>
-<section id="transformers-how-they-work" class="slide level2 smaller">
-<h2>Transformers: How they work</h2>
+<section id="transformers-inference" class="slide level2 smaller">
+<h2>Transformers: Inference</h2>
 <div class="columns">
-<div class="column" style="width:55%;">
+<div class="column" style="width:45%;">
+<div class="fragment" data-fragment-index="1">
 <ul>
-<li><strong>Tokenise</strong><br>
-text → sub-word tokens</li>
-<li><strong>Embed</strong><br>
-tokens → dense vectors</li>
-<li><strong>Positional encoding</strong><br>
-inject token order</li>
-<li><strong>Self-attention</strong><br>
-every token attends to every other <em>in parallel</em></li>
-<li><strong>Feed-forward</strong><br>
-per-token transform</li>
-<li>Repeat × N layers, then <strong>softmax → next token</strong></li>
+<li><strong>Tokenise</strong> text → sub-word tokens</li>
 </ul>
-</div><div class="column" style="width:45%;">
+</div>
+<div class="fragment" data-fragment-index="2">
+<ul>
+<li><strong>Embed</strong> tokens → dense vectors</li>
+<li><strong>Positional encoding</strong> inject token order</li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="3">
+<ul>
+<li><strong>Self-attention</strong> every token attends to every other <em>in parallel</em></li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="4">
+<ul>
+<li><strong>Feed-forward</strong> per-token transform</li>
+<li>Repeat × N layers, then <strong>softmax → next token</strong><sup>1</sup></li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="5">
+<ul>
+<li><strong>Softmax → predict next token</strong></li>
+</ul>
+</div>
+<div class="fragment" data-fragment-index="6">
+<ul>
+<li>Predicted token appended to input, process repeats, one token at a time</li>
+</ul>
+</div>
+</div><div class="column" style="width:55%;">
+<div class="r-stack" style="min-height: 520px;">
+<div class="fragment fade-in-then-out" data-fragment-index="1">
 <div class="cell" data-reveal="true" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 15, "rankSpacing": 18}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
+<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 20, "rankSpacing": 35}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
+flowchart TD
+    A([Input text]) --&gt; B[Tokenise]
+    classDef io   fill:#6c757d,stroke:#495057,color:#fff
+    classDef prep fill:#4b9cd3,stroke:#2c6e9e,color:#fff
+    class A io
+    class B prep
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment fade-in-then-out" data-fragment-index="2">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 20, "rankSpacing": 35}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
+flowchart TD
+    A([Input text]) --&gt; B[Tokenise]
+    B --&gt; C[Embed + pos. encoding]
+    classDef io   fill:#6c757d,stroke:#495057,color:#fff
+    classDef prep fill:#4b9cd3,stroke:#2c6e9e,color:#fff
+    class A io
+    class B,C prep
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment fade-in-then-out" data-fragment-index="3">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 20, "rankSpacing": 35}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
 flowchart TD
     A([Input text]) --&gt; B[Tokenise]
     B --&gt; C[Embed + pos. encoding]
     C --&gt; D[Self-attention]
-    D --&gt; E[Feed-forward]
-    E --&gt;|repeat × N| D
-    E --&gt; F([Next token])
-
-    classDef io     fill:#6c757d,stroke:#495057,color:#fff,rx:20
-    classDef prep   fill:#4b9cd3,stroke:#2c6e9e,color:#fff
-    classDef core   fill:#003b6f,stroke:#001f3f,color:#fff
-
+    classDef io   fill:#6c757d,stroke:#495057,color:#fff
+    classDef prep fill:#4b9cd3,stroke:#2c6e9e,color:#fff
+    classDef core fill:#003b6f,stroke:#001f3f,color:#fff
+    class A io
+    class B,C prep
+    class D core
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment fade-in-then-out" data-fragment-index="4">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 20, "rankSpacing": 35}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
+flowchart TD
+    A([Input text]) --&gt; B[Tokenise]
+    B --&gt; C[Embed + pos. encoding]
+    C --&gt; D[Self-attention]
+    D --&gt; E["Feed-forward (× N layers)"]
+    classDef io   fill:#6c757d,stroke:#495057,color:#fff
+    classDef prep fill:#4b9cd3,stroke:#2c6e9e,color:#fff
+    classDef core fill:#003b6f,stroke:#001f3f,color:#fff
+    class A io
+    class B,C prep
+    class D,E core
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment fade-in-then-out" data-fragment-index="5">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 20, "rankSpacing": 35}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
+flowchart TD
+    A([Input text]) --&gt; B[Tokenise]
+    B --&gt; C[Embed + pos. encoding]
+    C --&gt; D[Self-attention]
+    D --&gt; E["Feed-forward (× N layers)"]
+    E --&gt; F([Predict next token])
+    classDef io   fill:#6c757d,stroke:#495057,color:#fff
+    classDef prep fill:#4b9cd3,stroke:#2c6e9e,color:#fff
+    classDef core fill:#003b6f,stroke:#001f3f,color:#fff
     class A,F io
     class B,C prep
     class D,E core
 </pre>
 </div>
 <p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="6">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 20, "rankSpacing": 35}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
+flowchart TD
+    A([Input text]) --&gt; B[Tokenise]
+    B --&gt; C[Embed + pos. encoding]
+    C --&gt; D[Self-attention]
+    D --&gt; E["Feed-forward (× N layers)"]
+    E --&gt; F([Predict next token])
+    F -.-&gt;|autoregressive| A2([Input text])
+    classDef io   fill:#6c757d,stroke:#495057,color:#fff
+    classDef prep fill:#4b9cd3,stroke:#2c6e9e,color:#fff
+    classDef core fill:#003b6f,stroke:#001f3f,color:#fff
+    class A,A2,F io
+    class B,C prep
+    class D,E core
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -292,13 +437,93 @@ flowchart TD
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="agentic-ai" class="slide level2">
-<h2>Agentic AI</h2>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Not always the most likely token. Sampling strategies include temperature, top-k, top-p</p></li></ol></aside></section>
+<section id="embeddings-encode-meaning" class="slide level2 smaller">
+<h2>Embeddings encode meaning</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>The <strong>input embedding matrix</strong> maps tokens to vectors. Directions encode semantic relationships:</p>
+<!-- ::: {style="background:#1a1a2e; color:#fff; padding:0.5em 1em; border-radius:6px; font-size:0.9em; text-align:center; margin:0.5em 0;"}
+E(Sushi) + E(Germany) − E(Japan) ≈ E(Bratwurst)
+::: -->
 <ul>
-<li>RL &amp; Alignment</li>
-<li>Reasoning</li>
+<li>The food/country direction generalises across many pairs:
+<ul>
+<li>pizza (Italy)</li>
+<li>tacos (Mexico)</li>
+</ul></li>
 </ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="./images/3b1b-embedding.png" style="width:80.0%"></p>
+</div></div>
+<div style="margin-top:0.8em; font-size:0.85em; color:#555; border-left: 3px solid #4b9cd3; padding-left:0.5em;">
+<p>These patterns exist <em>before</em> attention runs. Attention enriches each vector with context, distinguishing “bank” (river) from “bank” (finance).</p>
+</div>
+<div class="attribution">
+<p>3Blue1Brown, <a href="https://www.3blue1brown.com/lessons/gpt">Deep Learning Ch. 5</a></p>
+</div>
+</section>
+<section id="agentic-ai" class="slide level2 smaller">
+<h2>Agentic AI</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>LLM</strong>: generates text, reasons, and decides whether to act or answer</li>
+<li><strong>System prompt</strong>: the agent’s “config”, defines its role, tools, and behaviour</li>
+<li><strong>Context window</strong>: all state lives here: prompt, results, reasoning</li>
+<li><strong>Planning</strong>: CoT/ReAct, model reasons step by step before acting</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><strong>Tools</strong>: search, code execution, APIs, RAG. Agent decides when to invoke each</li>
+<li><strong>Termination</strong>: done when LLM produces a final answer, or <code>max_iterations</code> is hit</li>
+</ul>
+</div></div>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 40, "rankSpacing": 80}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
+flowchart LR
+    S([System prompt]) --&gt; C
+    H([Prompt]) --&gt; C["Context window"]
+    C --&gt; L["LLM: generate text"]
+    L --&gt; D{Tool call?}
+    D --&gt;|yes| T["Tools (incl. RAG)"]
+    T --&gt;|result appended| C
+    D --&gt;|no| O([Output])
+
+    classDef io      fill:#6c757d,stroke:#495057,color:#fff
+    classDef core    fill:#003b6f,stroke:#001f3f,color:#fff
+    classDef support fill:#4b9cd3,stroke:#2c6e9e,color:#fff
+    classDef decision fill:#e9c46a,stroke:#f4a261,color:#000
+
+    class S,H,O io
+    class L core
+    class C,T support
+    class D decision
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>An agentic system wraps an LLM in a loop: the model receives a prompt, decides whether it needs more information or to take an action, calls a tool if so, gets the result back in its context, and repeats until it decides it is done.</p>
+<p>The key components: - <strong>LLM</strong>: does all the reasoning:it reads the context, decides what to do next, and generates either a tool call or a final answer. - <strong>Tools</strong>: external capabilities the LLM can invoke:web search, a code interpreter, database queries, API calls. The LLM doesn’t execute these itself; the surrounding framework does and appends the result to the context. - <strong>Memory / RAG</strong>: retrieved documents or prior conversation history injected into the context before the LLM runs. This is how agents can work with knowledge beyond their training cutoff or access private data. - <strong>Planning</strong>: some agents explicitly decompose a task into sub-steps before acting (ReAct, chain-of-thought, tree-of-thought). Others just iterate implicitly.</p>
+<p>A key point for an RSE audience: the LLM itself is stateless:all state lives in the context window. The “loop” is managed by the surrounding application code, not the model.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="tooling" class="slide level2">
 <h2>Tooling</h2>
@@ -310,17 +535,17 @@ flowchart TD
 <h2>References &amp; Further Reading</h2>
 <p><strong>Foundational concepts</strong></p>
 <ul>
-<li>3Blue1Brown — <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">Neural Networks playlist</a> <span class="citation" data-cites="3blue1brown_nn">(<a href="#/references" role="doc-biblioref" onclick="">Sanderson 2017</a>)</span></li>
-<li>Andrej Karpathy — <a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">Neural Networks: Zero to Hero</a> <span class="citation" data-cites="karpathy_zero_to_hero">(<a href="#/references" role="doc-biblioref" onclick="">Karpathy 2022</a>)</span></li>
+<li>3Blue1Brown: <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">Neural Networks playlist</a> <span class="citation" data-cites="3blue1brown_nn">(<a href="#/references" role="doc-biblioref" onclick="">Sanderson 2017</a>)</span></li>
+<li>Andrej Karpathy: <a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">Neural Networks: Zero to Hero</a> <span class="citation" data-cites="karpathy_zero_to_hero">(<a href="#/references" role="doc-biblioref" onclick="">Karpathy 2022</a>)</span></li>
 </ul>
 <p><strong>Transformers</strong></p>
 <ul>
-<li>Stanford CS25 — <a href="https://web.stanford.edu/class/cs25/">Transformers United</a> <span class="citation" data-cites="stanford_cs25">(<a href="#/references" role="doc-biblioref" onclick="">Stanford University 2021</a>)</span></li>
+<li>Stanford CS25: <a href="https://web.stanford.edu/class/cs25/">Transformers United</a> <span class="citation" data-cites="stanford_cs25">(<a href="#/references" role="doc-biblioref" onclick="">Stanford University 2021</a>)</span></li>
 </ul>
 <p><strong>Reinforcement Learning &amp; Alignment</strong></p>
 <ul>
-<li>Hugging Face — <a href="https://huggingface.co/learn/deep-rl-course">Deep RL Course</a> <span class="citation" data-cites="huggingface_deep_rl">(<a href="#/references" role="doc-biblioref" onclick="">Hugging Face 2022</a>)</span></li>
-<li>OpenAI — <a href="https://spinningup.openai.com">Spinning Up in Deep RL</a> <span class="citation" data-cites="openai_spinningup">(<a href="#/references" role="doc-biblioref" onclick="">Achiam 2018</a>)</span></li>
+<li>Hugging Face: <a href="https://huggingface.co/learn/deep-rl-course">Deep RL Course</a> <span class="citation" data-cites="huggingface_deep_rl">(<a href="#/references" role="doc-biblioref" onclick="">Hugging Face 2022</a>)</span></li>
+<li>OpenAI: <a href="https://spinningup.openai.com">Spinning Up in Deep RL</a> <span class="citation" data-cites="openai_spinningup">(<a href="#/references" role="doc-biblioref" onclick="">Achiam 2018</a>)</span></li>
 </ul>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
@@ -344,6 +569,7 @@ Stanford University. 2021. <em><span>CS25</span>: Transformers United</em>. Stan
 </div>
 </div>
 </section>
+
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="images/combined_logo.png" class="slide-logo"></p>
