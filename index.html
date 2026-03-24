@@ -228,7 +228,7 @@ flowchart TD
 </div>
 </div></div>
 <aside class="notes">
-<p>Overfitting is a major concern in classical ML, but large transformer models largely sidestep it, somewhat paradoxically. They have billions of parameters (far more than training examples), yet generalise well. Key reasons: (1) vast and diverse training data makes true memorisation impractical; (2) regularisation techniques such as dropout and weight decay are baked in; (3) the double-descent phenomenon: very over-parameterised models can re-enter a good-generalisation regime; and (4) emergent representations learned across billions of tokens capture structure rather than surface patterns.</p>
+<p>Overfitting is a major concern in classical ML, but large transformer models largely sidestep it. They have billions of parameters (far more than training examples), yet generalise well. Key reasons: (1) vast and diverse training data makes true memorisation impractical; (2) regularisation techniques such as dropout and weight decay are baked in; (3) the double-descent phenomenon: very over-parameterised models can re-enter a good-generalisation regime; and (4) emergent representations learned across billions of tokens capture structure rather than surface patterns.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -263,7 +263,7 @@ flowchart TD
 </div>
 <div class="fragment" data-fragment-index="4">
 <ul>
-<li><strong>Feed-forward</strong> per-token transform</li>
+<li><strong>MLP</strong> per-token transform</li>
 <li>Repeat × N layers, then <strong>softmax → next token</strong><sup>1</sup></li>
 </ul>
 </div>
@@ -449,8 +449,7 @@ E(Sushi) + E(Germany) − E(Japan) ≈ E(Bratwurst)
 <ul>
 <li>The food/country direction generalises across many pairs:
 <ul>
-<li>pizza (Italy)</li>
-<li>tacos (Mexico)</li>
+<li>pizza / Italy, tacos / Mexico</li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
