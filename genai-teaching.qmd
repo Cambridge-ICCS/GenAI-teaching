@@ -1,0 +1,45 @@
+---
+output-file: index
+title: "An introduction to Generative AI for RSE "
+subtitle: "<br>Basic principles and tooling<br>"
+format:
+  revealjs:
+    embed-resources: false
+    chalkboard: false
+    preview-links: auto
+    history: false
+    highlight-style: a11y
+    code-overflow: wrap
+    code-line-numbers: true
+    logo: images/combined_logo.png
+    theme: [default, custom.scss]
+    preview: true
+    slide-number: true
+    mermaid:
+      theme: forest
+revealjs-plugins:
+  - attribution
+author:
+  - name: Tom Meltzer
+    orcid: 
+  - name: "Matt Archer"
+    orcid: 0009-0002-7043-6769
+date: "2026-03-30"
+bibliography: references.bib
+include-in-header:
+  - text: |
+      <style>
+      #title-slide .title {
+        font-size: 1.25em;
+        color: #fffff;
+      }
+      #title-slide .authors {
+        font-size: 1.0em;
+        color: #fffff;
+      }
+      </style>
+---
+
+{{< include _intro.qmd >}}
+
+## References {.smaller}
