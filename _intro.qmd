@@ -16,7 +16,7 @@
 ```{mermaid}
 %%{init: {"flowchart": {"nodeSpacing": 15, "rankSpacing": 18}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
 flowchart TD
-    A([Training data]) --> B["Forward pass (→ see next slide)"]
+    A([Training data]) --> B["Forward pass"]
     B --> C[Compute loss]
     C --> D[Backpropagation]
     D --> E[Update weights]
@@ -50,124 +50,54 @@ Overfitting is a major concern in classical ML, but large transformer models lar
 - **Positional encoding** inject token order
 :::
 ::: {.fragment fragment-index=3}
-- **Self-attention** every token attends to every other *in parallel*
+- Transformer block (× N layers):
+    - **Self-attention** every token attends to every other *in parallel*
+    - **Feed-forward network** per-token transform
 :::
 ::: {.fragment fragment-index=4}
-- **MLP** per-token transform
-- Repeat × N layers, then **softmax → next token**^[Not always the most likely token. Sampling strategies include temperature, top-k, top-p]
-:::
-::: {.fragment fragment-index=5}
-- **Softmax → predict next token**
-:::
-::: {.fragment fragment-index=6}
-- Predicted token appended to input, process repeats, one token at a time
+- **Predict next token** via softmax *(not always the most likely — temperature, top-k, top-p)*
 :::
 :::
 
 ::: {.column width="55%"}
-::: {.r-stack style="min-height: 520px;"}
+::: {.r-stack style="padding-left: 5em;"}
+
+::: {.fragment .fade-in-then-out fragment-index=0}
+![](images/tf-step0.png){width="75%"}
+:::
 
 ::: {.fragment .fade-in-then-out fragment-index=1}
-```{mermaid}
-%%{init: {"flowchart": {"nodeSpacing": 20, "rankSpacing": 35}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
-flowchart TD
-    A([Input text]) --> B[Tokenise]
-    classDef io   fill:#6c757d,stroke:#495057,color:#fff
-    classDef prep fill:#4b9cd3,stroke:#2c6e9e,color:#fff
-    class A io
-    class B prep
-```
+![](images/tf-step1.png){width="75%"}
 :::
 
 ::: {.fragment .fade-in-then-out fragment-index=2}
-```{mermaid}
-%%{init: {"flowchart": {"nodeSpacing": 20, "rankSpacing": 35}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
-flowchart TD
-    A([Input text]) --> B[Tokenise]
-    B --> C[Embed + pos. encoding]
-    classDef io   fill:#6c757d,stroke:#495057,color:#fff
-    classDef prep fill:#4b9cd3,stroke:#2c6e9e,color:#fff
-    class A io
-    class B,C prep
-```
+![](images/tf-step2.png){width="75%"}
 :::
 
 ::: {.fragment .fade-in-then-out fragment-index=3}
-```{mermaid}
-%%{init: {"flowchart": {"nodeSpacing": 20, "rankSpacing": 35}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
-flowchart TD
-    A([Input text]) --> B[Tokenise]
-    B --> C[Embed + pos. encoding]
-    C --> D[Self-attention]
-    classDef io   fill:#6c757d,stroke:#495057,color:#fff
-    classDef prep fill:#4b9cd3,stroke:#2c6e9e,color:#fff
-    classDef core fill:#003b6f,stroke:#001f3f,color:#fff
-    class A io
-    class B,C prep
-    class D core
-```
+![](images/tf-step3.png){width="75%"}
 :::
 
 ::: {.fragment .fade-in-then-out fragment-index=4}
-```{mermaid}
-%%{init: {"flowchart": {"nodeSpacing": 20, "rankSpacing": 35}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
-flowchart TD
-    A([Input text]) --> B[Tokenise]
-    B --> C[Embed + pos. encoding]
-    C --> D[Self-attention]
-    D --> E["Feed-forward (× N layers)"]
-    classDef io   fill:#6c757d,stroke:#495057,color:#fff
-    classDef prep fill:#4b9cd3,stroke:#2c6e9e,color:#fff
-    classDef core fill:#003b6f,stroke:#001f3f,color:#fff
-    class A io
-    class B,C prep
-    class D,E core
-```
+![](images/tf-step4.png){width="75%"}
 :::
 
-::: {.fragment .fade-in-then-out fragment-index=5}
-```{mermaid}
-%%{init: {"flowchart": {"nodeSpacing": 20, "rankSpacing": 35}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
-flowchart TD
-    A([Input text]) --> B[Tokenise]
-    B --> C[Embed + pos. encoding]
-    C --> D[Self-attention]
-    D --> E["Feed-forward (× N layers)"]
-    E --> F([Predict next token])
-    classDef io   fill:#6c757d,stroke:#495057,color:#fff
-    classDef prep fill:#4b9cd3,stroke:#2c6e9e,color:#fff
-    classDef core fill:#003b6f,stroke:#001f3f,color:#fff
-    class A,F io
-    class B,C prep
-    class D,E core
-```
-:::
-
-::: {.fragment fragment-index=6}
-```{mermaid}
-%%{init: {"flowchart": {"nodeSpacing": 20, "rankSpacing": 35}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
-flowchart TD
-    A([Input text]) --> B[Tokenise]
-    B --> C[Embed + pos. encoding]
-    C --> D[Self-attention]
-    D --> E["Feed-forward (× N layers)"]
-    E --> F([Predict next token])
-    F -.->|autoregressive| A2([Input text])
-    classDef io   fill:#6c757d,stroke:#495057,color:#fff
-    classDef prep fill:#4b9cd3,stroke:#2c6e9e,color:#fff
-    classDef core fill:#003b6f,stroke:#001f3f,color:#fff
-    class A,A2,F io
-    class B,C prep
-    class D,E core
-```
+::: {.fragment fragment-index=5}
+![](images/tf-step5.png){width="75%"}
 :::
 
 :::
 :::
 ::::
 
+::: {.fragment fragment-index=5}
+- Predicted token appended to input, process repeats, one token at a time
+:::
+
 ::: {.notes}
 The crucial innovation is self-attention: rather than processing tokens in sequence (like an RNN), every token attends to every other token in parallel. This lets the model capture long-range dependencies and scales well on modern hardware.
+
+Sampling strategies: the model doesn't always pick the most likely next token. Temperature scales the probability distribution (higher = more random). Top-k restricts sampling to the k most likely tokens. Top-p (nucleus sampling) samples from the smallest set of tokens whose cumulative probability exceeds p.
 :::
 
 
@@ -184,7 +114,7 @@ E(Sushi) + E(Germany) − E(Japan) ≈ E(Bratwurst)
 ::: -->
 
 - The food/country direction generalises across many pairs: 
-  - pizza / Italy, tacos / Mexico
+  - i.e. pizza / Italy, tacos / Mexico
 
 :::
 ::: {.column width="50%"}
