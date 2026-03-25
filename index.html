@@ -12,7 +12,7 @@
   <meta name="author" content="Tom Meltzer">
   <meta name="author" content="Matt Archer">
   <meta name="dcterms.date" content="2026-03-30">
-  <title>An introduction to Generative AI for RSE</title>
+  <title>An Introduction to Generative AI for RSEs</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -53,7 +53,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="genai-teaching_files/libs/revealjs/dist/theme/quarto-e4523f2770f29e284f6b09cf2d02dfd6.css">
+  <link rel="stylesheet" href="genai-teaching_files/libs/revealjs/dist/theme/quarto-879bf4702ce161ef98ecdd3ade7526f2.css">
   <link href="genai-teaching_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="genai-teaching_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="genai-teaching_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -146,10 +146,6 @@
       margin-right: 0; 
     }
   </style>
-  <meta name="mermaid-theme" content="forest">
-  <script src="genai-teaching_files/libs/quarto-diagram/mermaid.min.js"></script>
-  <script src="genai-teaching_files/libs/quarto-diagram/mermaid-init.js"></script>
-  <link href="genai-teaching_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
   <style>
   #title-slide .title {
     font-size: 1.25em;
@@ -166,13 +162,13 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">An introduction to Generative AI for RSE</h1>
-  <p class="subtitle"><br>Basic principles and tooling<br></p>
+  <h1 class="title">An Introduction to Generative AI for RSEs</h1>
+  <p class="subtitle">Basic principles and tooling</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Tom Meltzer 
+Tom Meltzer <a href="https://orcid.org/0000-0003-1740-9550" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
 </div>
 </div>
 <div class="quarto-title-author">
@@ -199,28 +195,12 @@ efficiently compute gradients layer by layer</li>
 learns training data <em>too well</em>, poor on new data</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 15, "rankSpacing": 18}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
-flowchart TD
-    A([Training data]) --&gt; B["Forward pass"]
-    B --&gt; C[Compute loss]
-    C --&gt; D[Backpropagation]
-    D --&gt; E[Update weights]
-    E --&gt;|repeat| B
-    C --&gt;|loss small enough| F([Done ✓])
-
-    classDef io     fill:#6c757d,stroke:#495057,color:#fff
-    classDef step   fill:#4b9cd3,stroke:#2c6e9e,color:#fff
-    classDef key    fill:#003b6f,stroke:#001f3f,color:#fff
-
-    class A,F io
-    class B,C step
-    class D,E key
-</pre>
+<p><img data-src="genai-teaching_files/figure-revealjs/mermaid-figure-1.png" style="width:3.97in;height:3.82in"></p>
 </div>
 <p></p></figure><p></p>
 </div>
@@ -352,31 +332,12 @@ E(Sushi) + E(Germany) − E(Japan) ≈ E(Bratwurst)
 <li><strong>Termination</strong>: done when LLM produces a final answer, or <code>max_iterations</code> is hit</li>
 </ul>
 </div></div>
-<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class=""><p></p>
 <div>
-<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 40, "rankSpacing": 80}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
-flowchart LR
-    S([System prompt]) --&gt; C
-    H([Prompt]) --&gt; C["Context window"]
-    C --&gt; L["LLM: generate text"]
-    L --&gt; D{Tool call?}
-    D --&gt;|yes| T["Tools (incl. RAG)"]
-    T --&gt;|result appended| C
-    D --&gt;|no| O([Output])
-
-    classDef io      fill:#6c757d,stroke:#495057,color:#fff
-    classDef core    fill:#003b6f,stroke:#001f3f,color:#fff
-    classDef support fill:#4b9cd3,stroke:#2c6e9e,color:#fff
-    classDef decision fill:#e9c46a,stroke:#f4a261,color:#000
-
-    class S,H,O io
-    class L core
-    class C,T support
-    class D decision
-</pre>
+<p><img data-src="genai-teaching_files/figure-revealjs/mermaid-figure-2.png" style="width:13.28in;height:2.01in"></p>
 </div>
 <p></p></figure><p></p>
 </div>
