@@ -43,4 +43,6 @@ include-in-header:
 
 {{< include _intro.qmd >}}
 
+{{< include _tools.qmd >}}
+
 ## References {.smaller}
