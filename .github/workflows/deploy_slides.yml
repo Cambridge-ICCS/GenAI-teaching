@@ -38,7 +38,7 @@ jobs:
           quarto add --no-prompt quarto-ext/fontawesome
           quarto add --no-prompt jmbuhr/quarto-qrcode
 
-          quarto render genai-teaching.qmd
+          quarto render genai-teaching.qmd --log-level debug
 
       - name: Test pages build
         if: github.ref != 'refs/heads/main'
