@@ -1,0 +1,61 @@
+# Tools and Workflows
+
+## Opencode (CLI) {.nostretch}
+
+In this half of the training we will make use of [`opencode`](https://opencode.ai/)
+
+:::{.r-stack .center}
+![](./images/opencode-front.png){width=80%}
+:::
+
+## Context Engineering
+
+- LLMs are powerful, but suffer from context bloat
+- Context window is finite resource
+- LOTR + Hobbit ~ 750k tokens / 100k LOC ~ 1M tokens
+
+| Model Name                       | Context Size   |
+| :------------------------------- | -------------: |
+| `Claude 4.6 Opus`                | 1M             |
+| `Gemini 3.1 Pro`                 | 1M – 10M       |
+| `GPT-5.3-Codex`                  | 400k           |
+| `Devstral-2-123B-Instruct-2512`  | 256k           |
+<!-- : Context lengths for SOTA and self-hosted models -->
+
+## Solution
+
+To resolve this issue, Anthropic open-sourced 2 methods:
+
+- [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) (MCP) [November 2024]
+- [Agent Skills](https://agentskills.io/what-are-skills) [December 2025]
+
+## MCP
+
+- Open-source standard
+- Connect LLMs to external systems
+
+![](./images/mcp-simple-diagram.png)
+
+## MCP examples {.nostretch}
+
+- `opencode` supports 11 built-in skills (see [docs](https://opencode.ai/docs/tools#built-in))
+
+![](./images/mcp-opencode-1.png){width=80%}
+
+## MCP examples {.nostretch}
+
+
+
+## Skills
+
+## Anatomy of a Skill
+
+```
+my-skill/             # Required: unique skill name e.g., [my-skill]
+├── SKILL.md          # Required: instructions + metadata
+├── scripts/          # Optional: executable code
+├── references/       # Optional: documentation
+└── assets/           # Optional: templates, resources
+```
+
+##
