@@ -30,12 +30,14 @@ jobs:
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-      
+
+      - name: Install Python dependencies
+        run: pip install jupyter
+
       - name: Render Quarto Project
         run: |
           # This takes an unreasonably long time
           quarto add --no-prompt quarto-ext/attribution
-          quarto add --no-prompt quarto-ext/fontawesome
           quarto add --no-prompt jmbuhr/quarto-qrcode
 
           quarto render genai-teaching.qmd --log-level debug
