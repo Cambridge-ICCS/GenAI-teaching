@@ -1,0 +1,49 @@
+## Agentic AI {.smaller}
+
+:::: {.columns}
+::: {.column width="50%"}
+- **LLM**: generates text, reasons, and decides whether to act or answer
+- **System prompt**: the agent's "config", defines its role, tools, and behaviour
+- **Context window**: all state lives here: prompt, results, reasoning
+- **Planning**: CoT/ReAct, model reasons step by step before acting
+:::
+::: {.column width="50%"}
+- **Tools**: search, code execution, APIs, RAG. Agent decides when to invoke each
+- **Termination**: done when LLM produces a final answer, or `max_iterations` is hit
+:::
+::::
+
+```{mermaid}
+%%{init: {"flowchart": {"nodeSpacing": 40, "rankSpacing": 80}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
+flowchart LR
+    S([System prompt]) --> C
+    H([Prompt]) --> C["Context window"]
+    C --> L["LLM: generate text"]
+    L --> D{Tool call?}
+    D -->|yes| T["Tools (incl. RAG)"]
+    T -->|result appended| C
+    D -->|no| O([Output])
+
+    classDef io      fill:#6c757d,stroke:#495057,color:#fff
+    classDef core    fill:#003b6f,stroke:#001f3f,color:#fff
+    classDef support fill:#4b9cd3,stroke:#2c6e9e,color:#fff
+    classDef decision fill:#e9c46a,stroke:#f4a261,color:#000
+
+    class S,H,O io
+    class L core
+    class C,T support
+    class D decision
+```
+
+::: {.notes}
+An agentic system wraps an LLM in a loop: the model receives a prompt, decides whether it needs more information or to take an action, calls a tool if so, gets the result back in its context, and repeats until it decides it is done.
+
+The key components:
+- **LLM**: does all the reasoning:it reads the context, decides what to do next, and generates either a tool call or a final answer.
+- **Tools**: external capabilities the LLM can invoke:web search, a code interpreter, database queries, API calls. The LLM doesn't execute these itself; the surrounding framework does and appends the result to the context.
+- **Memory / RAG**: retrieved documents or prior conversation history injected into the context before the LLM runs. This is how agents can work with knowledge beyond their training cutoff or access private data.
+- **Planning**: some agents explicitly decompose a task into sub-steps before acting (ReAct, chain-of-thought, tree-of-thought). Others just iterate implicitly.
+
+A key point for an RSE audience: the LLM itself is stateless:all state lives in the context window. The "loop" is managed by the surrounding application code, not the model.
+:::
+
