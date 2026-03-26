@@ -15,7 +15,7 @@ format:
     theme: [default, custom.scss]
     preview: true
     slide-number: true
-    mermaid-format: png
+    # mermaid-format: png
     mermaid:
       theme: forest
 revealjs-plugins:
