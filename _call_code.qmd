@@ -1,9 +1,6 @@
 ## LLM Hello World {.smaller auto-animate=true}
 
-```{python}
-#| eval: false
-#| echo: true
-#| code-line-numbers: "1-3"
+```{.python code-line-numbers="1-3"}
 import os
 from huggingface_hub import login
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -25,10 +22,7 @@ print(tokenizer.decode(outputs[0]))
 
 ## LLM Hello World {.smaller auto-animate=true}
 
-```{python}
-#| eval: false
-#| echo: true
-#| code-line-numbers: "5"
+```{.python code-line-numbers="5"}
 import os
 from huggingface_hub import login
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -51,10 +45,7 @@ print(tokenizer.decode(outputs[0]))
 
 ## LLM Hello World {.smaller auto-animate=true}
 
-```{python}
-#| eval: false
-#| echo: true
-#| code-line-numbers: "7,9"
+```{.python code-line-numbers="7,9"}
 import os
 from huggingface_hub import login
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -78,10 +69,7 @@ print(tokenizer.decode(outputs[0]))
 
 ## LLM Hello World {.smaller auto-animate=true}
 
-```{python}
-#| eval: false
-#| echo: true
-#| code-line-numbers: "11-12"
+```{.python code-line-numbers="11-12"}
 import os
 from huggingface_hub import login
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -106,10 +94,7 @@ print(tokenizer.decode(outputs[0]))
 
 ## LLM Hello World {.smaller auto-animate=true}
 
-```{python}
-#| eval: false
-#| echo: true
-#| code-line-numbers: "14-15"
+```{.python code-line-numbers="14-15"}
 import os
 from huggingface_hub import login
 from transformers import AutoTokenizer, AutoModelForCausalLM

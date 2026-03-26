@@ -31,9 +31,6 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Install Python dependencies
-        run: pip install jupyter
-
       - name: Render Quarto Project
         run: |
           # This takes an unreasonably long time
