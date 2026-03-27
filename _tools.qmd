@@ -8,6 +8,8 @@ In this half of the training we will make use of [`opencode`](https://opencode.a
 ![](./images/opencode-front.png){width=80%}
 :::
 
+Concepts can also be applied to similar tools e.g., VSCode, GitHub Copilot CLI etc.
+
 ## Context Engineering
 
 - LLMs are powerful, but suffer from context bloat
@@ -38,13 +40,29 @@ To resolve this issue, Anthropic open-sourced 2 methods:
 
 ## MCP examples {.nostretch}
 
-- `opencode` supports 11 built-in skills (see [docs](https://opencode.ai/docs/tools#built-in))
+- For example, `opencode` supports 11 built-in skills (see [docs](https://opencode.ai/docs/tools#built-in))
 
 ![](./images/mcp-opencode-1.png){width=80%}
 
+LLMs can answer questions, but cannot interact with your system.
+
 ## MCP examples {.nostretch}
 
+We will build our own using [`fastMCP`](https://fastmcp.wiki/en/getting-started/welcome)
 
+```python
+from fastmcp import FastMCP
+
+mcp = FastMCP("add-server")
+
+@mcp.tool
+def add(a: int, b: int) -> int:
+  """Add two numbers"""
+  return a + b
+
+if __name__ == "__main__":
+  mcp.run()
+```
 
 ## Skills
 
@@ -57,5 +75,25 @@ my-skill/             # Required: unique skill name e.g., [my-skill]
 ├── references/       # Optional: documentation
 └── assets/           # Optional: templates, resources
 ```
+
+## Opencode Installation
+
+Installation instructions [here](https://opencode.ai/download)
+
+- Linux
+
+```bash
+curl -fsSL https://opencode.ai/install | bash
+```
+
+- Mac
+
+```bash
+brew install --cask opencode-desktop
+```
+
+- Windows (download `.exe`)
+
+
 
 ##
