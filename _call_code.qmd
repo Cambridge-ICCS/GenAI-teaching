@@ -18,7 +18,9 @@ outputs = model.generate(**input_ids, max_new_tokens=10, do_sample=True, top_p=0
 print(tokenizer.decode(outputs[0]))
 ```
 
+:::{style="font-size: 0.75em; line-height: 1.4;"}
 - **`huggingface_hub` / `transformers`**:The platform and library where the ML community collaborates on models, datasets, and applications.
+:::
 
 ## LLM Hello World {.smaller auto-animate=true}
 
@@ -40,8 +42,10 @@ outputs = model.generate(**input_ids, max_new_tokens=10, do_sample=True, top_p=0
 print(tokenizer.decode(outputs[0]))
 ```
 
+:::{style="font-size: 0.75em; line-height: 1.4;"}
 - **`huggingface_hub` / `transformers`**:The platform and library where the ML community collaborates on models, datasets, and applications.
 - **Login**:Register with Hugging Face and obtain a key to download hosted models.
+:::
 
 ## LLM Hello World {.smaller auto-animate=true}
 
@@ -63,9 +67,11 @@ outputs = model.generate(**input_ids, max_new_tokens=10, do_sample=True, top_p=0
 print(tokenizer.decode(outputs[0]))
 ```
 
+:::{style="font-size: 0.75em; line-height: 1.4;"}
 - **`huggingface_hub` / `transformers`**:The platform and library where the ML community collaborates on models, datasets, and applications.
 - **Login**:Register with Hugging Face and obtain a key to download hosted models.
 - **Load tokenizer & model**:Downloads Google Gemma-2b and its matching tokenizer.
+:::
 
 ## LLM Hello World {.smaller auto-animate=true}
 
@@ -87,10 +93,12 @@ outputs = model.generate(**input_ids, max_new_tokens=10, do_sample=True, top_p=0
 print(tokenizer.decode(outputs[0]))
 ```
 
+:::{style="font-size: 0.75em; line-height: 1.4;"}
 - **`huggingface_hub` / `transformers`**:The platform and library where the ML community collaborates on models, datasets, and applications.
 - **Login**:Register with Hugging Face and obtain a key to download hosted models.
 - **Load tokenizer & model**:Downloads Google Gemma-2b and its matching tokenizer.
 - **Tokenise input**:Converts your text into a tensor of token IDs the model can read.
+:::
 
 ## LLM Hello World {.smaller auto-animate=true}
 
@@ -112,8 +120,10 @@ outputs = model.generate(**input_ids, max_new_tokens=10, do_sample=True, top_p=0
 print(tokenizer.decode(outputs[0]))
 ```
 
+:::{style="font-size: 0.75em; line-height: 1.4;"}
 - **`huggingface_hub` / `transformers`**:The platform and library where the ML community collaborates on models, datasets, and applications.
 - **Login**:Register with Hugging Face and obtain a key to download hosted models.
 - **Load tokenizer & model**:Downloads Google Gemma-2b and its matching tokenizer.
 - **Tokenise input**:Converts your text into a tensor of token IDs the model can read.
 - **Generate & decode**:Model predicts tokens autoregressively; tokenizer converts them back to text.
+:::
