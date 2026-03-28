@@ -11,6 +11,7 @@ The required Quarto extensions can be installed with:
 ```bash
 quarto add --no-prompt quarto-ext/attribution
 quarto add --no-prompt jmbuhr/quarto-qrcode
+quarto add --no-prompt quarto-ext/pointer
 ```
 
 Then render with:
