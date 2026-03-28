@@ -1,7 +1,7 @@
 ## Plan
 
 - ML basics
-  - Transformer inference and agentic AI overview
+- Transformer inference and agentic AI overview
 - Tooling overview and code demo
 - Opencode intro and configuration 
 - Create your tool call with MCP + Skills
