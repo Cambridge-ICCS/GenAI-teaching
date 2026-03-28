@@ -12,6 +12,7 @@ The required Quarto extensions can be installed with:
 quarto add --no-prompt quarto-ext/attribution
 quarto add --no-prompt jmbuhr/quarto-qrcode
 quarto add --no-prompt quarto-ext/pointer
+quarto add --no-prompt herosi/pointer-sync
 ```
 
 Then render with:

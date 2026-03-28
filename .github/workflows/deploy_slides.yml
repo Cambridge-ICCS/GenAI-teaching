@@ -41,6 +41,8 @@ jobs:
           # This takes an unreasonably long time
           quarto add --no-prompt quarto-ext/attribution
           quarto add --no-prompt jmbuhr/quarto-qrcode
+          quarto add --no-prompt quarto-ext/pointer
+          quarto add --no-prompt herosi/pointer-sync
 
           quarto render genai-teaching.qmd --log-level debug
 

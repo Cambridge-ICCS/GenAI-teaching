@@ -20,6 +20,8 @@ format:
       theme: forest
 revealjs-plugins:
   - attribution
+  - pointer
+  - pointer-sync
 author:
   - name: Tom Meltzer
     orcid: 0000-0003-1740-9550
