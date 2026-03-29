@@ -45,6 +45,12 @@ include-in-header:
 
 {{< include _intro.qmd >}}
 
+{{< include _intro_transformers.qmd >}}
+
+{{< include _intro_agents.qmd >}}
+
+{{< include _intro_reading.qmd >}}
+
 {{< include _tools.qmd >}}
 
 ## References {.smaller}

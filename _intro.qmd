@@ -17,6 +17,17 @@
 - Overfitting: memorises training data, fails to generalise
 :::
 
+::: {.notes}
+- working in a supervised context where we have a dataset of input-output pairs and we want to learn a function that maps inputs to outputs
+- differentiable loss function quantifies how well the model's predictions match the training data
+- apply gradient descent to update model parameters to reduce the loss
+- this is done with backpropagation - computes gradients to move down this loss surface
+- One complexities of training a model is overfitting - when the model memorises the training data instead of learning general patterns, it performs well on training data but poorly on unseen data. Regularisation techniques and careful validation are used to mitigate this.
+- I'm not going to talk about the details of training large transformer models, but it's worth noting that overfitting is less of a concern for them than for classical ML models. Despite having billions of parameters, they generalise well due to vast and diverse training data, regularisation techniques, the double-descent phenomenon, and emergent representations that capture structure rather than surface patterns.
+
+Overfitting is a major concern in classical ML, but large transformer models largely sidestep it. They have billions of parameters (far more than training examples), yet generalise well. Key reasons: (1) vast and diverse training data makes true memorisation impractical; (2) regularisation techniques such as dropout and weight decay are baked in; (3) the double-descent phenomenon: very over-parameterised models can re-enter a good-generalisation regime; and (4) emergent representations learned across billions of tokens capture structure rather than surface patterns.
+::: 
+
 ## ML: The basics
 
 :::{style="display: block; margin: 0 auto; text-align: center; margin-top: 2em;"}
@@ -42,125 +53,51 @@ flowchart TD
 :::
 
 ::: {.notes}
+
+These are the main components of the training loop for a supervised learning model. 
+The model's parameters (weights) are updated iteratively to minimise the loss function, which quantifies how well the model's predictions match the training data. 
+Backpropagation efficiently computes the gradients needed for weight updates, allowing the model to learn complex patterns in the data.
+
 - Loss function: measures model error
 - Gradient descent: moves weights down the loss surface
 - Backpropagation: computes gradients layer by layer
 - Overfitting: memorises training data, fails to generalise
 
-Overfitting is a major concern in classical ML, but large transformer models largely sidestep it. They have billions of parameters (far more than training examples), yet generalise well. Key reasons: (1) vast and diverse training data makes true memorisation impractical; (2) regularisation techniques such as dropout and weight decay are baked in; (3) the double-descent phenomenon: very over-parameterised models can re-enter a good-generalisation regime; and (4) emergent representations learned across billions of tokens capture structure rather than surface patterns.
 :::
 
-## Transformers: Inference I {auto-animate=true}
+## LLMs: Tokenisation
 
-:::: {.columns}
-::: {.column width="60%"}
-![](images/tf-steps-simple-1.png){width="70%" data-id="basic-inference-img"}
-:::
-::: {.column width="40%"}
-:::
-::::
+LLMs cannot process raw text, it must first be converted to numbers.
 
-## Transformers: Inference I {auto-animate=true}
+::: {.incremental}
+- Text is split into **sub-word tokens** using a learned vocabulary
+- Each token is assigned a unique integer ID
+- Common words are single tokens; rare words split into pieces
+:::
 
-:::: {.columns}
-::: {.column width="60%"}
-![](images/tf-steps-simple-2.png){width="70%" data-id="basic-inference-img"}
+:::{.fragment style="margin-bottom: 2.0em;"}
+:::{style="font-family: monospace; font-size: 0.8em; color: #333;"}
+"I went to the"
 :::
-::: {.column width="40%"}
-::: {style="font-size: 0.8em; color: #555; margin-top: 4em;"}
-Convert text to tokens
-:::
-:::
-::::
-
-## Transformers: Inference I {auto-animate=true}
-
-:::: {.columns}
-::: {.column width="60%"}
-![](images/tf-steps-simple-3.png){width="70%" data-id="basic-inference-img"}
-:::
-::: {.column width="40%"}
-::: {style="font-size: 0.8em; color: #555; margin-top: 4em;"}
-Convert text to tokens
-:::
-::: {style="font-size: 0.8em; color: #555; margin-top: 1.25em;"}
-Predict new tokens
+:::{style="display: flex; gap: 0.4em; font-family: monospace; font-size: 0.75em;"}
+[235285 "I"]{style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;"}
+[3806 "▁went"]{style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;"}
+[576 "▁to"]{style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;"}
+[573 "▁the"]{style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;"}
 :::
 :::
-::::
-
-## Transformers: Inference I {auto-animate=true}
-
-:::: {.columns}
-::: {.column width="60%"}
-![](images/tf-steps-simple-4.png){width="70%" data-id="basic-inference-img"}
-:::
-::: {.column width="40%"}
-::: {style="font-size: 0.8em; color: #555; margin-top: 4em;"}
-Convert text to tokens
-:::
-::: {style="font-size: 0.8em; color: #555; margin-top: 1.25em;"}
-Predict new tokens
-:::
-::: {style="font-size: 0.8em; color: #555; margin-top: 1.25em;"}
-Convert tokens to text
-:::
-:::
-::::
 
 ::: {.notes}
-- Tokenise: text to token IDs
-- Generate: predict next tokens autoregressively
-- Decode: token IDs to text
+
+we're dealing with text, but the model operates on numbers. So the first step is tokenisation: converting raw text into a sequence of token IDs.
+
+Tokenisation is the first step in the pipeline. The tokeniser is a separate component from the LLM — it ships as a vocabulary file and a set of merge rules (BPE or SentencePiece). 
+The vocabulary size for Gemma is ~256k tokens. 
+
+Sub-word tokenisation means common words like "the" are a single token, while rare or technical words like "backpropagation" split into pieces: ▁back, prop, agation.
 :::
 
-## Transformers: Inference II {auto-animate=false}
-
-![](images/tfp-step0a.png){width="40%" style="display: block; margin: 0 auto;" data-id="inference-img"}
-
-## Transformers: Inference II {auto-animate=false}
-
-![](images/tfp-step0b.png){width="40%" style="display: block; margin: 0 auto;" data-id="inference-img"}
-
-## Transformers: Inference II {auto-animate=true}
-
-![](images/tfp-step1-alternate.png){width="40%" style="display: block; margin: 0 auto;" data-id="inference-img"}
-
-## Transformers: Inference II {auto-animate=true}
-
-![](images/tfp-step2-alternate.png){width="40%" style="display: block; margin: 0 auto;" data-id="inference-img"}
-
-## Transformers: Inference II {auto-animate=true}
-
-![](images/tfp-step4-alternate.png){width="40%" style="display: block; margin: 0 auto;" data-id="inference-img"}
-
-## Transformers: Inference II {auto-animate=true}
-
-![](images/tfp-step5-alternate.png){width="40%" style="display: block; margin: 0 auto;" data-id="inference-img"}
-
-## Transformers: Inference II {auto-animate=true}
-
-![](images/tfp-step6-alternate.png){width="40%" style="display: block; margin: 0 auto;" data-id="inference-img"}
-
-## Transformers: Inference II {auto-animate=true}
-
-![](images/tfp-step7-alternate.png){width="40%" style="display: block; margin: 0 auto;" data-id="inference-img"}
-
-::: {.notes}
-- Tokenise: text to sub-word token IDs
-- LLM: token IDs enter the model
-- Embed + pos. encoding: token IDs to dense vectors with position
-- Self-attention + MLP × N layers: every token attends to every other
-- Predict & sample: logits to softmax to sample next token
-- Autoregressive: feed token back, repeat
-- Decode: token IDs to text
-
-The crucial innovation is self-attention: rather than processing tokens in sequence (like an RNN), every token attends to every other token in parallel. This lets the model capture long-range dependencies and scales well on modern hardware.
-
-Sampling strategies: the model doesn't always pick the most likely next token. Temperature scales the probability distribution (higher = more random). Top-k restricts sampling to the k most likely tokens. Top-p (nucleus sampling) samples from the smallest set of tokens whose cumulative probability exceeds p.
-:::
-
-## Embeddings encode meaning
+## LLMs: Embeddings encode meaning
 
 ::: {style="font-size: 0.85em;"}
 The embedding matrix maps tokens to vectors; directions encode meaning.
@@ -179,92 +116,18 @@ Attention enriches each vector with context: bank (river) vs bank (finance)
 :::
 
 ::: {.notes}
+We need to covert tokens to vectors before the model can process them.
+
+Why can't we just feed token in directly, why do we need embeddings? This is because the model operates in a continuous vector space, not discrete token IDs. 
+
+The embedding matrix maps each token ID to a dense vector of numbers.
+
+These vectors capture semantic meaning — similar words have similar embeddings. For example, "king" and "queen" might be close in embedding space, while "king" and "carrot" are far apart.
+
+$\text{king} - \text{man} + \text{woman} \approx \text{queen}$
+
 The food / country direction generalises across many pairs: pizza / Italy, tacos / Mexico, sushi / Japan. These patterns exist before attention runs. Attention enriches each vector with context, distinguishing "bank" (river) from "bank" (finance).
 :::
 
-{{< include ./_call_code.qmd >}}
 
-## Agentic AI
 
-An AI Agents are essentially some scaffolding / loop around LLM(s):
-
-::: {.incremental}
-- LLM: The reasoning engine. It plans, evaluates, and decides whether to "act" or "answer."
-- System Prompt: Defines the persona, available tools, and operational boundaries.
-- Context Window: The Short-term Memory. Maintains the state, including history, tool outputs, and the current goal.
-- Tools: External capabilities like Web Search, Python Code, APIs, or RAG.
-:::
-
-::: {.notes}
-- LLM is like a goldfish - completely stateless. All short term memory lives in the context window. The "loop" is managed by the surrounding application code, not the model.
-
-:::
-## Agentic AI
-
-:::{style="margin-top: 3em;"}
-```{mermaid}
-%%{init: {"flowchart": {"nodeSpacing": 40, "rankSpacing": 80}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
-flowchart LR
-    S([System prompt]) --> C
-    H([Prompt]) --> C["Context window"]
-    C --> L["LLM: generate text"]
-    L --> D{Tool call?}
-    D -->|yes| T["Tools (incl. RAG)"]
-    T -->|result appended| C
-    D -->|no| O([Output])
-
-    classDef io      fill:#6c757d,stroke:#495057,color:#fff
-    classDef core    fill:#003b6f,stroke:#001f3f,color:#fff
-    classDef support fill:#4b9cd3,stroke:#2c6e9e,color:#fff
-    classDef decision fill:#e9c46a,stroke:#f4a261,color:#000
-
-    class S,H,O io
-    class L core
-    class C,T support
-    class D decision
-```
-:::
-
-::: {.notes}
-- LLM: reasons and decides to act or answer
-- System prompt: defines role, tools, and behaviour
-- Context window: holds all state (prompt, results, history)
-- Planning: reason step-by-step before acting
-- Tools: search, code, APIs, RAG
-- Termination: stop when done or max_iterations reached
-
-An agentic system wraps an LLM in a loop: the model receives a prompt, decides whether it needs more information or to take an action, calls a tool if so, gets the result back in its context, and repeats until it decides it is done.
-
-The key components:
-- LLM: does all the reasoning — it reads the context, decides what to do next, and generates either a tool call or a final answer.
-- Tools: external capabilities the LLM can invoke — web search, a code interpreter, database queries, API calls. The LLM doesn't execute these itself; the surrounding framework does and appends the result to the context.
-- Memory / RAG: retrieved documents or prior conversation history injected into the context before the LLM runs. This is how agents can work with knowledge beyond their training cutoff or access private data.
-- Planning: some agents explicitly decompose a task into sub-steps before acting (ReAct, chain-of-thought, tree-of-thought). Others just iterate implicitly.
-
-A key point for RSEs: the LLM itself is stateless — all state lives in the context window. The "loop" is managed by the surrounding application code, not the model.
-:::
-
-## Self Study Resources
-
-- 3Blue1Brown, Language Models Explained: 
-  - Chapters [4](https://youtu.be/LPZh9BOjkQs?si=AXb6kvl44CQqaCto), [5](https://youtu.be/wjZofJX0v4M?si=-gx_cV-et1yG3aFn), [6](https://youtu.be/eMlx5fFNoYc?si=V8gU3iIsRmNMMIsM), [7](https://youtu.be/eMlx5fFNoYc?si=x01rnOt7jnsku_pa)
-- Meridian Cambridge [Transformer architecture](https://youtu.be/G51Hrmfll9s?si=UQCDHBVmESqHSpbR), [Agents](https://youtu.be/8mRG0JtxLL0?si=GigTan8Hw9TEeEe0) 
-
-::: {.notes}
-
-:::
-
-## Further Reading
-Foundational concepts and Transformers
-
-- 3Blue1Brown: [Neural Networks playlist](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi) [@3blue1brown_nn]
-- Andrej Karpathy: [Neural Networks: Zero to Hero](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ) [@karpathy_zero_to_hero]
-
-- Stanford CS25: [Transformers United](https://web.stanford.edu/class/cs25/) [@stanford_cs25]
-- DeepLearning.AI: [Build and Train an LLM with JAX](https://learn.deeplearning.ai/courses/build-and-train-an-llm-with-jax/lesson/gy364z/introduction) [@deeplearningai_llm_jax]
-
-## Further Reading
-Reinforcement Learning & Alignment
-
-- Hugging Face: [Deep RL Course](https://huggingface.co/learn/deep-rl-course) [@huggingface_deep_rl]
-- OpenAI: [Spinning Up in Deep RL](https://spinningup.openai.com) [@openai_spinningup]

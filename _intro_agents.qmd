@@ -1,0 +1,75 @@
+## Agentic AI
+
+AI Agents are essentially some scaffolding / loop around LLM(s):
+
+::: {.incremental}
+- LLM: The reasoning engine. It can plan, evaluate, or decide whether to "act" or "answer."
+- System Prompt: Defines the persona, available tools, and operational boundaries.
+- Short-term memory: Maintains the state, including history, tool outputs, and the current goal.
+- Tools: External capabilities like Web Search, code execution, APIs, or RAG.
+:::
+
+::: {.notes}
+- LLM is like a goldfish - completely stateless. All short term memory lives in the context window. The "loop" is managed by the surrounding application code, not the model.
+
+:::
+## Agentic AI
+
+:::{style="margin-top: 3em;"}
+```{mermaid}
+%%{init: {"flowchart": {"nodeSpacing": 40, "rankSpacing": 80}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
+flowchart LR
+    S([System prompt]) --> C
+    H([Prompt]) --> C["Context window"]
+    C --> L["LLM: generate text"]
+    L --> D{Tool call?}
+    D -->|yes| T["Tools (incl. RAG)"]
+    T -->|result appended| C
+    D -->|no| O([Output])
+
+    classDef io      fill:#6c757d,stroke:#495057,color:#fff
+    classDef core    fill:#003b6f,stroke:#001f3f,color:#fff
+    classDef support fill:#4b9cd3,stroke:#2c6e9e,color:#fff
+    classDef decision fill:#e9c46a,stroke:#f4a261,color:#000
+
+    class S,H,O io
+    class L core
+    class C,T support
+    class D decision
+```
+:::
+
+::: {.notes}
+
+An agentic system wraps an LLM in a loop using lots of scaffolding to enable it to solve complex tasks. 
+
+We start with two inputs. The Prompt is what the user wants, but the System Prompt is where we've given the agent a persona, 'You are a researcher with access to these specific tools.' Both of these get combined into the Context Window.
+
+The context window is limited in size so we have to be quite strategic about what goes in there. We can't include the entire internet or all our documentation. 
+
+The LLM looks at that window and generates text. But in an agentic workflow it is making a decision about whether it has enough information to answer the query
+
+The LLM might output a specific string that the scaffolding recognizes as a Tool Call. If the answer is 'Yes,' the agent doesn't talk to the user yet. Instead, it reaches out to a tool. Maybe it runs a Python script or performs a RAG search in your documentation.
+
+The result of that tool—the data it found or the code it ran—is appended back into the Context Window.
+
+Even though LLMs are entirely stateless, this loop is how we 'fake' memory. The LLM now sees the original prompt, its own decision to use a tool, and the tool's result. It 're-reasons' with this new information.
+
+The LLM itself is stateless — all state lives in the context window. The "loop" is managed by the surrounding application code, not the model.
+
+
+- LLM: reasons and decides to act or answer
+- System prompt: defines role, tools, and behaviour
+- Context window: holds all state (prompt, results, history)
+- Planning: reason step-by-step before acting
+- Tools: search, code, APIs, RAG
+- Termination: stop when done or max_iterations reached
+
+
+The key components:
+- LLM: does all the reasoning — it reads the context, decides what to do next, and generates either a tool call or a final answer.
+- Tools: external capabilities the LLM can invoke — web search, a code interpreter, database queries, API calls. The LLM doesn't execute these itself; the surrounding framework does and appends the result to the context.
+- Memory / RAG: retrieved documents or prior conversation history injected into the context before the LLM runs. This is how agents can work with knowledge beyond their training cutoff or access private data.
+- Planning: some agents explicitly decompose a task into sub-steps before acting (ReAct, chain-of-thought, tree-of-thought). Others just iterate implicitly.
+
+:::
