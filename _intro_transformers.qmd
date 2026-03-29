@@ -382,23 +382,28 @@ Sampling strategies: the model doesn't always pick the most likely next token. T
 :::
 
 ::: {.notes}
-The key insight: the embedding matrix gives every token a static starting vector, and self-attention makes those vectors contextual. The model is stateless — all state lives in the sequence of token IDs fed in on each loop.
+The key insight: the embedding matrix gives every token a static starting vector, and self-attention makes those vectors contextual. The model is stateless — all state lives in the sequence of token IDs fed in on each loop. 
+
 :::
 
 ## Transformers: Summary {auto-animate=true}
 
-::: {.incremental style="line-height: 2;"}
+::: {.incremental}
 - The model is completely stateless
 - All context is in the text fed to it, there is no memory
-- Each forward pass starts from scratch
+- Each forward pass re-processes the full sequence
+- Longer contexts are more expensive: attention is O(n²)
 :::
 
 ::: {.notes}
-This has profound implications for how you use LLMs. Long conversations get expensive because the full history is re-processed every time. 
+This has profound implications for how you use LLMs.
 
-Context length limits are a hard constraint.
+Long conversations get expensive because the full history is re-processed every time.
 
- Techniques like RAG, summarisation, and memory modules are all workarounds for this fundamental limitation.
+Context length is a hard constraint. Techniques like RAG, summarisation, and memory modules are all workarounds for this fundamental limitation.
+
+In summary: it's essentially a goldfish.
+
 :::
 
 <!-- CODE EXAMPLE  -->
