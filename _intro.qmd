@@ -91,6 +91,8 @@ LLMs cannot process raw text, it must first be converted to numbers.
 
 we're dealing with text, but the model operates on numbers. So the first step is tokenisation: converting raw text into a sequence of token IDs.
 
+We break text into sub-word tokens as otherwise the vocabulary would be too large. We can instead use the tokens as building blocks to represent any word. This makes the vocabulary more manageable and allows the model to handle rare or technical words by breaking them into pieces.
+
 Tokenisation is the first step in the pipeline. The tokeniser is a separate component from the LLM — it ships as a vocabulary file and a set of merge rules (BPE or SentencePiece). 
 The vocabulary size for Gemma is ~256k tokens. 
 
@@ -125,6 +127,10 @@ The embedding matrix maps each token ID to a dense vector of numbers.
 These vectors capture semantic meaning — similar words have similar embeddings. For example, "king" and "queen" might be close in embedding space, while "king" and "carrot" are far apart.
 
 $\text{king} - \text{man} + \text{woman} \approx \text{queen}$
+
+In practice this relationship isn't very accurate because queen has multiple meanings. But the point is that directions in embedding space can encode meaningful relationships.
+
+In this example if we look at the displacement between germany and japan, we see it is approximately the same as the displacement between bratwurst and sushi. 
 
 The food / country direction generalises across many pairs: pizza / Italy, tacos / Mexico, sushi / Japan. These patterns exist before attention runs. Attention enriches each vector with context, distinguishing "bank" (river) from "bank" (finance).
 :::

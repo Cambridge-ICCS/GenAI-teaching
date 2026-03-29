@@ -174,6 +174,17 @@ transformer block
 :::{style="position: absolute; top: 55%; left: 65%; font-size: 0.75em; color: #003b6f;"}
 transformer block
 :::
+
+:::{.notes}
+The transformer block is where all the interesting stuff happens. The key idea is self-attention: rather than processing tokens in sequence (like an RNN), every token attends to every other token in parallel.
+
+This endows the embedding vectors with contextual information.
+
+This lets the model capture long-range dependencies and scales well on modern hardware.
+
+The MLP layers are a little different in that they capture facts and rules of language. 
+:::
+
 ## Self-attention {auto-animate=false}
 
 :::: {.columns}
@@ -194,9 +205,11 @@ transformer block
 ::::
 
 ::: {.notes}
-The transformer block is where the magic happens. The key innovation is self-attention: rather than processing tokens in sequence (like an RNN), every token attends to every other token in parallel. This lets the model capture long-range dependencies and scales well on modern hardware.
 
-The MLP layers capture facts and rules of language. 
+Let's look at a few examples:
+
+The attention scores determine how much each token "looks at" the others when building its contextual representation. Syntactic example: "I" and "went" are linked by subject-verb agreement; "went" and "to" by verb-preposition dependency.
+
 :::
 
 ## Self-attention {auto-animate=false}
@@ -217,7 +230,9 @@ The MLP layers capture facts and rules of language.
 
 ::: {.notes}
 
- The attention scores determine how much each token "looks at" the others when building its contextual representation. Syntactic example: "I" and "went" are linked by subject-verb agreement; "went" and "to" by verb-preposition dependency. Semantic example: "bank" attends strongly to "river" so its output vector shifts toward the riverbank meaning rather than the financial one.
+  and similarly, "bank" attends strongly to "river" so its output vector shifts toward the riverbank meaning rather than the financial one.
+
+  attention builds up lots of these relationships. 
 :::
 
 ## Transformers: Inference II {auto-animate=true}
@@ -255,7 +270,21 @@ Only "the" matters - it has been contextualised by attention.
 ::::
 
 ::: {.notes}
-The unembedding matrix is applied at every position, but only the last token's logits are sampled — it's the only one that has seen the full context of the sequence.
+
+At this point the word 'the' has been enriched with context by attention. 
+
+The model then applies the unembedding matrix to this vector, giving a score (logit) for every token in the vocabulary.
+
+Basically a dot product similarity between the contextualised vector and the vocab vectors. 
+
+softmax converts these logits to probabilities, and the model samples the next token ID from this distribution.  
+
+During inference, we actually do this for every token in the sequence. This is obviously inefficient. 
+
+Get around this with a concept called KV caching, but that's a topic for another day.
+
+Why is there a limit on context length?
+
 :::
 
 ## Transformers: Inference II {auto-animate=true}
@@ -294,6 +323,12 @@ full sequence fed back in each loop
 
 ::: {.notes}
 Each iteration appends the new token ID to the sequence and feeds the full sequence back in. Eventually the model generates an end-of-sequence token or hits max_new_tokens.
+
+- Since the model processes the entire sequence on every forward pass, so longer inputs require more computation and memory. This is a fundamental limitation of the transformer architecture - it's obviously inefficent to re-process the same tokens every time.
+- It was also trained on sequences up to a certain length (e.g. 2048 tokens), so it may not perform well on much longer inputs.
+- kv caching grows as O(n)
+- computation grows as O(n^2) due to self-attention
+
 :::
 
 ## Transformers: Inference II {auto-animate=true}
@@ -359,7 +394,11 @@ The key insight: the embedding matrix gives every token a static starting vector
 :::
 
 ::: {.notes}
-This has profound implications for how you use LLMs. Long conversations get expensive because the full history is re-processed every time. Context length limits are a hard constraint. Techniques like RAG, summarisation, and memory modules are all workarounds for this fundamental limitation.
+This has profound implications for how you use LLMs. Long conversations get expensive because the full history is re-processed every time. 
+
+Context length limits are a hard constraint.
+
+ Techniques like RAG, summarisation, and memory modules are all workarounds for this fundamental limitation.
 :::
 
 <!-- CODE EXAMPLE  -->
@@ -405,7 +444,7 @@ print(tokenizer.decode(outputs[0]))
 ```
 
 :::{style="font-size: 0.75em; line-height: 1.4;"}
-- **`huggingface_hub` / `transformers`**:The platform and library where the ML community collaborates on models, datasets, and applications.
+- **`huggingface_hub` / `transformers`**: The platform and library where the ML community collaborates on models, datasets, and applications.
 :::
 
 ## LLM Hello World {.smaller auto-animate=true}
@@ -429,8 +468,8 @@ print(tokenizer.decode(outputs[0]))
 ```
 
 :::{style="font-size: 0.75em; line-height: 1.4;"}
-- **`huggingface_hub` / `transformers`**:The platform and library where the ML community collaborates on models, datasets, and applications.
-- **Login**:Register with Hugging Face and obtain a key to download hosted models.
+- **`huggingface_hub` / `transformers`**: The platform and library where the ML community collaborates on models, datasets, and applications.
+- **Login**: Register with Hugging Face and obtain a key to download hosted models.
 :::
 
 ## LLM Hello World {.smaller auto-animate=true}
@@ -454,9 +493,9 @@ print(tokenizer.decode(outputs[0]))
 ```
 
 :::{style="font-size: 0.75em; line-height: 1.4;"}
-- **`huggingface_hub` / `transformers`**:The platform and library where the ML community collaborates on models, datasets, and applications.
-- **Login**:Register with Hugging Face and obtain a key to download hosted models.
-- **Load tokenizer & model**:Downloads Google Gemma-2b and its matching tokenizer.
+- **`huggingface_hub` / `transformers`**: The platform and library where the ML community collaborates on models, datasets, and applications.
+- **Login**: Register with Hugging Face and obtain a key to download hosted models.
+- **Load tokenizer & model**: Downloads Google Gemma-2b and its matching tokenizer.
 :::
 
 ## LLM Hello World {.smaller auto-animate=true}
@@ -480,10 +519,10 @@ print(tokenizer.decode(outputs[0]))
 ```
 
 :::{style="font-size: 0.75em; line-height: 1.4;"}
-- **`huggingface_hub` / `transformers`**:The platform and library where the ML community collaborates on models, datasets, and applications.
-- **Login**:Register with Hugging Face and obtain a key to download hosted models.
-- **Load tokenizer & model**:Downloads Google Gemma-2b and its matching tokenizer.
-- **Tokenise input**:Converts your text into a tensor of token IDs the model can read.
+- **`huggingface_hub` / `transformers`**: The platform and library where the ML community collaborates on models, datasets, and applications.
+- **Login**: Register with Hugging Face and obtain a key to download hosted models.
+- **Load tokenizer & model**: Downloads Google Gemma-2b and its matching tokenizer.
+- **Tokenise input**: Converts your text into a tensor of token IDs the model can read.
 :::
 
 ## LLM Hello World {.smaller auto-animate=true}
@@ -507,9 +546,17 @@ print(tokenizer.decode(outputs[0]))
 ```
 
 :::{style="font-size: 0.75em; line-height: 1.4;"}
-- **`huggingface_hub` / `transformers`**:The platform and library where the ML community collaborates on models, datasets, and applications.
-- **Login**:Register with Hugging Face and obtain a key to download hosted models.
-- **Load tokenizer & model**:Downloads Google Gemma-2b and its matching tokenizer.
-- **Tokenise input**:Converts your text into a tensor of token IDs the model can read.
-- **Generate & decode**:Model predicts tokens autoregressively; tokenizer converts them back to text.
+- **`huggingface_hub` / `transformers`**: The platform and library where the ML community collaborates on models, datasets, and applications.
+- **Login**: Register with Hugging Face and obtain a key to download hosted models.
+- **Load tokenizer & model**: Downloads Google Gemma-2b and its matching tokenizer.
+- **Tokenise input**: Converts your text into a tensor of token IDs the model can read.
+- **Generate & decode**: Model predicts tokens autoregressively; tokenizer converts them back to text.
+:::
+
+:::{.notes}
+
+By writing model.generate(**input_ids), you are telling Python: "Take every key in this dictionary and pass it to the function as a named argument."
+
+
+
 :::
