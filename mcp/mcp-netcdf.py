@@ -28,7 +28,7 @@ def get_netcdf_variables(path: str) -> str:
         dset = netCDF4.Dataset(path)
 
         # Capture the variables as a string to return to the client
-        variables_output = str(dset.variables)
+        variables_output = ", ".join(dset.variables.keys())
 
         # Close the dataset to free up resources
         dset.close()
