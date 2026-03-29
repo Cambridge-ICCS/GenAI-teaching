@@ -23,7 +23,7 @@ revealjs-plugins:
   - pointer
   - pointer-sync
 author:
-  - name: Tom Meltzer
+  - name: "Tom Meltzer"
     orcid: 0000-0003-1740-9550
   - name: "Matt Archer"
     orcid: 0009-0002-7043-6769
