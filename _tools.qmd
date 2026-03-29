@@ -186,7 +186,7 @@ def get_variable_shape(path: str, variable_name: str) -> dict:
 
 ## Anatomy of a Skill
 
-- Many GenAI tools support skills e.g., Claude code, opencode, codex etc.
+- Many genAI tools support skills e.g., Claude code, opencode, codex etc.
 
 ::: {.callout-note}
 `opencode` requires that skills are stored in a specific set of locations (A
@@ -236,7 +236,7 @@ Try running the following command
 
 ## Skills Exercise
 
-- Create your own SKILL.md
+- Create your own `SKILL.md`
 - Register it in opencode
 - Try using it
 
@@ -248,7 +248,7 @@ So how do I choose between Skills vs MCP?
 
 ::: {style="font-size: 70%;"}
 
-|                 | MCP Server                                                                                               | SKILL.md (Instruction)                                                   |
+|                 | MCP Server                                                                                               | `SKILL.md` (Instruction)                                                 |
 | --              | ----                                                                                                     | ----                                                                     |
 | Primary Purpose | **Tool calling** -- Interact with external services or perform short actions.                            | **Domain Expertise** -- Provides workflows, rules, and domain knowledge. |
 | Context/Loading | **Loaded immediately** into context window (regardless of query) reducing effective context window size. | **Lazy loaded** when needed. Will still impact context window.           |
