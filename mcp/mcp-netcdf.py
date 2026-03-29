@@ -13,7 +13,7 @@ mcp = FastMCP("nc-mcp")
 
 
 @mcp.tool()
-def get_netcdf_variables(path: str) -> str:
+def get_variables(path: str) -> str:
     """
     Reads a NetCDF file from the given path and returns its variables.
 
