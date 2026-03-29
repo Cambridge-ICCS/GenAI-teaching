@@ -1,0 +1,33 @@
+# Gen-AI Concerns
+
+- Safety
+- Ethical
+- Environmental
+
+## Safety
+
+- Amazon experienced [several high-profile incidents](https://www.ft.com/content/7cab4ec7-4712-4137-b602-119a44f771de?syn-25a6b1a6=1)
+- AI-slop crippling maintainers e.g., [curl](https://daniel.haxx.se/blog/2025/07/14/death-by-a-thousand-slops/)
+- Supply-chain infection e.g., [LiteLLM](https://docs.litellm.ai/blog/security-update-march-2026)
+- Hard to debug semantically correct code
+
+And these are just from a software perspective...
+
+## Ethical
+
+- Staff layoffs [under guise of genAI](https://www.forbes.com/sites/shivaramrajgopal/2025/08/17/is-ai-the-scapegoat-employers-use-to-explain-technology-layoffs/)
+- Copyright/piracy e.g., [Anthropic $1.5bn settlement](https://www.bbc.co.uk/news/articles/c5y4jpg922qo)
+- Data sovereignty (who owns your data)
+
+## Environmental
+
+- Massive increase in [water & energy consumption](https://arxiv.org/pdf/2505.09598v5)
+- Accelerating E-Waste and Hardware Churn
+
+# Opinion
+
+- GenAI usage has parallels to HPC
+- If genAI can help science -- I want to make it:
+  - greener
+  - safer
+  - more ethical
