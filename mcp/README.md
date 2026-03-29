@@ -87,11 +87,11 @@ environment. Feel free to use either method described below.
 If you have `uv` already installed, you can simply pass the following command into `opencode`'s MCP CLI configuration tool
 
 ```
-uv run --directory absolute/path/to/GenAI-teaching/mcp mcp-add.py
+uv run absolute/path/to/GenAI-teaching/mcp/mcp-numbers.py
 ```
 
 > [!NOTE]
-> I recommend giving the full absolute path of the server `mcp-add.py` to prevent errors when launching from other directories.
+> I recommend giving the full absolute path of the server `mcp-numbers.py` to prevent errors when launching from other directories.
 
 So it will looks something like this:
 
@@ -108,7 +108,7 @@ So it will looks something like this:
 │  Local
 │
 ◇  Enter command to run
-│  uv run --directory absolute/path/to/GenAI-teaching/mcp mcp-add.py
+│  uv run absolute/path/to/GenAI-teaching/mcp/mcp-numbers.py
 │
 ◆  MCP server "numbers" added to path/to/GenAI-teaching/opencode.json
 │

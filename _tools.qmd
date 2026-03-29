@@ -4,9 +4,7 @@
 
 In this half of the training we will make use of [`opencode`](https://opencode.ai/)
 
-:::{.r-stack .center}
-![](./images/opencode-front.png){width=80%}
-:::
+![](./images/opencode-front.png){width=70% fig-align="center"}
 
 Concepts can also be applied to similar tools e.g., VSCode, GitHub Copilot CLI etc.
 
@@ -40,20 +38,23 @@ To resolve this issue, Anthropic open-sourced 2 methods:
 
 ## MCP examples {.nostretch}
 
-- For example, `opencode` supports 11 built-in skills (see [docs](https://opencode.ai/docs/tools#built-in))
+For example, `opencode` supports 11 built-in skills (see [docs](https://opencode.ai/docs/tools#built-in))
 
-![](./images/mcp-opencode-1.png){width=80%}
-
+::: {.callout-note}
 LLMs can answer questions, but cannot interact with your system.
+:::
 
-## MCP examples {.nostretch}
+![](./images/mcp-opencode-1.png){width=70% fig-align="center"}
+
+
+## MCP example (add)
 
 We will build our own using [`fastMCP`](https://fastmcp.wiki/en/getting-started/welcome)
 
-```python
+```python {filename=mcp-numbers.py}
 from fastmcp import FastMCP
 
-mcp = FastMCP("add-server")
+mcp = FastMCP(name="mcp-numbers")
 
 @mcp.tool
 def add(a: int, b: int) -> int:
@@ -63,6 +64,34 @@ def add(a: int, b: int) -> int:
 if __name__ == "__main__":
   mcp.run()
 ```
+
+## MCP example (add) {.nostretch}
+
+1. Now let's add `mcp-numbers` to our `opencode` configuration
+1. Follow instructions in `mcp/README.md`
+1. Running `/status` in `opencode` should display
+   ![](./images/mcp-opencode-2.png){width=40%}
+4. Try `Use mcp tool "numbers_add" to add 4 and -1`
+   ![](./images/mcp-opencode-3.png){width=40%}
+
+## MCP examples (netcdf)
+
+- What about a more interesting example...
+- Can we give LLM power to inspect netcdf `.nc` files?
+- Let's try with MCP.
+
+## MCP examples (netcdf)
+
+- Inspect file `mcp/mcp-netcdf.py`
+
+```python {filename="mcp/mcp-netcdf.py"}
+{{< include mcp/mcp-netcdf.py >}}
+```
+
+## MCP examples (netcdf)
+
+- `mcp/mcp-netcdf.py` contains 2 MCP tools
+
 
 ## Skills
 
@@ -95,5 +124,46 @@ brew install --cask opencode-desktop
 - Windows (download `.exe`)
 
 
+## Opencode Configuration
 
-##
+We now need to configure `opencode` to run self-hosted LLMs
+
+1. Add API key to `.basrhc` (or equivalent) e.g., <br>`export CAMLLM_API_KEY=sk-XXXXXXXXXXXXXXXXXXXXXX`
+1. Configure `opencode` (see next slide)
+
+::: {.callout-note}
+If you already have access to UoC's LiteLLM
+([https://llm.hpc.cam.ac.uk](https://llm.hpc.cam.ac.uk)) you can create one
+from the virtual keys page: `Virtual Keys` $\rightarrow$ `Create New Key`.
+:::
+
+## Opencode Configuration
+
+- edit/create `~/.config/opencode/opencode.json`
+
+```json {filename=~/.config/opencode/opencode.json}
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "cam-llm": {
+      "options": {
+        "baseURL": "https://llm.hpc.cam.ac.uk/v1",
+        "apiKey": "{env:CAMLLM_API_KEY}"
+      },
+      "models": {
+        "mistralai/Devstral-2-123B-Instruct-2512": {
+          "name": "mistralai/Devstral-2-123B-Instruct-2512"
+        },
+        "Qwen/Qwen3-VL-30B-A3B-Instruct": {
+          "name": "Qwen/Qwen3-VL-30B-A3B-Instruct",
+          "modalities": { "input": ["text", "image"], "output": ["text"] }
+        }
+      }
+    }
+  },
+  "permission": {
+    "bash": { "*": "ask" },
+    "edit": { "*": "allow" }
+  }
+}
+```
