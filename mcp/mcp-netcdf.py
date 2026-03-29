@@ -41,5 +41,23 @@ def get_netcdf_variables(path: str) -> str:
         return f"Error reading NetCDF file: {str(e)}"
 
 
+@mcp.tool()
+def get_variable_shape(path: str, variable_name: str) -> dict:
+    """
+    Reads a NetCDF file from the given path and returns the shape of a specific
+    variable.
+
+    Args:
+        path: The absolute or relative path to the NetCDF (.nc) file.
+        variable_name: The name of the variable to get the shape for.
+
+    Returns:
+        A dictionary containing the shape of the specified variable.
+        Example: {'temperature': (365, 180, 360)}
+        Returns an error if the variable is not found.
+    """
+    pass
+
+
 if __name__ == "__main__":
     mcp.run()
