@@ -2,6 +2,7 @@
 output-file: index
 title: "An Introduction to Generative AI for RSEs"
 subtitle: "Basic principles and tooling"
+from: markdown+emoji
 format:
   revealjs:
     embed-resources: false

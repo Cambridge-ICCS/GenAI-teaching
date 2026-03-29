@@ -256,9 +256,28 @@ So how do I choose between Skills vs MCP?
 
 :::
 
+## Taking it further {.nostretch}
+
+- Live demo of profiling skill
+
+![](./images/skills-opencode-3.png){width=60% fig-align="center"}
+
+![](./images/skills-opencode-4.png){width=60% fig-align="center"}
+
 ## Taking it further
 
-- `opencode` and other genAI tools often support agents/sub-agents.
+- `opencode` and other genAI tools often support agents/sub-agents (see [docs](https://opencode.ai/docs/agents/#subagents))
 - Agents are specialized AI assistants that can be configured for specific tasks and workflows
-- They allow you to create focused tools with custom prompts, models, and tool access.
+- They allow you to create focused tools with custom prompts, models, and tool access
 - More markdown :eyes:
+
+## Sub-Agent
+
+- Let's create a sub-agent to generate PR messages
+- Use `opencode agent create`
+- Try creating your own
+- Modify it and see what difference it makes
+
+(15 minutes for exercise)
+
+# Thanks for listening
