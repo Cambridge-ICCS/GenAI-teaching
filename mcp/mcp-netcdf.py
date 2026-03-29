@@ -19,6 +19,9 @@ def get_netcdf_variables(path: str) -> str:
 
     Args:
         path: The absolute or relative path to the NetCDF (.nc) file.
+
+    Returns:
+        A string representation of the NetCDF file's variables.
     """
     try:
         # Open the dataset
@@ -39,5 +42,4 @@ def get_netcdf_variables(path: str) -> str:
 
 
 if __name__ == "__main__":
-    # Run the server via stdio
     mcp.run()
