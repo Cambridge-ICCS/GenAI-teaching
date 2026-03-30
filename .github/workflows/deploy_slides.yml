@@ -30,15 +30,21 @@ jobs:
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-      
+        env:
+          # This is the most important one for Mermaid-to-PNG
+          QUARTO_CHROMIUM_HEADLESS_MODE: new
+          # These flags bypass the specific Linux/Docker restrictions that cause hangs
+          CHROMIUM_FLAGS: "--no-sandbox --disable-dev-shm-usage --disable-gpu"
+
       - name: Render Quarto Project
         run: |
           # This takes an unreasonably long time
           quarto add --no-prompt quarto-ext/attribution
-          quarto add --no-prompt quarto-ext/fontawesome
           quarto add --no-prompt jmbuhr/quarto-qrcode
+          quarto add --no-prompt quarto-ext/pointer
+          quarto add --no-prompt herosi/pointer-sync
 
-          quarto render genai-teaching.qmd
+          quarto render genai-teaching.qmd --log-level debug
 
       - name: Test pages build
         if: github.ref != 'refs/heads/main'
