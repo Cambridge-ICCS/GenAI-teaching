@@ -33,6 +33,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #767676;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #767676;  padding-left: 4px; }
+    div.sourceCode
+      { color: #545454; background-color: #fefefe; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #545454; } /* Normal */
+    code span.al { color: #7928a1; } /* Alert */
+    code span.an { color: #696969; } /* Annotation */
+    code span.at { color: #a55a00; } /* Attribute */
+    code span.bn { color: #7928a1; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #d91e18; } /* ControlFlow */
+    code span.ch { color: #008000; } /* Char */
+    code span.cn { color: #d91e18; } /* Constant */
+    code span.co { color: #696969; } /* Comment */
+    code span.cv { color: #696969; font-style: italic; } /* CommentVar */
+    code span.do { color: #696969; font-style: italic; } /* Documentation */
+    code span.dt { color: #7928a1; } /* DataType */
+    code span.dv { color: #7928a1; } /* DecVal */
+    code span.er { color: #7928a1; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #a55a00; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #696969; } /* Information */
+    code span.kw { color: #d91e18; } /* Keyword */
+    code span.op { color: #00769e; } /* Operator */
+    code span.ot { color: #d91e18; } /* Other */
+    code span.pp { color: #7928a1; } /* Preprocessor */
+    code span.sc { color: #00769e; } /* SpecialChar */
+    code span.ss { color: #008000; } /* SpecialString */
+    code span.st { color: #008000; } /* String */
+    code span.va { color: #a55a00; } /* Variable */
+    code span.vs { color: #008000; } /* VerbatimString */
+    code span.wa { color: #696969; font-style: italic; } /* Warning */
     /* CSS for citations */
     div.csl-bib-body { }
     div.csl-entry {
@@ -58,6 +124,7 @@
   <link href="genai-teaching_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="genai-teaching_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="genai-teaching_files/libs/revealjs/plugin/reveal-attribution/attribution.css" rel="stylesheet">
+  <link href="genai-teaching_files/libs/revealjs/plugin/reveal-pointer/pointer.css" rel="stylesheet">
   <link href="genai-teaching_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -146,6 +213,10 @@
       margin-right: 0; 
     }
   </style>
+  <meta name="mermaid-theme" content="forest">
+  <script src="genai-teaching_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="genai-teaching_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="genai-teaching_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
   <style>
   #title-slide .title {
     font-size: 1.25em;
@@ -180,34 +251,35 @@ Matt Archer <a href="https://orcid.org/0009-0002-7043-6769" class="quarto-title-
 
   <p class="date">2026-03-30</p>
 </section>
-<section id="ml-the-basics" class="slide level2 smaller">
-<h2>ML: The basics</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
+<section id="plan" class="slide level2">
+<h2>Plan</h2>
 <ul>
-<li><strong>Loss function</strong><br>
-measures how wrong the model is</li>
-<li><strong>Gradient descent</strong><br>
-nudge weights down the loss surface</li>
-<li><strong>Backpropagation</strong><br>
-efficiently compute gradients layer by layer</li>
-<li><strong>Overfitting</strong><br>
-learns training data <em>too well</em>, poor on new data</li>
+<li>ML basics</li>
+<li>Transformer inference and agentic AI overview</li>
+<li>Tooling overview and code demo</li>
+<li>Opencode intro and configuration</li>
+<li>Create your tool call with MCP + Skills</li>
 </ul>
-</div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<p><img data-src="genai-teaching_files/figure-revealjs/mermaid-figure-1.png" style="width:3.97in;height:3.82in"></p>
+</section>
+<section id="ml-the-basics" class="slide level2">
+<h2>ML: The basics</h2>
+<div style="line-height: 2;">
+<ul>
+<li class="fragment">Loss function: measures model error</li>
+<li class="fragment">Gradient descent: moves weights down the loss surface</li>
+<li class="fragment">Backpropagation: computes gradients layer by layer</li>
+<li class="fragment">Overfitting: memorises training data, fails to generalise</li>
+</ul>
 </div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</div></div>
 <aside class="notes">
+<ul>
+<li>working in a supervised context where we have a dataset of input-output pairs and we want to learn a function that maps inputs to outputs</li>
+<li>differentiable loss function quantifies how well the model’s predictions match the training data</li>
+<li>apply gradient descent to update model parameters to reduce the loss</li>
+<li>this is done with backpropagation - computes gradients to move down this loss surface</li>
+<li>One complexities of training a model is overfitting - when the model memorises the training data instead of learning general patterns, it performs well on training data but poorly on unseen data. Regularisation techniques and careful validation are used to mitigate this.</li>
+<li>I’m not going to talk about the details of training large transformer models, but it’s worth noting that overfitting is less of a concern for them than for classical ML models. Despite having billions of parameters, they generalise well due to vast and diverse training data, regularisation techniques, the double-descent phenomenon, and emergent representations that capture structure rather than surface patterns.</li>
+</ul>
 <p>Overfitting is a major concern in classical ML, but large transformer models largely sidestep it. They have billions of parameters (far more than training examples), yet generalise well. Key reasons: (1) vast and diverse training data makes true memorisation impractical; (2) regularisation techniques such as dropout and weight decay are baked in; (3) the double-descent phenomenon: very over-parameterised models can re-enter a good-generalisation regime; and (4) emergent representations learned across billions of tokens capture structure rather than surface patterns.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -221,63 +293,561 @@ learns training data <em>too well</em>, poor on new data</li>
           display:block!important;
       }</style></aside>
 </section>
-<section id="transformers-inference" class="slide level2 smaller">
-<h2>Transformers: Inference</h2>
-<div class="columns">
-<div class="column" style="width:45%;">
-<div class="fragment" data-fragment-index="1">
-<ul>
-<li><strong>Tokenise</strong> text → sub-word tokens</li>
-</ul>
+<section id="ml-the-basics-1" class="slide level2">
+<h2>ML: The basics</h2>
+<div style="display: block; margin: 0 auto; text-align: center; margin-top: 2em;">
+<div class="cell" data-reveal="true" data-fig-height="5" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 15, "rankSpacing": 18}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
+flowchart TD
+    A([Training data]) --&gt; B["Forward pass"]
+    B --&gt; C[Compute loss]
+    C --&gt; D[Backpropagation]
+    D --&gt; E[Update weights]
+    E --&gt;|repeat| B
+    C --&gt;|loss small enough| F([Done ✓])
+
+    classDef io     fill:#6c757d,stroke:#495057,color:#fff
+    classDef step   fill:#4b9cd3,stroke:#2c6e9e,color:#fff
+    classDef key    fill:#003b6f,stroke:#001f3f,color:#fff
+
+    class A,F io
+    class B,C step
+    class D,E key
+</pre>
 </div>
-<div class="fragment" data-fragment-index="2">
-<ul>
-<li><strong>Embed</strong> tokens → dense vectors</li>
-<li><strong>Positional encoding</strong> inject token order</li>
-</ul>
-</div>
-<div class="fragment" data-fragment-index="3">
-<ul>
-<li>Transformer block (× N layers):
-<ul>
-<li><strong>Self-attention</strong> every token attends to every other <em>in parallel</em></li>
-<li><strong>Feed-forward network</strong> per-token transform</li>
-</ul></li>
-</ul>
-</div>
-<div class="fragment" data-fragment-index="4">
-<ul>
-<li><strong>Predict next token</strong> via softmax <em>(not always the most likely — temperature, top-k, top-p)</em></li>
-</ul>
-</div>
-</div><div class="column" style="width:55%;">
-<div class="r-stack" style="padding-left: 5em;">
-<div class="fragment fade-in-then-out" data-fragment-index="0">
-<p><img data-src="images/tf-step0.png" style="width:75.0%"></p>
-</div>
-<div class="fragment fade-in-then-out" data-fragment-index="1">
-<p><img data-src="images/tf-step1.png" style="width:75.0%"></p>
-</div>
-<div class="fragment fade-in-then-out" data-fragment-index="2">
-<p><img data-src="images/tf-step2.png" style="width:75.0%"></p>
-</div>
-<div class="fragment fade-in-then-out" data-fragment-index="3">
-<p><img data-src="images/tf-step3.png" style="width:75.0%"></p>
-</div>
-<div class="fragment fade-in-then-out" data-fragment-index="4">
-<p><img data-src="images/tf-step4.png" style="width:75.0%"></p>
-</div>
-<div class="fragment" data-fragment-index="5">
-<p><img data-src="images/tf-step5.png" style="width:75.0%"></p>
+<p></p></figure><p></p>
 </div>
 </div>
-</div></div>
-<div class="fragment" data-fragment-index="5">
-<ul>
-<li>Predicted token appended to input, process repeats, one token at a time</li>
-</ul>
+</div>
 </div>
 <aside class="notes">
+<p>These are the main components of the training loop for a supervised learning model. The model’s parameters (weights) are updated iteratively to minimise the loss function, which quantifies how well the model’s predictions match the training data. Backpropagation efficiently computes the gradients needed for weight updates, allowing the model to learn complex patterns in the data.</p>
+<ul>
+<li>Loss function: measures model error</li>
+<li>Gradient descent: moves weights down the loss surface</li>
+<li>Backpropagation: computes gradients layer by layer</li>
+<li>Overfitting: memorises training data, fails to generalise</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="llms-tokenisation" class="slide level2">
+<h2>LLMs: Tokenisation</h2>
+<p>LLMs cannot process raw text, it must first be converted to numbers.</p>
+<ul>
+<li class="fragment">Text is split into <strong>sub-word tokens</strong> using a learned vocabulary</li>
+<li class="fragment">Each token is assigned a unique integer ID</li>
+<li class="fragment">Common words are single tokens; rare words split into pieces</li>
+</ul>
+<div class="fragment" style="margin-bottom: 2.0em;">
+<div style="font-family: monospace; font-size: 0.8em; color: #333;">
+<p>“I went to the”</p>
+</div>
+<div style="display: flex; gap: 0.4em; font-family: monospace; font-size: 0.75em;">
+<p><span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;">235285 “I”</span> <span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;">3806 “▁went”</span> <span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;">576 “▁to”</span> <span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;">573 “▁the”</span></p>
+</div>
+</div>
+<aside class="notes">
+<p>we’re dealing with text, but the model operates on numbers. So the first step is tokenisation: converting raw text into a sequence of token IDs.</p>
+<p>We break text into sub-word tokens as otherwise the vocabulary would be too large. We can instead use the tokens as building blocks to represent any word. This makes the vocabulary more manageable and allows the model to handle rare or technical words by breaking them into pieces.</p>
+<p>Tokenisation is the first step in the pipeline. The tokeniser is a separate component from the LLM — it ships as a vocabulary file and a set of merge rules (BPE or SentencePiece). The vocabulary size for Gemma is ~256k tokens.</p>
+<p>Sub-word tokenisation means common words like “the” are a single token, while rare or technical words like “backpropagation” split into pieces: ▁back, prop, agation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="llms-embeddings-encode-meaning" class="slide level2">
+<h2>LLMs: Embeddings encode meaning</h2>
+<div style="font-size: 0.85em;">
+<p>The embedding matrix maps tokens to vectors; directions encode meaning.</p>
+</div>
+<div style="text-align: center; margin-top: 0.3em;">
+<p><img data-src="./images/3b1b-embedding.png" style="width:52.0%"></p>
+</div>
+<div style="font-size: 0.75em; color:#555; margin-top: 0.3em;">
+<p>Attention enriches each vector with context: bank (river) vs bank (finance)</p>
+</div>
+<div class="attribution">
+<p>3Blue1Brown, <a href="https://www.3blue1brown.com/lessons/gpt">Deep Learning Ch. 5</a></p>
+</div>
+<aside class="notes">
+<p>We need to covert tokens to vectors before the model can process them.</p>
+<p>Why can’t we just feed token in directly, why do we need embeddings? This is because the model operates in a continuous vector space, not discrete token IDs.</p>
+<p>The embedding matrix maps each token ID to a dense vector of numbers.</p>
+<p>These vectors capture semantic meaning — similar words have similar embeddings. For example, “king” and “queen” might be close in embedding space, while “king” and “carrot” are far apart.</p>
+<p><span class="math inline">\(\text{king} - \text{man} + \text{woman} \approx \text{queen}\)</span></p>
+<p>In practice this relationship isn’t very accurate because queen has multiple meanings. But the point is that directions in embedding space can encode meaningful relationships.</p>
+<p>In this example if we look at the displacement between germany and japan, we see it is approximately the same as the displacement between bratwurst and sushi.</p>
+<p>The food / country direction generalises across many pairs: pizza / Italy, tacos / Mexico, sushi / Japan. These patterns exist before attention runs. Attention enriches each vector with context, distinguishing “bank” (river) from “bank” (finance).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!-- SIMPLE ABSTRACTION -->
+</section>
+<section id="transformers-inference-i" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference I</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="images/tf-steps-simple-1.png" style="width:70.0%" data-id="basic-inference-img"></p>
+</div><div class="column" style="width:40%;">
+
+</div></div>
+</section>
+<section id="transformers-inference-i-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference I</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="images/tf-steps-simple-2.png" style="width:70.0%" data-id="basic-inference-img"></p>
+</div><div class="column" style="width:40%;">
+<div style="font-size: 0.8em; color: #555; margin-top: 4em;">
+<p>Convert text to tokens</p>
+</div>
+</div></div>
+</section>
+<section id="transformers-inference-i-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference I</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="images/tf-steps-simple-3.png" style="width:70.0%" data-id="basic-inference-img"></p>
+</div><div class="column" style="width:40%;">
+<div style="font-size: 0.8em; color: #555; margin-top: 4em;">
+<p>Convert text to tokens</p>
+</div>
+<div style="font-size: 0.8em; color: #555; margin-top: 1.25em;">
+<p>Predict new tokens</p>
+</div>
+</div></div>
+<aside class="notes">
+<p>This box is doing a lot of work, but we can break it down (in the next section) into a few key steps:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="transformers-inference-i-3" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference I</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="images/tf-steps-simple-4.png" style="width:70.0%" data-id="basic-inference-img"></p>
+</div><div class="column" style="width:40%;">
+<div style="font-size: 0.8em; color: #555; margin-top: 4em;">
+<p>Convert text to tokens</p>
+</div>
+<div style="font-size: 0.8em; color: #555; margin-top: 1.25em;">
+<p>Predict new tokens</p>
+</div>
+<div style="font-size: 0.8em; color: #555; margin-top: 1.25em;">
+<p>Convert tokens to text</p>
+</div>
+</div></div>
+<!-- COMPLEX ABSTRACTION -->
+</section>
+<section id="transformers-inference-ii" class="slide level2" data-auto-animate="false">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+
+<img data-src="images/tfp-step0a.png" style="display: block; margin: 0 auto;;width:40.0%" data-id="inference-img" class="r-stretch"></section>
+<section id="transformers-inference-ii-1" class="slide level2" data-auto-animate="false">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="images/tfp-step0b.png" style="display: block; margin: 0 auto;;width:100.0%" data-id="inference-img"></p>
+</div><div class="column" style="width:60%;">
+<div style="margin-top: 3em; font-family: monospace; font-size: 0.85em;">
+<p>“I went to the”</p>
+</div>
+<div style="display: flex; gap: 0.4em; margin-top: 0.8em; font-family: monospace; font-size: 0.8em;">
+<p><span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;">I</span> <span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;">▁went</span> <span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;">▁to</span> <span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;">▁the</span></p>
+</div>
+</div></div>
+</section>
+<section id="transformers-inference-ii-2" class="slide level2" data-auto-animate="false">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="images/tfp-step0b.png" style="display: block; margin: 0 auto;;width:100.0%" data-id="inference-img"></p>
+</div><div class="column" style="width:60%;">
+<div style="margin-top: 3em; font-family: monospace; font-size: 0.85em;">
+<p>“backpropagation”</p>
+</div>
+<div style="display: flex; gap: 0.4em; margin-top: 0.8em; font-family: monospace; font-size: 0.8em;">
+<p><span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;">▁back</span> <span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;">prop</span> <span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;">agation</span></p>
+</div>
+<div style="font-size: 0.65em; color: #888; margin-top: 0.5em;">
+<p>3 tokens</p>
+</div>
+</div></div>
+</section>
+<section id="transformers-inference-ii-3" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+
+<img data-src="images/tfp-step1-alternate.png" style="display: block; margin: 0 auto;;width:40.0%" data-id="inference-img" class="r-stretch"><aside class="notes">
+<p>This is the LLM - the tokenizer sits outside of the model.</p>
+<p>Converts to token ids.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="transformers-inference-ii-4" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+
+<img data-src="images/tfp-step2-alternate.png" style="display: block; margin: 0 auto;;width:40.0%" data-id="inference-img" class="r-stretch"><aside class="notes">
+<p>begin by mapping token IDs to dense vectors using the embedding matrix. This is obtained during training and captures the static meaning of each token.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="transformers-inference-ii-5" class="slide level2" data-auto-animate="false">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+<div class="columns">
+<div class="column" style="width:35%;">
+<p><img data-src="images/tfp-step2-alternate.png" style="display: block; margin: 0 auto;;width:100.0%" data-id="inference-img"></p>
+</div><div class="column" style="width:65%;">
+<div style="font-family: monospace; font-size: 0.65em; margin-top: 2em; color: #333;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Token</th>
+<th>ID</th>
+<th>Embedding (2048 dims)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>I</td>
+<td>235285</td>
+<td>[ 0.21, -0.83, 0.54, 0.12, … ]</td>
+</tr>
+<tr class="even">
+<td>▁went</td>
+<td>3806</td>
+<td>[ -0.44, 0.31, 0.09, -0.77, … ]</td>
+</tr>
+<tr class="odd">
+<td>▁to</td>
+<td>576</td>
+<td>[ 0.67, 0.02, -0.51, 0.38, … ]</td>
+</tr>
+<tr class="even">
+<td>▁the</td>
+<td>573</td>
+<td>[ 0.55, -0.19, 0.73, -0.02, … ]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></div>
+<!-- ::: {style="text-align: center; font-size: 0.6em; color: #888; margin-top: 0.4em;"}
+::: -->
+<aside class="notes">
+<p>Each token ID maps to a vector of numbers. A positional signal is added so the model knows the order of tokens — “I went to the” is different from “the to went I”.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="transformers-inference-ii-6" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+
+<img data-src="images/tfp-step2-alternate.png" style="display: block; margin: 0 auto;;width:40.0%" data-id="inference-img" class="r-stretch"></section>
+<section id="transformers-inference-ii-7" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+
+<img data-src="images/tfp-step3-alternate.png" style="display: block; margin: 0 auto;;width:40.0%" data-id="inference-img" class="r-stretch"><div style="position: absolute; top: 55%; left: 65%; font-size: 0.75em; color: #003b6f;">
+<p>transformer block</p>
+</div>
+</section>
+<section id="transformers-inference-ii-8" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+
+<img data-src="images/tfp-step4-alternate.png" style="display: block; margin: 0 auto;;width:100.0%" data-id="inference-img" class="r-stretch"><div style="position: absolute; top: 55%; left: 65%; font-size: 0.75em; color: #003b6f;">
+<p>transformer block</p>
+</div>
+<aside class="notes">
+<p>The transformer block is where all the interesting stuff happens. The key idea is self-attention: rather than processing tokens in sequence (like an RNN), every token attends to every other token in parallel.</p>
+<p>This endows the embedding vectors with contextual information.</p>
+<p>This lets the model capture long-range dependencies and scales well on modern hardware.</p>
+<p>The MLP layers are a little different in that they capture facts and rules of language.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="self-attention" class="slide level2" data-auto-animate="false">
+<h2 data-id="quarto-animate-title">Self-attention</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="images/tfp-step4-alternate.png" style="display: block; margin: 0 auto;;width:100.0%" data-id="inference-img"></p>
+</div><div class="column" style="width:60%;">
+<div style="text-align: center; margin-top: 2em; font-size: 1.0em; line-height: 3;">
+<p><span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.5em; border-radius: 4px;">I</span> <span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.5em; border-radius: 4px;">went</span> <span style="background:#e9c46a; padding: 0.2em 0.5em; border-radius: 4px;">to</span> <span style="color:#aaa; padding: 0.2em 0.5em;">the</span></p>
+</div>
+<div style="text-align: center; font-size: 0.7em; color: #555;">
+<p>“I” ↔︎ “went”: subject-verb &nbsp;&nbsp;|&nbsp;&nbsp; “went” → “to”: verb-preposition</p>
+</div>
+</div></div>
+<aside class="notes">
+<p>Let’s look at a few examples:</p>
+<p>The attention scores determine how much each token “looks at” the others when building its contextual representation. Syntactic example: “I” and “went” are linked by subject-verb agreement; “went” and “to” by verb-preposition dependency.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="self-attention-1" class="slide level2" data-auto-animate="false">
+<h2 data-id="quarto-animate-title">Self-attention</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="images/tfp-step4-alternate.png" style="display: block; margin: 0 auto;;width:100.0%" data-id="inference-img"></p>
+</div><div class="column" style="width:60%;">
+<div style="text-align: center; margin-top: 2em; font-size: 1.0em; line-height: 3;">
+<p>“The <span style="background:#e9c46a; padding: 0.2em 0.5em; border-radius: 4px;">bank</span> by the <span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.5em; border-radius: 4px;">river</span> was steep”</p>
+</div>
+<div style="text-align: center; font-size: 0.7em; color: #555;">
+<p>“bank” attends strongly to “river” - meaning is of a riverbank, not financial</p>
+</div>
+</div></div>
+<aside class="notes">
+<p>and similarly, “bank” attends strongly to “river” so its output vector shifts toward the riverbank meaning rather than the financial one.</p>
+<p>attention builds up lots of these relationships.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="transformers-inference-ii-9" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+
+<img data-src="images/tfp-step5-alternate.png" style="display: block; margin: 0 auto;;width:40.0%" data-id="inference-img" class="r-stretch"></section>
+<section id="transformers-inference-ii-10" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="images/tfp-step5-alternate.png" style="display: block; margin: 0 auto;;width:100.0%" data-id="inference-img"></p>
+</div><div class="column" style="width:60%;">
+<div style="font-family: monospace; font-size: 0.72em; margin-top: 1.5em; color: #333;">
+<p>▁the → [ 0.55, -0.19, 0.73, … ]</p>
+<p>× unembedding matrix (2048 × 256k)</p>
+<p>→ logits for every token in vocab</p>
+<p>→ softmax → sample</p>
+</div>
+<div style="font-family: monospace; font-size: 0.75em; margin-top: 1em; color: #333;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Token</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>▁library</td>
+<td>31%</td>
+</tr>
+<tr class="even">
+<td>▁store</td>
+<td>18%</td>
+</tr>
+<tr class="odd">
+<td>▁park</td>
+<td>12%</td>
+</tr>
+<tr class="even">
+<td>▁doctor</td>
+<td>8%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="font-size: 0.65em; color: #888; margin-top: 0.5em;">
+<p>Only “the” matters - it has been contextualised by attention.</p>
+</div>
+</div></div>
+<aside class="notes">
+<p>At this point the word ‘the’ has been enriched with context by attention.</p>
+<p>The model then applies the unembedding matrix to this vector, giving a score (logit) for every token in the vocabulary.</p>
+<p>Basically a dot product similarity between the contextualised vector and the vocab vectors.</p>
+<p>softmax converts these logits to probabilities, and the model samples the next token ID from this distribution.</p>
+<p>During inference, we actually do this for every token in the sequence. This is obviously inefficient.</p>
+<p>Get around this with a concept called KV caching, but that’s a topic for another day.</p>
+<p>Why is there a limit on context length?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="transformers-inference-ii-11" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+
+<img data-src="images/tfp-step5-alternate.png" style="display: block; margin: 0 auto;;width:40.0%" data-id="inference-img" class="r-stretch"></section>
+<section id="transformers-inference-ii-12" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+
+<img data-src="images/tfp-step6-alternate.png" style="display: block; margin: 0 auto;;width:40.0%" data-id="inference-img" class="r-stretch"><aside class="notes">
+<p>This is run autoregressively.</p>
+<p>Autoregressive is a fancy way of saying “feed the output back in as input.” Each iteration appends the new token ID to the sequence and feeds the full sequence back in. Eventually the model generates an end-of-sequence token or hits max_new_tokens.</p>
+<p>Maybe my arrow is a little misleading here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="transformers-inference-ii-13" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="images/tfp-step6-alternate.png" style="display: block; margin: 0 auto;;width:100.0%" data-id="inference-img"></p>
+</div><div class="column" style="width:60%;">
+<div style="font-family: monospace; font-size: 0.6em; margin-top: 2em; line-height: 2.2; color: #333;">
+<p>[235285] [3806] [576] [573] → <strong>4376 “▁library”</strong></p>
+<p>[235285] [3806] [576] [573] [4376] → <strong>736 “▁this”</strong></p>
+</div>
+<div style="font-size: 0.65em; color: #888; margin-top: 0.5em;">
+<p>full sequence fed back in each loop</p>
+</div>
+</div></div>
+<aside class="notes">
+<p>Each iteration appends the new token ID to the sequence and feeds the full sequence back in. Eventually the model generates an end-of-sequence token or hits max_new_tokens.</p>
+<ul>
+<li>Since the model processes the entire sequence on every forward pass, so longer inputs require more computation and memory. This is a fundamental limitation of the transformer architecture - it’s obviously inefficent to re-process the same tokens every time.</li>
+<li>It was also trained on sequences up to a certain length (e.g.&nbsp;2048 tokens), so it may not perform well on much longer inputs.</li>
+<li>kv caching grows as O(n)</li>
+<li>computation grows as O(n^2) due to self-attention</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="transformers-inference-ii-14" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+
+<img data-src="images/tfp-step7-alternate.png" style="display: block; margin: 0 auto;;width:40.0%" data-id="inference-img" class="r-stretch"></section>
+<section id="transformers-inference-ii-15" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="images/tfp-step7-alternate.png" style="display: block; margin: 0 auto;;width:100.0%" data-id="inference-img"></p>
+</div><div class="column" style="width:60%;">
+<div style="font-family: monospace; font-size: 0.62em; margin-top: 2em; line-height: 2; color: #333;">
+<p>[235285, 3806, 576, 573, 4376, 736]</p>
+<p>↓ vocab lookup</p>
+<p>“I went to the library this”</p>
+</div>
+<div style="font-size: 0.65em; color: #888; margin-top: 0.5em;">
+<p>just a lookup table, the inverse of tokenisation</p>
+</div>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Tokenise: text to sub-word token IDs</li>
+<li>LLM: token IDs enter the model</li>
+<li>Embed + pos. encoding: token IDs to dense vectors with position</li>
+<li>Self-attention + MLP × N layers: every token attends to every other</li>
+<li>Predict &amp; sample: logits to softmax to sample next token</li>
+<li>Autoregressive: feed token back, repeat</li>
+<li>Decode: token IDs to text</li>
+</ul>
 <p>The crucial innovation is self-attention: rather than processing tokens in sequence (like an RNN), every token attends to every other token in parallel. This lets the model capture long-range dependencies and scales well on modern hardware.</p>
 <p>Sampling strategies: the model doesn’t always pick the most likely next token. Temperature scales the probability distribution (higher = more random). Top-k restricts sampling to the k most likely tokens. Top-p (nucleus sampling) samples from the smallest set of tokens whose cumulative probability exceeds p.</p>
 <style type="text/css">
@@ -292,61 +862,25 @@ learns training data <em>too well</em>, poor on new data</li>
           display:block!important;
       }</style></aside>
 </section>
-<section id="embeddings-encode-meaning" class="slide level2 smaller">
-<h2>Embeddings encode meaning</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>The <strong>input embedding matrix</strong> maps tokens to vectors. Directions encode semantic relationships:</p>
-<!-- ::: {style="background:#1a1a2e; color:#fff; padding:0.5em 1em; border-radius:6px; font-size:0.9em; text-align:center; margin:0.5em 0;"}
-E(Sushi) + E(Germany) − E(Japan) ≈ E(Bratwurst)
-::: -->
+<section id="transformers-summary" class="slide level2">
+<h2>Transformers: Summary</h2>
+<div class="{.incremental&quot;}">
 <ul>
-<li>The food/country direction generalises across many pairs:
+<li>Tokenise: text → sub-word token IDs</li>
+<li>Embed: token IDs → dense vectors (static meaning)</li>
+<li>Self-attention: enrich each vector with context (dynamic meaning)
 <ul>
-<li>i.e.&nbsp;pizza / Italy, tacos / Mexico</li>
+<li><ul>
+<li>MLP × N layers: transform representations</li>
 </ul></li>
+</ul></li>
+<li>Predict &amp; sample: last token’s vector × unembedding matrix → next token ID</li>
+<li>Autoregressive loop: append token, feed full sequence back in</li>
+<li>Decode: token IDs → text (lookup table)</li>
 </ul>
-</div><div class="column" style="width:50%;">
-<p><img data-src="./images/3b1b-embedding.png" style="width:80.0%"></p>
-</div></div>
-<div style="margin-top:0.8em; font-size:0.85em; color:#555; border-left: 3px solid #4b9cd3; padding-left:0.5em;">
-<p>These patterns exist <em>before</em> attention runs. Attention enriches each vector with context, distinguishing “bank” (river) from “bank” (finance).</p>
-</div>
-<div class="attribution">
-<p>3Blue1Brown, <a href="https://www.3blue1brown.com/lessons/gpt">Deep Learning Ch. 5</a></p>
-</div>
-</section>
-<section id="agentic-ai" class="slide level2 smaller">
-<h2>Agentic AI</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><strong>LLM</strong>: generates text, reasons, and decides whether to act or answer</li>
-<li><strong>System prompt</strong>: the agent’s “config”, defines its role, tools, and behaviour</li>
-<li><strong>Context window</strong>: all state lives here: prompt, results, reasoning</li>
-<li><strong>Planning</strong>: CoT/ReAct, model reasons step by step before acting</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<ul>
-<li><strong>Tools</strong>: search, code execution, APIs, RAG. Agent decides when to invoke each</li>
-<li><strong>Termination</strong>: done when LLM produces a final answer, or <code>max_iterations</code> is hit</li>
-</ul>
-</div></div>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<p><img data-src="genai-teaching_files/figure-revealjs/mermaid-figure-2.png" style="width:13.28in;height:2.01in"></p>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
 </div>
 <aside class="notes">
-<p>An agentic system wraps an LLM in a loop: the model receives a prompt, decides whether it needs more information or to take an action, calls a tool if so, gets the result back in its context, and repeats until it decides it is done.</p>
-<p>The key components: - <strong>LLM</strong>: does all the reasoning:it reads the context, decides what to do next, and generates either a tool call or a final answer. - <strong>Tools</strong>: external capabilities the LLM can invoke:web search, a code interpreter, database queries, API calls. The LLM doesn’t execute these itself; the surrounding framework does and appends the result to the context. - <strong>Memory / RAG</strong>: retrieved documents or prior conversation history injected into the context before the LLM runs. This is how agents can work with knowledge beyond their training cutoff or access private data. - <strong>Planning</strong>: some agents explicitly decompose a task into sub-steps before acting (ReAct, chain-of-thought, tree-of-thought). Others just iterate implicitly.</p>
-<p>A key point for an RSE audience: the LLM itself is stateless:all state lives in the context window. The “loop” is managed by the surrounding application code, not the model.</p>
+<p>The key insight: the embedding matrix gives every token a static starting vector, and self-attention makes those vectors contextual. The model is stateless — all state lives in the sequence of token IDs fed in on each loop.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -359,24 +893,309 @@ E(Sushi) + E(Germany) − E(Japan) ≈ E(Bratwurst)
           display:block!important;
       }</style></aside>
 </section>
-<section id="tooling" class="slide level2">
-<h2>Tooling</h2>
+<section id="transformers-summary-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Transformers: Summary</h2>
 <ul>
-<li>MCP - connecting models to the outside world (Tom…)</li>
+<li class="fragment">The model is completely stateless</li>
+<li class="fragment">All context is in the text fed to it, there is no memory</li>
+<li class="fragment">Each forward pass re-processes the full sequence</li>
+<li class="fragment">Longer contexts are more expensive: attention is O(n²)</li>
+</ul>
+<aside class="notes">
+<p>This has profound implications for how you use LLMs.</p>
+<p>Long conversations get expensive because the full history is re-processed every time.</p>
+<p>Context length is a hard constraint. Techniques like RAG, summarisation, and memory modules are all workarounds for this fundamental limitation.</p>
+<p>In summary: it’s essentially a goldfish.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!-- CODE EXAMPLE  -->
+</section>
+<section id="llm-hello-world" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">LLM Hello World</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb1-1" class="hljs-ln-code"><a href=""></a><span class="im">import</span> os</span>
+<span id="cb1-2" class="hljs-ln-code"><a href=""></a><span class="im">from</span> huggingface_hub <span class="im">import</span> login</span>
+<span id="cb1-3" class="hljs-ln-code"><a href=""></a><span class="im">from</span> transformers <span class="im">import</span> AutoTokenizer, AutoModelForCausalLM</span>
+<span id="cb1-4" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb1-5" class="hljs-ln-code"><a href=""></a>login(token<span class="op">=</span>os.environ[<span class="st">"HF_API_KEY"</span>], add_to_git_credential<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-6" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb1-7" class="hljs-ln-code"><a href=""></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(<span class="st">"google/gemma-2b"</span>)</span>
+<span id="cb1-8" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb1-9" class="hljs-ln-code"><a href=""></a>model <span class="op">=</span> AutoModelForCausalLM.from_pretrained(<span class="st">"google/gemma-2b"</span>)</span>
+<span id="cb1-10" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb1-11" class="hljs-ln-code"><a href=""></a>input_text <span class="op">=</span> <span class="st">"I went to the"</span></span>
+<span id="cb1-12" class="hljs-ln-code"><a href=""></a>input_ids <span class="op">=</span> tokenizer(input_text, return_tensors<span class="op">=</span><span class="st">"pt"</span>)</span>
+<span id="cb1-13" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb1-14" class="hljs-ln-code"><a href=""></a>outputs <span class="op">=</span> model.generate(<span class="op">**</span>input_ids, max_new_tokens<span class="op">=</span><span class="dv">10</span>, do_sample<span class="op">=</span><span class="va">True</span>, top_p<span class="op">=</span><span class="fl">0.9</span>)</span>
+<span id="cb1-15" class="hljs-ln-code"><a href=""></a><span class="bu">print</span>(tokenizer.decode(outputs[<span class="dv">0</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="llm-hello-world-1" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">LLM Hello World</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-code-line-numbers="1-3"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb2-1" class="hljs-ln-code"><a href=""></a><span class="im">import</span> os</span>
+<span id="cb2-2" class="hljs-ln-code"><a href=""></a><span class="im">from</span> huggingface_hub <span class="im">import</span> login</span>
+<span id="cb2-3" class="hljs-ln-code"><a href=""></a><span class="im">from</span> transformers <span class="im">import</span> AutoTokenizer, AutoModelForCausalLM</span>
+<span id="cb2-4" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb2-5" class="hljs-ln-code"><a href=""></a>login(token<span class="op">=</span>os.environ[<span class="st">"HF_API_KEY"</span>], add_to_git_credential<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-6" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb2-7" class="hljs-ln-code"><a href=""></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(<span class="st">"google/gemma-2b"</span>)</span>
+<span id="cb2-8" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb2-9" class="hljs-ln-code"><a href=""></a>model <span class="op">=</span> AutoModelForCausalLM.from_pretrained(<span class="st">"google/gemma-2b"</span>)</span>
+<span id="cb2-10" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb2-11" class="hljs-ln-code"><a href=""></a>input_text <span class="op">=</span> <span class="st">"I went to the"</span></span>
+<span id="cb2-12" class="hljs-ln-code"><a href=""></a>input_ids <span class="op">=</span> tokenizer(input_text, return_tensors<span class="op">=</span><span class="st">"pt"</span>)</span>
+<span id="cb2-13" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb2-14" class="hljs-ln-code"><a href=""></a>outputs <span class="op">=</span> model.generate(<span class="op">**</span>input_ids, max_new_tokens<span class="op">=</span><span class="dv">10</span>, do_sample<span class="op">=</span><span class="va">True</span>, top_p<span class="op">=</span><span class="fl">0.9</span>)</span>
+<span id="cb2-15" class="hljs-ln-code"><a href=""></a><span class="bu">print</span>(tokenizer.decode(outputs[<span class="dv">0</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div style="font-size: 0.75em; line-height: 1.4;">
+<ul>
+<li><strong><code>huggingface_hub</code> / <code>transformers</code></strong>: The platform and library where the ML community collaborates on models, datasets, and applications.</li>
+</ul>
+</div>
+</section>
+<section id="llm-hello-world-2" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">LLM Hello World</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-code-line-numbers="5"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb3-1" class="hljs-ln-code"><a href=""></a><span class="im">import</span> os</span>
+<span id="cb3-2" class="hljs-ln-code"><a href=""></a><span class="im">from</span> huggingface_hub <span class="im">import</span> login</span>
+<span id="cb3-3" class="hljs-ln-code"><a href=""></a><span class="im">from</span> transformers <span class="im">import</span> AutoTokenizer, AutoModelForCausalLM</span>
+<span id="cb3-4" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb3-5" class="hljs-ln-code"><a href=""></a>login(token<span class="op">=</span>os.environ[<span class="st">"HF_API_KEY"</span>], add_to_git_credential<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-6" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb3-7" class="hljs-ln-code"><a href=""></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(<span class="st">"google/gemma-2b"</span>)</span>
+<span id="cb3-8" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb3-9" class="hljs-ln-code"><a href=""></a>model <span class="op">=</span> AutoModelForCausalLM.from_pretrained(<span class="st">"google/gemma-2b"</span>)</span>
+<span id="cb3-10" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb3-11" class="hljs-ln-code"><a href=""></a>input_text <span class="op">=</span> <span class="st">"I went to the"</span></span>
+<span id="cb3-12" class="hljs-ln-code"><a href=""></a>input_ids <span class="op">=</span> tokenizer(input_text, return_tensors<span class="op">=</span><span class="st">"pt"</span>)</span>
+<span id="cb3-13" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb3-14" class="hljs-ln-code"><a href=""></a>outputs <span class="op">=</span> model.generate(<span class="op">**</span>input_ids, max_new_tokens<span class="op">=</span><span class="dv">10</span>, do_sample<span class="op">=</span><span class="va">True</span>, top_p<span class="op">=</span><span class="fl">0.9</span>)</span>
+<span id="cb3-15" class="hljs-ln-code"><a href=""></a><span class="bu">print</span>(tokenizer.decode(outputs[<span class="dv">0</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div style="font-size: 0.75em; line-height: 1.4;">
+<ul>
+<li><strong><code>huggingface_hub</code> / <code>transformers</code></strong>: The platform and library where the ML community collaborates on models, datasets, and applications.</li>
+<li><strong>Login</strong>: Register with Hugging Face and obtain a key to download hosted models.</li>
+</ul>
+</div>
+</section>
+<section id="llm-hello-world-3" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">LLM Hello World</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-code-line-numbers="7,9"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb4-1" class="hljs-ln-code"><a href=""></a><span class="im">import</span> os</span>
+<span id="cb4-2" class="hljs-ln-code"><a href=""></a><span class="im">from</span> huggingface_hub <span class="im">import</span> login</span>
+<span id="cb4-3" class="hljs-ln-code"><a href=""></a><span class="im">from</span> transformers <span class="im">import</span> AutoTokenizer, AutoModelForCausalLM</span>
+<span id="cb4-4" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb4-5" class="hljs-ln-code"><a href=""></a>login(token<span class="op">=</span>os.environ[<span class="st">"HF_API_KEY"</span>], add_to_git_credential<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-6" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb4-7" class="hljs-ln-code"><a href=""></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(<span class="st">"google/gemma-2b"</span>)</span>
+<span id="cb4-8" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb4-9" class="hljs-ln-code"><a href=""></a>model <span class="op">=</span> AutoModelForCausalLM.from_pretrained(<span class="st">"google/gemma-2b"</span>)</span>
+<span id="cb4-10" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb4-11" class="hljs-ln-code"><a href=""></a>input_text <span class="op">=</span> <span class="st">"I went to the"</span></span>
+<span id="cb4-12" class="hljs-ln-code"><a href=""></a>input_ids <span class="op">=</span> tokenizer(input_text, return_tensors<span class="op">=</span><span class="st">"pt"</span>)</span>
+<span id="cb4-13" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb4-14" class="hljs-ln-code"><a href=""></a>outputs <span class="op">=</span> model.generate(<span class="op">**</span>input_ids, max_new_tokens<span class="op">=</span><span class="dv">10</span>, do_sample<span class="op">=</span><span class="va">True</span>, top_p<span class="op">=</span><span class="fl">0.9</span>)</span>
+<span id="cb4-15" class="hljs-ln-code"><a href=""></a><span class="bu">print</span>(tokenizer.decode(outputs[<span class="dv">0</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div style="font-size: 0.75em; line-height: 1.4;">
+<ul>
+<li><strong><code>huggingface_hub</code> / <code>transformers</code></strong>: The platform and library where the ML community collaborates on models, datasets, and applications.</li>
+<li><strong>Login</strong>: Register with Hugging Face and obtain a key to download hosted models.</li>
+<li><strong>Load tokenizer &amp; model</strong>: Downloads Google Gemma-2b and its matching tokenizer.</li>
+</ul>
+</div>
+</section>
+<section id="llm-hello-world-4" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">LLM Hello World</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-code-line-numbers="11-12"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb5-1" class="hljs-ln-code"><a href=""></a><span class="im">import</span> os</span>
+<span id="cb5-2" class="hljs-ln-code"><a href=""></a><span class="im">from</span> huggingface_hub <span class="im">import</span> login</span>
+<span id="cb5-3" class="hljs-ln-code"><a href=""></a><span class="im">from</span> transformers <span class="im">import</span> AutoTokenizer, AutoModelForCausalLM</span>
+<span id="cb5-4" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb5-5" class="hljs-ln-code"><a href=""></a>login(token<span class="op">=</span>os.environ[<span class="st">"HF_API_KEY"</span>], add_to_git_credential<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-6" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb5-7" class="hljs-ln-code"><a href=""></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(<span class="st">"google/gemma-2b"</span>)</span>
+<span id="cb5-8" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb5-9" class="hljs-ln-code"><a href=""></a>model <span class="op">=</span> AutoModelForCausalLM.from_pretrained(<span class="st">"google/gemma-2b"</span>)</span>
+<span id="cb5-10" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb5-11" class="hljs-ln-code"><a href=""></a>input_text <span class="op">=</span> <span class="st">"I went to the"</span></span>
+<span id="cb5-12" class="hljs-ln-code"><a href=""></a>input_ids <span class="op">=</span> tokenizer(input_text, return_tensors<span class="op">=</span><span class="st">"pt"</span>)</span>
+<span id="cb5-13" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb5-14" class="hljs-ln-code"><a href=""></a>outputs <span class="op">=</span> model.generate(<span class="op">**</span>input_ids, max_new_tokens<span class="op">=</span><span class="dv">10</span>, do_sample<span class="op">=</span><span class="va">True</span>, top_p<span class="op">=</span><span class="fl">0.9</span>)</span>
+<span id="cb5-15" class="hljs-ln-code"><a href=""></a><span class="bu">print</span>(tokenizer.decode(outputs[<span class="dv">0</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div style="font-size: 0.75em; line-height: 1.4;">
+<ul>
+<li><strong><code>huggingface_hub</code> / <code>transformers</code></strong>: The platform and library where the ML community collaborates on models, datasets, and applications.</li>
+<li><strong>Login</strong>: Register with Hugging Face and obtain a key to download hosted models.</li>
+<li><strong>Load tokenizer &amp; model</strong>: Downloads Google Gemma-2b and its matching tokenizer.</li>
+<li><strong>Tokenise input</strong>: Converts your text into a tensor of token IDs the model can read.</li>
+</ul>
+</div>
+</section>
+<section id="llm-hello-world-5" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">LLM Hello World</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-code-line-numbers="14-15"><pre class="sourceCode numberSource python number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb6-1" class="hljs-ln-code"><a href=""></a><span class="im">import</span> os</span>
+<span id="cb6-2" class="hljs-ln-code"><a href=""></a><span class="im">from</span> huggingface_hub <span class="im">import</span> login</span>
+<span id="cb6-3" class="hljs-ln-code"><a href=""></a><span class="im">from</span> transformers <span class="im">import</span> AutoTokenizer, AutoModelForCausalLM</span>
+<span id="cb6-4" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb6-5" class="hljs-ln-code"><a href=""></a>login(token<span class="op">=</span>os.environ[<span class="st">"HF_API_KEY"</span>], add_to_git_credential<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-6" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb6-7" class="hljs-ln-code"><a href=""></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(<span class="st">"google/gemma-2b"</span>)</span>
+<span id="cb6-8" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb6-9" class="hljs-ln-code"><a href=""></a>model <span class="op">=</span> AutoModelForCausalLM.from_pretrained(<span class="st">"google/gemma-2b"</span>)</span>
+<span id="cb6-10" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb6-11" class="hljs-ln-code"><a href=""></a>input_text <span class="op">=</span> <span class="st">"I went to the"</span></span>
+<span id="cb6-12" class="hljs-ln-code"><a href=""></a>input_ids <span class="op">=</span> tokenizer(input_text, return_tensors<span class="op">=</span><span class="st">"pt"</span>)</span>
+<span id="cb6-13" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb6-14" class="hljs-ln-code"><a href=""></a>outputs <span class="op">=</span> model.generate(<span class="op">**</span>input_ids, max_new_tokens<span class="op">=</span><span class="dv">10</span>, do_sample<span class="op">=</span><span class="va">True</span>, top_p<span class="op">=</span><span class="fl">0.9</span>)</span>
+<span id="cb6-15" class="hljs-ln-code"><a href=""></a><span class="bu">print</span>(tokenizer.decode(outputs[<span class="dv">0</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div style="font-size: 0.75em; line-height: 1.4;">
+<ul>
+<li><strong><code>huggingface_hub</code> / <code>transformers</code></strong>: The platform and library where the ML community collaborates on models, datasets, and applications.</li>
+<li><strong>Login</strong>: Register with Hugging Face and obtain a key to download hosted models.</li>
+<li><strong>Load tokenizer &amp; model</strong>: Downloads Google Gemma-2b and its matching tokenizer.</li>
+<li><strong>Tokenise input</strong>: Converts your text into a tensor of token IDs the model can read.</li>
+<li><strong>Generate &amp; decode</strong>: Model predicts tokens autoregressively; tokenizer converts them back to text.</li>
+</ul>
+</div>
+<aside class="notes">
+<p>By writing model.generate(**input_ids), you are telling Python: “Take every key in this dictionary and pass it to the function as a named argument.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="agentic-ai" class="slide level2">
+<h2>Agentic AI</h2>
+<p>AI Agents are essentially some scaffolding / loop around LLM(s):</p>
+<ul>
+<li class="fragment">LLM: The reasoning engine. It can plan, evaluate, or decide whether to “act” or “answer.”</li>
+<li class="fragment">System Prompt: Defines the persona, available tools, and operational boundaries.</li>
+<li class="fragment">Working memory: Maintains the state, including history, tool outputs, and the current goal.</li>
+<li class="fragment">Tools: External capabilities like web search, code execution, APIs, or connecting to RAG.</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><p>The LLM is the core reasoning engine. It may also plan out a sequence of steps before action. i.e.&nbsp;CoT is a simple form of agentic reasoning. More complex agents can evaluate their own output and decide whether to “act” (e.g.&nbsp;call a tool) or “answer” (respond to the user).</p></li>
+<li><p>The system prompt. I.e. if it’s financial adviser - it can’t go off track and give medical advice.</p></li>
+<li><p>Working memory: this is held in the contenxt window. Might have to summarise as it goes.</p></li>
+<li><p>Tools allow the LLM to interact with the outside. It doesn’t execute code itself. It generates a tool call, the surrounding framework executes it, and the result is appended back into the context for the LLM to re-reason with.</p></li>
+<li><p>LLM is like a goldfish - completely stateless. All short term memory lives in the context window. The “loop” is managed by the surrounding application code, not the model.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="agentic-ai-1" class="slide level2">
+<h2>Agentic AI</h2>
+<div style="margin-top: 3em;">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 40, "rankSpacing": 80}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
+flowchart LR
+    S([System prompt]) --&gt; C
+    H([Prompt]) --&gt; C["Context window"]
+    C --&gt; L["LLM: generate text"]
+    L --&gt; D{Tool call?}
+    D --&gt;|yes| T["Tools (incl. RAG)"]
+    T --&gt;|result appended| C
+    D --&gt;|no| O([Output])
+
+    classDef io      fill:#6c757d,stroke:#495057,color:#fff
+    classDef core    fill:#003b6f,stroke:#001f3f,color:#fff
+    classDef support fill:#4b9cd3,stroke:#2c6e9e,color:#fff
+    classDef decision fill:#e9c46a,stroke:#f4a261,color:#000
+
+    class S,H,O io
+    class L core
+    class C,T support
+    class D decision
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>An agentic system wraps an LLM in a loop using lots of scaffolding to enable it to solve complex tasks.</p>
+<p>We start with two inputs. The Prompt is what the user wants, but the System Prompt is where we’ve given the agent a persona, ‘You are a researcher with access to these specific tools.’ Both of these get combined into the Context Window.</p>
+<p>The context window is limited in size so we have to be quite strategic about what goes in there. We can’t include the entire internet or all our documentation.</p>
+<p>The LLM looks at the context window and decides: ‘Do I need a tool to answer this?’</p>
+<p>If the answer is ‘Yes,’ the agent doesn’t talk to the user yet. Instead, it outputs a specific string (a Tool Call) that the scaffolding recognises. The scaffolding then executes a Skill—like running a Python script or a RAG search—and appends the result back into the window.</p>
+<p>Only when the LLM decides it finally has enough information does it generate the final response for the user.”</p>
+<p>The result of that tool—the data it found or the code it ran—is appended back into the Context Window.</p>
+<p>Even though LLMs are entirely stateless, this loop is how we ‘fake’ memory. The LLM now sees the original prompt, its own decision to use a tool, and the tool’s result. It ‘re-reasons’ with this new information.</p>
+<p>The LLM itself is stateless — all state lives in the context window. The “loop” is managed by the surrounding application code, not the model.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="self-study-resources" class="slide level2">
+<h2>Self Study Resources</h2>
+<ul>
+<li>3Blue1Brown, Language Models Explained:
+<ul>
+<li>Chapters <a href="https://youtu.be/LPZh9BOjkQs?si=AXb6kvl44CQqaCto">4</a>, <a href="https://youtu.be/wjZofJX0v4M?si=-gx_cV-et1yG3aFn">5</a>, <a href="https://youtu.be/eMlx5fFNoYc?si=V8gU3iIsRmNMMIsM">6</a>, <a href="https://youtu.be/eMlx5fFNoYc?si=x01rnOt7jnsku_pa">7</a></li>
+</ul></li>
+<li>Meridian Cambridge <a href="https://youtu.be/G51Hrmfll9s?si=UQCDHBVmESqHSpbR">Transformer architecture</a>, <a href="https://youtu.be/8mRG0JtxLL0?si=GigTan8Hw9TEeEe0">Agents</a></li>
+</ul>
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="further-reading" class="slide level2">
+<h2>Further Reading</h2>
+<p>Foundational concepts and Transformers</p>
+<ul>
+<li><p>3Blue1Brown: <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">Neural Networks playlist</a> <span class="citation" data-cites="3blue1brown_nn">(<a href="#/references" role="doc-biblioref" onclick="">Sanderson 2017</a>)</span></p></li>
+<li><p>Andrej Karpathy: <a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">Neural Networks: Zero to Hero</a> <span class="citation" data-cites="karpathy_zero_to_hero">(<a href="#/references" role="doc-biblioref" onclick="">Karpathy 2022</a>)</span></p></li>
+<li><p>Stanford CS25: <a href="https://web.stanford.edu/class/cs25/">Transformers United</a> <span class="citation" data-cites="stanford_cs25">(<a href="#/references" role="doc-biblioref" onclick="">Stanford University 2021</a>)</span></p></li>
+<li><p>DeepLearning.AI: <a href="https://learn.deeplearning.ai/courses/build-and-train-an-llm-with-jax/lesson/gy364z/introduction">Build and Train an LLM with JAX</a> <span class="citation" data-cites="deeplearningai_llm_jax">(<a href="#/references" role="doc-biblioref" onclick="">DeepLearning.AI 2024</a>)</span></p></li>
 </ul>
 </section>
-<section id="references-further-reading" class="slide level2 smaller">
-<h2>References &amp; Further Reading</h2>
-<p><strong>Foundational concepts</strong></p>
-<ul>
-<li>3Blue1Brown: <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">Neural Networks playlist</a> <span class="citation" data-cites="3blue1brown_nn">(<a href="#/references" role="doc-biblioref" onclick="">Sanderson 2017</a>)</span></li>
-<li>Andrej Karpathy: <a href="https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ">Neural Networks: Zero to Hero</a> <span class="citation" data-cites="karpathy_zero_to_hero">(<a href="#/references" role="doc-biblioref" onclick="">Karpathy 2022</a>)</span></li>
-</ul>
-<p><strong>Transformers</strong></p>
-<ul>
-<li>Stanford CS25: <a href="https://web.stanford.edu/class/cs25/">Transformers United</a> <span class="citation" data-cites="stanford_cs25">(<a href="#/references" role="doc-biblioref" onclick="">Stanford University 2021</a>)</span></li>
-</ul>
-<p><strong>Reinforcement Learning &amp; Alignment</strong></p>
+<section id="further-reading-1" class="slide level2">
+<h2>Further Reading</h2>
+<p>Reinforcement Learning &amp; Alignment</p>
 <ul>
 <li>Hugging Face: <a href="https://huggingface.co/learn/deep-rl-course">Deep RL Course</a> <span class="citation" data-cites="huggingface_deep_rl">(<a href="#/references" role="doc-biblioref" onclick="">Hugging Face 2022</a>)</span></li>
 <li>OpenAI: <a href="https://spinningup.openai.com">Spinning Up in Deep RL</a> <span class="citation" data-cites="openai_spinningup">(<a href="#/references" role="doc-biblioref" onclick="">Achiam 2018</a>)</span></li>
@@ -476,6 +1295,9 @@ E(Sushi) + E(Germany) − E(Japan) ≈ E(Bratwurst)
 <div id="ref-openai_spinningup" class="csl-entry" role="listitem">
 Achiam, Joshua. 2018. <em>Spinning up in Deep Reinforcement Learning</em>. OpenAI. <a href="https://spinningup.openai.com">https://spinningup.openai.com</a>.
 </div>
+<div id="ref-deeplearningai_llm_jax" class="csl-entry" role="listitem">
+DeepLearning.AI. 2024. <em>Build and Train an <span>LLM</span> with <span>JAX</span></em>. Online course, DeepLearning.AI. <a href="https://learn.deeplearning.ai/courses/build-and-train-an-llm-with-jax/lesson/gy364z/introduction">https://learn.deeplearning.ai/courses/build-and-train-an-llm-with-jax/lesson/gy364z/introduction</a>.
+</div>
 <div id="ref-huggingface_deep_rl" class="csl-entry" role="listitem">
 Hugging Face. 2022. <em>Deep Reinforcement Learning Course</em>. Online course. <a href="https://huggingface.co/learn/deep-rl-course">https://huggingface.co/learn/deep-rl-course</a>.
 </div>
@@ -506,6 +1328,8 @@ Stanford University. 2021. <em><span>CS25</span>: Transformers United</em>. Stan
   <script src="genai-teaching_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="genai-teaching_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="genai-teaching_files/libs/revealjs/plugin/reveal-attribution/attribution.js"></script>
+  <script src="genai-teaching_files/libs/revealjs/plugin/reveal-pointer/pointer.js"></script>
+  <script src="genai-teaching_files/libs/revealjs/plugin/reveal-pointer-sync/pointer-sync.js"></script>
   <script src="genai-teaching_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -528,6 +1352,7 @@ Stanford University. 2021. <em><span>CS25</span>: Transformers United</em>. Stan
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'pointer': {"key":"q","color":"red","pointerSize":16,"alwaysVisible":false},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -698,7 +1523,7 @@ Stanford University. 2021. <em><span>CS25</span>: Transformers United</em>. Stan
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealAttribution, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealAttribution, RevealPointer, RevealPointerSync, QuartoSupport,
 
           RevealMath,
           RevealNotes,
