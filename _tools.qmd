@@ -21,7 +21,7 @@ curl -fsSL https://opencode.ai/install | bash
 - Mac
 
 ```bash
-brew install --cask opencode-desktop
+brew install anomalyco/tap/opencode
 ```
 
 - Windows (download `.exe`)
