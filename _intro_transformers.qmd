@@ -1,3 +1,38 @@
+## 2017: Attention Is All You Need
+
+::: {.timeline-strip}
+[1958]{.tl-stop} [›]{.tl-sep} [1986]{.tl-stop} [›]{.tl-sep} [2012]{.tl-stop} [›]{.tl-sep} [2014]{.tl-stop} [›]{.tl-sep} [2017]{.tl-stop .tl-now} [›]{.tl-sep} [2020]{.tl-stop} [›]{.tl-sep} [2022]{.tl-stop} [›]{.tl-sep} [now]{.tl-stop}
+:::
+
+::: {.era-tagline}
+The 2017 paper hiding inside every AI you use
+:::
+
+:::: {.columns}
+::: {.column width="58%"}
+::: {.incremental style="font-size: 0.85em;"}
+- Eight Google researchers, writing a **translation** paper
+- The reckless move: keep attention, **throw away the RNN**
+- Every token attends to every other token — **in parallel**
+- Parallel means GPUs saturate; GPUs saturating means **scale**
+:::
+:::
+::: {.column width="42%"}
+![](./images/tl-attention-web.png){width="82%" style="display: block; margin: 0.5em auto 0 auto;" fig-alt="Six word blocks arranged in a circle, every block connected to every other by thin lines, with one connection highlighted — every token attending to every other token."}
+:::
+::::
+
+::: {.notes}
+"Attention Is All You Need", Vaswani et al., 2017. Eight authors, listed as equal contributors, order randomised. They were trying to improve machine translation — none of them saw what it would become. It is now the blueprint for every AI you talk to: GPT literally stands for Generative Pretrained *Transformer*.
+
+The move sounds absurd on paper: attention was invented as an accessory to the RNN — keeping it while dropping the RNN is like keeping the GPS and getting rid of the car. But it works, because self-attention alone can capture the relationships that matter, and without recurrence the whole sequence processes simultaneously.
+
+That's the deep connection back to 2012: AlexNet proved GPUs + scale win, but RNNs couldn't use that hardware — they read one word at a time. The transformer is the architecture that finally let language soak up all the compute. "Structure is knowledge" again: the structure a language model needs is attention plus a sense of position, and almost nothing else needs to be hard-wired.
+
+Now let's open the box and walk through exactly what happens at inference time — this machinery is running every time you watch a model answer token by token.
+:::
+
+
 <!-- SIMPLE ABSTRACTION -->
 
 ## Transformers: Inference I {auto-animate=true}
@@ -103,7 +138,7 @@ Convert tokens to text
 [prop]{style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;"}
 [agation]{style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;"}
 :::
-:::{style="font-size: 0.65em; color: #888; margin-top: 0.5em;"}
+:::{style="font-size: 0.65em; color: #555; margin-top: 0.5em;"}
 3 tokens
 :::
 :::
@@ -146,7 +181,7 @@ This is obtained during training and captures the static meaning of each token.
 :::
 ::::
 
-<!-- ::: {style="text-align: center; font-size: 0.6em; color: #888; margin-top: 0.4em;"}
+<!-- ::: {style="text-align: center; font-size: 0.6em; color: #555; margin-top: 0.4em;"}
 ::: -->
 :::{.notes}
 
@@ -263,8 +298,8 @@ The attention scores determine how much each token "looks at" the others when bu
 | ▁park | 12% |
 | ▁doctor | 8% |
 :::
-:::{style="font-size: 0.65em; color: #888; margin-top: 0.5em;"}
-Only "the" matters - it has been contextualised by attention.
+:::{style="font-size: 0.65em; color: #555; margin-top: 0.5em;"}
+Only "the" matters — contextualised by attention.
 :::
 :::
 ::::
@@ -315,7 +350,7 @@ Maybe my arrow is a little misleading here.
 
 [235285] [3806] [576] [573] [4376] → **736 "▁this"**
 :::
-:::{style="font-size: 0.65em; color: #888; margin-top: 0.5em;"}
+:::{style="font-size: 0.65em; color: #555; margin-top: 0.5em;"}
 full sequence fed back in each loop
 :::
 :::
@@ -331,9 +366,9 @@ Each iteration appends the new token ID to the sequence and feeds the full seque
 
 :::
 
-## Transformers: Inference II {auto-animate=true}
+## Transformers: Inference II {.nostretch auto-animate=true}
 
-![](images/tfp-step7-alternate.png){width="40%" style="display: block; margin: 0 auto;" data-id="inference-img"}
+![](images/tfp-step7-alternate.png){width="36%" style="display: block; margin: 0 auto;" data-id="inference-img"}
 
 ## Transformers: Inference II {auto-animate=true}
 
@@ -349,7 +384,7 @@ Each iteration appends the new token ID to the sequence and feeds the full seque
 
 "I went to the library this"
 :::
-:::{style="font-size: 0.65em; color: #888; margin-top: 0.5em;"}
+:::{style="font-size: 0.65em; color: #555; margin-top: 0.5em;"}
 just a lookup table, the inverse of tokenisation
 :::
 :::
@@ -371,11 +406,11 @@ Sampling strategies: the model doesn't always pick the most likely next token. T
 
 ## Transformers: Summary
 
-::: {.incremental"}
+::: {.incremental style="font-size: 0.9em;"}
 - Tokenise: text → sub-word token IDs
 - Embed: token IDs → dense vectors (static meaning)
 - Self-attention: enrich each vector with context (dynamic meaning)
-  - + MLP × N layers: transform representations
+  - MLP × N layers: transform representations
 - Predict & sample: last token's vector × unembedding matrix → next token ID
 - Autoregressive loop: append token, feed full sequence back in
 - Decode: token IDs → text (lookup table)

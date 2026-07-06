@@ -14,3 +14,119 @@
 .callout {
   font-size: 0.5em !important;
 }
+
+/*-- "How We Got Here" timeline strip --*/
+.timeline-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.3em;
+  font-family: monospace;
+  font-size: 0.5em;
+  margin: 0.4em 0 0.8em 0;
+}
+
+.timeline-strip .tl-stop {
+  background: #e9ecef;
+  color: #495057;
+  padding: 0.15em 0.55em;
+  border-radius: 999px;
+}
+
+.timeline-strip .tl-now {
+  background: #003b6f;
+  color: #fff;
+  font-weight: bold;
+  transform: scale(1.18);
+  box-shadow: 0 2px 6px rgba(0, 59, 111, 0.35);
+}
+
+.timeline-strip .tl-sep {
+  color: #adb5bd;
+}
+
+/*-- Era tagline under slide titles --*/
+.era-tagline {
+  font-style: italic;
+  color: #2c6e9e;
+  font-size: 0.65em;
+  margin-top: -0.4em;
+  margin-bottom: 0.6em;
+  border-left: 5px solid #e9c46a;
+  padding-left: 0.6em;
+}
+
+/*-- Act divider slides (navy background) --*/
+.act-kicker {
+  font-family: monospace;
+  font-size: 0.6em;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #e9c46a;
+  margin-bottom: 0.2em;
+}
+
+.act-years {
+  font-family: monospace;
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.act-name {
+  font-size: 1.1em;
+  color: #a8c8e0;
+  font-style: italic;
+  margin-top: 0.3em;
+}
+
+/*-- Big-stat rows --*/
+.stat-row {
+  margin: 0.5em 0 0.4em 0;
+}
+
+.stat-row p {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 1.6em;
+  margin: 0;
+}
+
+.stat-row .stat {
+  font-family: monospace;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #003b6f;
+}
+
+.stat-row .stat-label {
+  display: block;
+  font-family: var(--r-main-font, sans-serif);
+  font-size: 0.35em;
+  font-weight: normal;
+  color: #495057;
+  text-align: center;
+  margin-top: 0.2em;
+}
+
+.stat-row .stat-arrow {
+  font-size: 1.1em;
+  color: #e9c46a;
+  font-weight: bold;
+}
+
+/*-- Recap timeline table --*/
+.timeline-table td:first-child {
+  font-family: monospace;
+  font-weight: bold;
+  color: #003b6f;
+  white-space: nowrap;
+}
+
+.timeline-table td:last-child {
+  font-style: italic;
+  color: #495057;
+}

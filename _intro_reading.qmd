@@ -1,6 +1,7 @@
 ## Self Study Resources
 
-- 3Blue1Brown, Language Models Explained: 
+- Cordero Core, [*How We Got Here*](https://medium.com/@corderocore) — the 25-part history of GenAI this talk is based on (Medium, weekly)
+- 3Blue1Brown, Language Models Explained:
   - Chapters [4](https://youtu.be/LPZh9BOjkQs?si=AXb6kvl44CQqaCto), [5](https://youtu.be/wjZofJX0v4M?si=-gx_cV-et1yG3aFn), [6](https://youtu.be/eMlx5fFNoYc?si=V8gU3iIsRmNMMIsM), [7](https://youtu.be/eMlx5fFNoYc?si=x01rnOt7jnsku_pa)
 - Meridian Cambridge [Transformer architecture](https://youtu.be/G51Hrmfll9s?si=UQCDHBVmESqHSpbR), [Agents](https://youtu.be/8mRG0JtxLL0?si=GigTan8Hw9TEeEe0) 
 
