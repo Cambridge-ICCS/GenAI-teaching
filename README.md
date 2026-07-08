@@ -2,6 +2,7 @@
 
 # GenAI-teaching
 
+![GitHub](https://img.shields.io/github/license/Cambridge-ICCS/GenAI-teaching)
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
 This repository contains documentation, resources, and code for the `GenAI-teaching` session designed and delivered by Tom
