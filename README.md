@@ -1,4 +1,4 @@
-<img src="./images/UCAM_ICCS_Logo.png"  width="600">
+<img src="slides/images/UCAM_ICCS_Logo.png"  width="600">
 
 # GenAI-teaching
 
