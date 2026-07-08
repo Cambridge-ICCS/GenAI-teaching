@@ -29,6 +29,8 @@ author:
     orcid: 0000-0002-3531-3221
   - name: "Tom Meltzer"
     orcid: 0000-0003-1740-9550
+  - name: "Matt Archer"
+    orcid: 0009-0002-7043-6769
 bibliography: references.bib
 include-in-header:
   - text: |
