@@ -147,8 +147,8 @@ if __name__ == "__main__":
 
 - Inspect file `mcp/mcp-netcdf.py`
 
-```python {filename="mcp/mcp-netcdf.py"}
-{{< include mcp/mcp-netcdf.py >}}
+```python {filename="../mcp/mcp-netcdf.py"}
+{{< include ../mcp/mcp-netcdf.py >}}
 ```
 
 ## MCP examples (netcdf)
@@ -163,7 +163,7 @@ if __name__ == "__main__":
 - Implement `netcdf_get_variable_shape`
 - See stub in `mcp/mcp-netcdf.py`
 
-```python {filename="mcp/mcp-netcdf.py"}
+```python {filename="../mcp/mcp-netcdf.py"}
 @mcp.tool()
 def get_variable_shape(path: str, variable_name: str) -> dict:
     """
@@ -220,7 +220,7 @@ ln -sf $(pwd)/skill/netcdf/SKILL.md .opencode/skills/netcdf/
 ## Skills Example (netcdf) {.nostretch}
 
 ```markdown {code-line-numbers="false" filename=skill/netcdf/SKILL.md}
-{{< include skill/netcdf/SKILL.md >}}
+{{< include ../skill/netcdf/SKILL.md >}}
 ```
 
 ## Skills Example (netcdf) {.nostretch}
