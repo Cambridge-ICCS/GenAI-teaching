@@ -4,6 +4,29 @@
 - Ethical
 - Environmental
 
+## The Trust Problem
+
+::: {.era-tagline}
+Capability outran verification
+:::
+
+::: {.incremental}
+- Benchmarks are proxies — and Goodhart applies: a measure made a target stops measuring
+- Benchmark contamination: the exam leaks into the training data
+- The weights are *grown*, not written — interpretability is still a young microscope
+- The posture: **calibrated trust** — check the diff, not the green tick
+:::
+
+::: {.notes}
+The last stop on the timeline is the unresolved one. A model passes the eval suite, the demo lands, it ships — and two weeks later it does something in production no test caught.
+
+Evals like MMLU are fixed exams, and we read the score table like a report card. But Goodhart's law bites: models optimised toward benchmarks aren't the same as good models. Worse, benchmarks live on the internet, so they leak into training data — studies have found substantial contamination, with scores dropping double digits on fresh equivalents.
+
+Alignment (RLHF, Constitutional AI) shapes behaviour but can't guarantee it: sycophancy, reward hacking, jailbreaks, prompt injection. And mechanistic interpretability — actually reading what's inside the weights — is real but early: a very good microscope pointed at a cell for the first time.
+
+The 1958 perceptron you could fully understand. The thing writing your pull requests, you cannot — capability outran verification. The practical posture is neither blind adoption nor blanket refusal: calibrated trust. Review the diff, keep a human accountable, scope what you hand over — treat it like a sharp new hire. The discomfort is the correct response; the concerns on the next slides are where it bites.
+:::
+
 ## Safety
 
 - Amazon experienced [several high-profile incidents](https://www.ft.com/content/7cab4ec7-4712-4137-b602-119a44f771de?syn-25a6b1a6=1)

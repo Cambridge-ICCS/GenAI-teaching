@@ -9,9 +9,8 @@
 <link href="genai-teaching_files/libs/quarto-html/quarto-syntax-highlighting-33269adcf1721b81efc5ea7fcfe7f0ee.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.9.38">
 
+  <meta name="author" content="Cordero Core">
   <meta name="author" content="Tom Meltzer">
-  <meta name="author" content="Matt Archer">
-  <meta name="dcterms.date" content="2026-03-30">
   <title>An Introduction to Generative AI for RSEs</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -119,7 +118,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="genai-teaching_files/libs/revealjs/dist/theme/quarto-18a03474412dfb396dc4263b77e95dd4.css">
+  <link rel="stylesheet" href="genai-teaching_files/libs/revealjs/dist/theme/quarto-6bc5b3d079656d33e5b39befac5c83c1.css">
   <link href="genai-teaching_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="genai-teaching_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="genai-teaching_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -234,53 +233,36 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">An Introduction to Generative AI for RSEs</h1>
-  <p class="subtitle">Basic principles and tooling</p>
+  <p class="subtitle">How we got here: principles and tooling — ICCS Summer School 2026</p>
 
 <div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Cordero Core <a href="https://orcid.org/0000-0002-3531-3221" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+</div>
+</div>
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
 Tom Meltzer <a href="https://orcid.org/0000-0003-1740-9550" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
 </div>
 </div>
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Matt Archer <a href="https://orcid.org/0009-0002-7043-6769" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
-</div>
-</div>
 </div>
 
-  <p class="date">2026-03-30</p>
 </section>
 <section id="plan" class="slide level2">
 <h2>Plan</h2>
 <ul>
-<li>ML basics</li>
-<li>Transformer inference and agentic AI overview</li>
+<li>How we got here: ~70 years of GenAI as a timeline</li>
+<li>Inside a transformer: tokens, embeddings, attention, inference</li>
+<li>From next-word prediction to assistants, agents, and MCP</li>
 <li>Tooling overview and code demo</li>
 <li>Opencode intro and configuration</li>
-<li>Create your tool call with MCP + Skills</li>
+<li>Create your own tool call with MCP + Skills</li>
 </ul>
-</section>
-<section id="ml-the-basics" class="slide level2">
-<h2>ML: The basics</h2>
-<div style="line-height: 2;">
-<ul>
-<li class="fragment">Loss function: measures model error</li>
-<li class="fragment">Gradient descent: moves weights down the loss surface</li>
-<li class="fragment">Backpropagation: computes gradients layer by layer</li>
-<li class="fragment">Overfitting: memorises training data, fails to generalise</li>
-</ul>
-</div>
 <aside class="notes">
-<ul>
-<li>working in a supervised context where we have a dataset of input-output pairs and we want to learn a function that maps inputs to outputs</li>
-<li>differentiable loss function quantifies how well the model’s predictions match the training data</li>
-<li>apply gradient descent to update model parameters to reduce the loss</li>
-<li>this is done with backpropagation - computes gradients to move down this loss surface</li>
-<li>One complexities of training a model is overfitting - when the model memorises the training data instead of learning general patterns, it performs well on training data but poorly on unseen data. Regularisation techniques and careful validation are used to mitigate this.</li>
-<li>I’m not going to talk about the details of training large transformer models, but it’s worth noting that overfitting is less of a concern for them than for classical ML models. Despite having billions of parameters, they generalise well due to vast and diverse training data, regularisation techniques, the double-descent phenomenon, and emergent representations that capture structure rather than surface patterns.</li>
-</ul>
-<p>Overfitting is a major concern in classical ML, but large transformer models largely sidestep it. They have billions of parameters (far more than training examples), yet generalise well. Key reasons: (1) vast and diverse training data makes true memorisation impractical; (2) regularisation techniques such as dropout and weight decay are baked in; (3) the double-descent phenomenon: very over-parameterised models can re-enter a good-generalisation regime; and (4) emergent representations learned across billions of tokens capture structure rather than surface patterns.</p>
+<p>Two halves today. In the first half I’ll cover the concepts you need — but instead of walking through them one-by-one as a glossary, we’ll follow the timeline. Every concept in modern GenAI was invented to fix a specific failure someone hit. If you know the problem, the concept becomes obvious — and you’ll also get a feel for <em>when</em> you need the cathedral and when you just need a hammer.</p>
+<p>In the second half Tom takes over and you’ll get hands-on: opencode, self-hosted LLMs, and building your own MCP tools and skills.</p>
+<p>This part of the talk is adapted from my series “How We Got Here” — a 25-part history of GenAI. Link at the end.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -293,9 +275,196 @@ Matt Archer <a href="https://orcid.org/0009-0002-7043-6769" class="quarto-title-
           display:block!important;
       }</style></aside>
 </section>
-<section id="ml-the-basics-1" class="slide level2">
-<h2>ML: The basics</h2>
-<div style="display: block; margin: 0 auto; text-align: center; margin-top: 2em;">
+<section id="how-we-got-here" class="slide level2">
+<h2>How We Got Here</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><img data-src="./images/how-we-got-here-hero.png" style="margin-top: 2.5em;;width:100.0%" alt="A winding road through computing history, from a 1950s cabinet computer with dials, past a beige workstation and GPU boards, to a modern laptop with a chat bubble and robotic arm."></p>
+</div><div class="column" style="width:45%;">
+<div style="font-size: 0.8em; margin-top: 2em; line-height: 1.5;">
+<ul>
+<li class="fragment">Every concept in GenAI was an answer to a problem someone hit</li>
+<li class="fragment">So we’ll walk the timeline instead of a glossary</li>
+<li class="fragment">Destination: what is inside the tools you’ll use this afternoon</li>
+</ul>
+</div>
+</div></div>
+<aside class="notes">
+<p>The tools you’ll use this afternoon — coding agents, MCP servers, skills — look like magic if you meet them cold. They stop looking like magic once you see the chain of problems and fixes that produced them. None of it was ever magic: a sequence of understandable moves, each one standing on the last.</p>
+<p>A recurring pattern to watch for: at almost every stop, the idea wasn’t wrong — it was early. And the field repeatedly confused “I can’t see how” with “it can’t be done.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="act-1" class="slide level2" data-background-color="#003b6f">
+<h2></h2>
+<div style="text-align: center; margin-top: 2.2em;">
+<p><span class="act-kicker">Act I</span></p>
+<p><span class="act-years">1958 – 2012</span></p>
+<p><span class="act-name">Learning from data</span></p>
+</div>
+<aside class="notes">
+<p>Act one: half a century of teaching machines to learn from examples — and two winters where the field stopped believing it was possible.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-perceptron" class="slide level2">
+<h2>1958: The Perceptron</h2>
+<div class="timeline-strip">
+<p><span class="tl-stop tl-now">1958</span> <span class="tl-sep">›</span> <span class="tl-stop">1969</span> <span class="tl-sep">›</span> <span class="tl-stop">1986</span> <span class="tl-sep">›</span> <span class="tl-stop">2012</span> <span class="tl-sep">›</span> <span class="tl-stop">2017</span> <span class="tl-sep">›</span> <span class="tl-stop">2020</span> <span class="tl-sep">›</span> <span class="tl-stop">2022</span> <span class="tl-sep">›</span> <span class="tl-stop">2024</span> <span class="tl-sep">›</span> <span class="tl-stop">now</span></p>
+</div>
+<div class="era-tagline">
+<p>The 1958 machine you’re still using</p>
+</div>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div style="font-size: 0.85em;">
+<ul>
+<li class="fragment">Inputs, weights, sum, threshold — no layers, no magic</li>
+<li class="fragment">Weights are dials: learn by nudging them on every mistake</li>
+<li class="fragment">Geometrically: learning to draw a line between two classes</li>
+<li class="fragment">Still the irreducible unit of every model you use</li>
+</ul>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="cell" data-reveal="true" data-fig-height="3.5" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"flowchart": {"nodeSpacing": 12, "rankSpacing": 25}, "theme": "base", "themeVariables": {"edgeLabelBackground": "#ffffff"}}}%%
+flowchart LR
+    x1([x₁]) --&gt;|w₁| S["Σ"]
+    x2([x₂]) --&gt;|w₂| S
+    x3([x₃]) --&gt;|w₃| S
+    S --&gt; T["&amp;gt; θ ?"]
+    T --&gt; O(["0 / 1"])
+
+    classDef io   fill:#6c757d,stroke:#495057,color:#fff
+    classDef key  fill:#003b6f,stroke:#001f3f,color:#fff
+    classDef step fill:#4b9cd3,stroke:#2c6e9e,color:#fff
+
+    class x1,x2,x3,O io
+    class S key
+    class T step
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>Frank Rosenblatt, a psychologist at Cornell, 1958. The Mark I Perceptron was hardware: a 20×20 grid of photocells, and the weights were physical potentiometers turned by electric motors. When Rosenblatt said “neural network”, he meant a wall of motors turning knobs.</p>
+<p>The learning rule: show it a labelled example; if it guesses wrong, nudge the offending weights in the direction that would have produced the right answer. Repeat ten thousand times. The Perceptron Convergence Theorem guaranteed that if a correct set of weights exists, this procedure finds it in a finite number of steps.</p>
+<p>The New York Times, July 1958: a machine that would eventually “walk, talk, see, write, reproduce itself and be conscious.” The hype cycle is not new.</p>
+<p>The single perceptron is to modern AI what the transistor is to modern computing: everything since is this unit, arranged.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-wall" class="slide level2">
+<h2>1969: The Wall</h2>
+<div class="timeline-strip">
+<p><span class="tl-stop">1958</span> <span class="tl-sep">›</span> <span class="tl-stop tl-now">1969</span> <span class="tl-sep">›</span> <span class="tl-stop">1986</span> <span class="tl-sep">›</span> <span class="tl-stop">2012</span> <span class="tl-sep">›</span> <span class="tl-stop">2017</span> <span class="tl-sep">›</span> <span class="tl-stop">2020</span> <span class="tl-sep">›</span> <span class="tl-stop">2022</span> <span class="tl-sep">›</span> <span class="tl-stop">2024</span> <span class="tl-sep">›</span> <span class="tl-stop">now</span></p>
+</div>
+<div class="era-tagline">
+<p>The book that almost killed neural networks</p>
+</div>
+<div class="columns">
+<div class="column" style="width:58%;">
+<div style="font-size: 0.85em;">
+<ul>
+<li class="fragment">Minsky &amp; Papert prove a single-layer perceptron <strong>cannot</strong> compute XOR</li>
+<li class="fragment">The proof was correct — and still is</li>
+<li class="fragment">The lethal move was extrapolation: multi-layer networks declared “sterile”</li>
+<li class="fragment">Funding dried up: the first AI winter</li>
+</ul>
+</div>
+</div><div class="column" style="width:42%;">
+<p><img data-src="./images/tl-wall.png" style="display: block; margin: 0.5em auto 0 auto;;width:82.0%" alt="A brick wall blocks a winding path, but a small door in the wall stands ajar with light shining through; a heavy closed book leans against the wall."></p>
+</div></div>
+<aside class="notes">
+<p>1969: Marvin Minsky and Seymour Papert publish “Perceptrons”. The XOR theorem is impeccable mathematics — a single layer can only separate linearly-separable classes. That result has never been overturned.</p>
+<p>But the damage came from the leap: they called the multi-layer extension “sterile”, and the field read that as “neural networks are a dead end.” The extension they dismissed turned out to be the entire engineering future of AI.</p>
+<p>The twist: Minsky was a believer first — he built one of the first neural-net learning machines (SNARC, 1951). And the fight was partly about a finite pot of DARPA funding.</p>
+<p>The lesson worth keeping: the right question is never just “is the math correct?” — it’s “what is the gap between the specific limit the math proves and the general claim being built on top of it?” That gap is where decades get lost.</p>
+<p>Rosenblatt died in a boating accident in 1971 and never saw the revival. Recurring theme in this history: many of the pioneers never got to read the ending.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="backpropagation" class="slide level2">
+<h2>1986: Backpropagation</h2>
+<div class="timeline-strip">
+<p><span class="tl-stop">1958</span> <span class="tl-sep">›</span> <span class="tl-stop">1969</span> <span class="tl-sep">›</span> <span class="tl-stop tl-now">1986</span> <span class="tl-sep">›</span> <span class="tl-stop">2012</span> <span class="tl-sep">›</span> <span class="tl-stop">2017</span> <span class="tl-sep">›</span> <span class="tl-stop">2020</span> <span class="tl-sep">›</span> <span class="tl-stop">2022</span> <span class="tl-sep">›</span> <span class="tl-stop">2024</span> <span class="tl-sep">›</span> <span class="tl-stop">now</span></p>
+</div>
+<div class="era-tagline">
+<p>One wrong answer, a billion dials — how a network learns who to blame</p>
+</div>
+<div style="line-height: 1.5; font-size: 0.95em;">
+<ul>
+<li class="fragment">Loss function: measures model error</li>
+<li class="fragment">Gradient descent: moves weights down the loss surface</li>
+<li class="fragment">Backpropagation: blame flows backward, layer by layer (chain rule)</li>
+<li class="fragment">Overfitting: memorises training data, fails to generalise</li>
+</ul>
+</div>
+<aside class="notes">
+<p>This is the “credit assignment” problem — a term coined by Minsky himself. A model reads a handwritten 2 and confidently says 8. Which of a billion dials do you turn, and by how much?</p>
+<p>The answer: measure how <em>sensitive</em> the final error is to each weight — that’s all a derivative is here. Innocent weights barely move the cost; guilty weights send it flying. The error signal flows backward through the network, and each connection computes its own share of the blame locally. You never have to tell the middle layers the right answer.</p>
+<p>The engine is nothing exotic — just the chain rule, used with discipline. The wall Minsky pointed at was real, but the door was sitting in a freshman calculus textbook. Werbos worked it out in his 1974 dissertation and offered Minsky a co-authored correction; Minsky declined. It took until Rumelhart, Hinton &amp; Williams’ 1986 Nature paper (six pages) for the field to listen.</p>
+<p>Standard ML-basics framing still applies: supervised learning on input-output pairs, differentiable loss, gradient descent on the loss surface.</p>
+<p>Overfitting is the classic failure mode in classical ML. Worth noting: large transformer models largely sidestep it — vast and diverse data, regularisation (dropout, weight decay), the double-descent phenomenon, and emergent representations that capture structure rather than surface patterns.</p>
+<p>Backprop’s gift wasn’t intelligence — it was <em>correctability</em>: the ability to be wrong and to know exactly who to blame.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-training-loop" class="slide level2">
+<h2>1986: The Training Loop</h2>
+<div style="display: block; margin: 0 auto; text-align: center; margin-top: 1em;">
 <div class="cell" data-reveal="true" data-fig-height="5" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -325,13 +494,119 @@ flowchart TD
 </div>
 </div>
 <aside class="notes">
-<p>These are the main components of the training loop for a supervised learning model. The model’s parameters (weights) are updated iteratively to minimise the loss function, which quantifies how well the model’s predictions match the training data. Backpropagation efficiently computes the gradients needed for weight updates, allowing the model to learn complex patterns in the data.</p>
+<p>This loop is the same whether you’re training a 1986 XOR network or a frontier model today. Forward pass, compute loss, backpropagate blame, update weights, repeat until the loss is small enough.</p>
+<p>Everything that follows in this talk — CNNs, transformers, GPT, RLHF, reasoning models — is trained with this exact loop. Only the architecture and the loss signal change. Keep that in mind: whenever something later looks like magic, it’s this loop underneath.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="winters-and-stubborn-ideas" class="slide level2">
+<h2>1989–2006: Winters and Stubborn Ideas</h2>
+<div class="timeline-strip">
+<p><span class="tl-stop">1958</span> <span class="tl-sep">›</span> <span class="tl-stop">1969</span> <span class="tl-sep">›</span> <span class="tl-stop">1986</span> <span class="tl-sep">›</span> <span class="tl-stop tl-now">90s</span> <span class="tl-sep">›</span> <span class="tl-stop">2012</span> <span class="tl-sep">›</span> <span class="tl-stop">2017</span> <span class="tl-sep">›</span> <span class="tl-stop">2022</span> <span class="tl-sep">›</span> <span class="tl-stop">now</span></p>
+</div>
+<div style="font-size: 0.9em;">
 <ul>
-<li>Loss function: measures model error</li>
-<li>Gradient descent: moves weights down the loss surface</li>
-<li>Backpropagation: computes gradients layer by layer</li>
-<li>Overfitting: memorises training data, fails to generalise</li>
+<li class="fragment"><strong>1989</strong> — LeCun’s convolutional network reads real ZIP codes: <em>structure is knowledge</em></li>
+<li class="fragment"><strong>1990s</strong> — SVMs win on clean math and guarantees; deep nets stall on the <strong>vanishing gradient</strong></li>
+<li class="fragment"><strong>2006</strong> — Hinton’s layer-wise pretraining revives depth, under a new name: <strong>deep learning</strong></li>
 </ul>
+</div>
+<aside class="notes">
+<p>Three beats, quickly.</p>
+<p>1989: Yann LeCun at Bell Labs trains a convolutional network on real mail from Buffalo — the first neural network with a day job. By the early 2000s its descendant read ~10% of all US checks. The key idea: bake what you already know into the architecture (a pattern worth finding in one place is worth finding everywhere), so the network’s capacity goes to what actually needs learning. “Structure is knowledge” — remember this phrase, it comes back with transformers and with tool use.</p>
+<p>1990s: Support Vector Machines (Vapnik &amp; Cortes, 1995 — written down the hall from LeCun) beat neural networks fair and square: convex optimisation, one best answer, real theory. Meanwhile deep nets hit the vanishing gradient: with sigmoid activations, the blame signal shrinks at every layer going backward — after twenty layers, a millionth. The one thing that could make neural nets special (depth) was exactly what wouldn’t train. Second winter.</p>
+<p>2006: Hinton, Osindero &amp; Teh train deep networks one layer at a time — greedy unsupervised pretraining, then fine-tune the whole stack. The trick itself became obsolete within a few years (better initialisation + ReLU + GPUs let you train from scratch), but it granted the field <em>permission</em> to go deep again — and the pretrain-then-fine-tune workflow you use every time you call <code>from_pretrained</code> was born here. They also rebranded: “neural networks” was radioactive, so they called it <em>deep learning</em>.</p>
+<p>The pattern in all three: being better and being believed are different things.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="alexnet-the-year-the-dam-broke" class="slide level2">
+<h2>2012: AlexNet — The Year the Dam Broke</h2>
+<div class="timeline-strip">
+<p><span class="tl-stop">1958</span> <span class="tl-sep">›</span> <span class="tl-stop">1969</span> <span class="tl-sep">›</span> <span class="tl-stop">1986</span> <span class="tl-sep">›</span> <span class="tl-stop">90s</span> <span class="tl-sep">›</span> <span class="tl-stop tl-now">2012</span> <span class="tl-sep">›</span> <span class="tl-stop">2017</span> <span class="tl-sep">›</span> <span class="tl-stop">2022</span> <span class="tl-sep">›</span> <span class="tl-stop">now</span></p>
+</div>
+<div class="stat-row">
+<p><span class="stat">26%<span class="stat-label">2011 best, top-5 error</span></span> <span class="stat-arrow">→</span> <span class="stat">15%<span class="stat-label">AlexNet, 2012</span></span> <span class="stat-arrow">·</span> <span class="stat">2<span class="stat-label">gaming GPUs</span></span></p>
+</div>
+<div style="font-size: 0.9em;">
+<ul>
+<li class="fragment">Nothing new in the network — the world finally supplied <strong>data + compute</strong></li>
+<li class="fragment">ReLU dodges the vanishing gradient; dropout tames overfitting</li>
+<li class="fragment">“Just make it bigger” is born; scale becomes the moat</li>
+</ul>
+</div>
+<aside class="notes">
+<p>2012, the ImageNet challenge: 1.2M labelled images, 1000 categories. Best systems (hand-designed features + SVMs) plateaued around 26% top-5 error. AlexNet — Krizhevsky, Sutskever, Hinton — comes in at ~15%. That’s not an improvement, it’s a different weather system. Within months every serious lab changed direction.</p>
+<p>And the architecture? A deep convolutional network — LeCun’s 1989 idea, finally cashing its cheque. What changed wasn’t the idea:</p>
+<ul>
+<li>Data: Fei-Fei Li’s ImageNet — 14M hand-labelled images, mocked at the time as too big, too manual, too unglamorous.</li>
+<li>Compute: two NVIDIA GTX 580 gaming cards. The compute that unlocked modern AI arrived as hardware a teenager might have under their desk.</li>
+<li>Two small tricks: ReLU (pass positives straight through — dodges the vanishing gradient) and dropout (break the network on purpose during training so it holds up in the real world).</li>
+</ul>
+<p>The bill: if wins come from data and compute, the question becomes <em>who has the data and the GPUs?</em> At the frontier, scale is the moat — that’s still the industry structure you live in today.</p>
+<p>Rosenblatt (d.&nbsp;1971) and Rumelhart (d.&nbsp;2011) never saw it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="act-2" class="slide level2" data-background-color="#003b6f">
+<h2></h2>
+<div style="text-align: center; margin-top: 2.2em;">
+<p><span class="act-kicker">Act II</span></p>
+<p><span class="act-years">2013 – 2020</span></p>
+<p><span class="act-name">The machine learns to read</span></p>
+</div>
+<aside class="notes">
+<p>Act two: vision fell to scale, but language resisted. This act is how text became numbers, how attention broke the bottleneck, and how the transformer let language finally soak up all the compute.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-next-problem-language" class="slide level2">
+<h2>The Next Problem: Language</h2>
+<ul>
+<li class="fragment">Vision fell to scale — but language resisted</li>
+<li class="fragment">An image is a grid, all present at once</li>
+<li class="fragment">A sentence is a <strong>sequence</strong>: “bank” needs memory of what came before</li>
+<li class="fragment">And first: how do you feed text to a machine that only does arithmetic?</li>
+</ul>
+<aside class="notes">
+<p>Transition slide. Seeing was hard; reading turned out to be harder. An image has no “before” and “after” — a sentence does, and meaning depends on order and context.</p>
+<p>Before any of that, there’s a plumbing question the next two slides answer: models do arithmetic on numbers, so text has to become numbers in a way that preserves meaning. Two steps: tokenisation (text to integer IDs) and embeddings (IDs to vectors where geometry encodes meaning).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -346,13 +621,17 @@ flowchart TD
 </section>
 <section id="llms-tokenisation" class="slide level2">
 <h2>LLMs: Tokenisation</h2>
+<div style="font-size: 0.9em;">
 <p>LLMs cannot process raw text, it must first be converted to numbers.</p>
+</div>
+<div style="font-size: 0.9em; line-height: 1.4;">
 <ul>
 <li class="fragment">Text is split into <strong>sub-word tokens</strong> using a learned vocabulary</li>
 <li class="fragment">Each token is assigned a unique integer ID</li>
 <li class="fragment">Common words are single tokens; rare words split into pieces</li>
 </ul>
-<div class="fragment" style="margin-bottom: 2.0em;">
+</div>
+<div class="fragment" style="margin-top: 0.8em;">
 <div style="font-family: monospace; font-size: 0.8em; color: #333;">
 <p>“I went to the”</p>
 </div>
@@ -377,13 +656,16 @@ flowchart TD
           display:block!important;
       }</style></aside>
 </section>
-<section id="llms-embeddings-encode-meaning" class="slide level2">
-<h2>LLMs: Embeddings encode meaning</h2>
+<section id="meaning-becomes-geometry" class="slide level2">
+<h2>2013: Meaning Becomes Geometry</h2>
+<div class="era-tagline">
+<p>word2vec: king − man + woman ≈ queen</p>
+</div>
 <div style="font-size: 0.85em;">
 <p>The embedding matrix maps tokens to vectors; directions encode meaning.</p>
 </div>
 <div style="text-align: center; margin-top: 0.3em;">
-<p><img data-src="./images/3b1b-embedding.png" style="width:52.0%"></p>
+<p><img data-src="./images/3b1b-embedding.png" style="width:46.0%" alt="A 3D vector space showing that the displacement from E(Japan) to E(Germany) approximately equals the displacement from E(Sushi) to E(Bratwurst), illustrating that directions in embedding space encode meaning."></p>
 </div>
 <div style="font-size: 0.75em; color:#555; margin-top: 0.3em;">
 <p>Attention enriches each vector with context: bank (river) vs bank (finance)</p>
@@ -392,14 +674,91 @@ flowchart TD
 <p>3Blue1Brown, <a href="https://www.3blue1brown.com/lessons/gpt">Deep Learning Ch. 5</a></p>
 </div>
 <aside class="notes">
-<p>We need to covert tokens to vectors before the model can process them.</p>
-<p>Why can’t we just feed token in directly, why do we need embeddings? This is because the model operates in a continuous vector space, not discrete token IDs.</p>
-<p>The embedding matrix maps each token ID to a dense vector of numbers.</p>
-<p>These vectors capture semantic meaning — similar words have similar embeddings. For example, “king” and “queen” might be close in embedding space, while “king” and “carrot” are far apart.</p>
+<p>Timeline stop: 2013, word2vec (Mikolov, Google). The discovery that made language tractable: meaning can become <em>location</em>. Words map to vectors, and directions in that space encode relationships.</p>
+<p>We need to convert tokens to vectors before the model can process them — the model operates in a continuous vector space, not discrete token IDs. The embedding matrix maps each token ID to a dense vector.</p>
+<p>These vectors capture semantic meaning — similar words have similar embeddings. “king” and “queen” are close; “king” and “carrot” are far apart.</p>
 <p><span class="math inline">\(\text{king} - \text{man} + \text{woman} \approx \text{queen}\)</span></p>
-<p>In practice this relationship isn’t very accurate because queen has multiple meanings. But the point is that directions in embedding space can encode meaningful relationships.</p>
-<p>In this example if we look at the displacement between germany and japan, we see it is approximately the same as the displacement between bratwurst and sushi.</p>
-<p>The food / country direction generalises across many pairs: pizza / Italy, tacos / Mexico, sushi / Japan. These patterns exist before attention runs. Attention enriches each vector with context, distinguishing “bank” (river) from “bank” (finance).</p>
+<p>In practice this exact relationship isn’t very accurate (queen has multiple meanings), but the point stands: directions encode meaning.</p>
+<p>In this example the displacement between germany and japan is approximately the same as between bratwurst and sushi. The food/country direction generalises: pizza/Italy, tacos/Mexico, sushi/Japan. These patterns exist before attention runs. Attention enriches each vector with context, distinguishing “bank” (river) from “bank” (finance).</p>
+<p>File this away for later too: this same “meaning becomes location” trick is what powers RAG and vector databases this afternoon.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="attention-the-bottleneck" class="slide level2">
+<h2>2014: Attention — The Bottleneck</h2>
+<div class="timeline-strip">
+<p><span class="tl-stop">1958</span> <span class="tl-sep">›</span> <span class="tl-stop">1986</span> <span class="tl-sep">›</span> <span class="tl-stop">2012</span> <span class="tl-sep">›</span> <span class="tl-stop tl-now">2014</span> <span class="tl-sep">›</span> <span class="tl-stop">2017</span> <span class="tl-sep">›</span> <span class="tl-stop">2020</span> <span class="tl-sep">›</span> <span class="tl-stop">2022</span> <span class="tl-sep">›</span> <span class="tl-stop">now</span></p>
+</div>
+<div class="era-tagline">
+<p>Stop making the machine work from memory — let it look back</p>
+</div>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div style="font-size: 0.82em;">
+<ul>
+<li class="fragment">RNNs read one token at a time, carrying a running “mental note”</li>
+<li class="fragment">seq2seq: the whole sentence crushed into <strong>one fixed-size vector</strong></li>
+<li class="fragment">Like translating a paragraph from a single sticky note</li>
+<li class="fragment">Bahdanau 2014: keep everything, let the decoder <strong>look back</strong> with learned soft weights</li>
+<li class="fragment">But attention was bolted onto RNNs — sequential, GPUs sitting idle</li>
+</ul>
+</div>
+</div><div class="column" style="width:40%;">
+<p><img data-src="./images/tl-sticky-note.png" style="display: block; margin: 0.5em auto 0 auto;;width:82.0%" alt="A long scroll of text is squeezed through a funnel, producing a single tiny sticky note that a confused reader stares at."></p>
+</div></div>
+<aside class="notes">
+<p>The 1990s-2014 approach to language: recurrent networks (RNNs). Read a word, update a running mental note (the hidden state), repeat. LSTMs (1997) added learned gates for what to keep and forget — that’s what powered Google Translate’s big 2016 jump.</p>
+<p>The wall: encoder-decoder translation crushed the entire source sentence into one fixed-size vector, and the decoder had to rebuild everything from just that. Read a paragraph once, write yourself one sticky note, hand the paragraph away, now translate. Quality fell off a cliff past a certain sentence length. One fixed-size vector is not enough room to hold a long thought.</p>
+<p>The fix (Bahdanau, Cho &amp; Bengio, 2014) was almost too simple to trust: keep all the encoder’s notes, and for every output word compute learned soft weights over all the inputs — 70% on this word, 20% on that. The model’s eyes flicking back to the source sentence.</p>
+<p>But for three years attention was an accessory bolted onto the RNN. And the RNN had to read in order — inherently sequential, impossible to parallelise, so the GPUs that won 2012 sat idle. The best part of the machine was chained to the worst part.</p>
+<p>Cliffhanger: what if you kept the accessory and threw away the machine?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="attention-is-all-you-need" class="slide level2">
+<h2>2017: Attention Is All You Need</h2>
+<div class="timeline-strip">
+<p><span class="tl-stop">1958</span> <span class="tl-sep">›</span> <span class="tl-stop">1986</span> <span class="tl-sep">›</span> <span class="tl-stop">2012</span> <span class="tl-sep">›</span> <span class="tl-stop">2014</span> <span class="tl-sep">›</span> <span class="tl-stop tl-now">2017</span> <span class="tl-sep">›</span> <span class="tl-stop">2020</span> <span class="tl-sep">›</span> <span class="tl-stop">2022</span> <span class="tl-sep">›</span> <span class="tl-stop">now</span></p>
+</div>
+<div class="era-tagline">
+<p>The 2017 paper hiding inside every AI you use</p>
+</div>
+<div class="columns">
+<div class="column" style="width:58%;">
+<div style="font-size: 0.85em;">
+<ul>
+<li class="fragment">Eight Google researchers, writing a <strong>translation</strong> paper</li>
+<li class="fragment">The reckless move: keep attention, <strong>throw away the RNN</strong></li>
+<li class="fragment">Every token attends to every other token — <strong>in parallel</strong></li>
+<li class="fragment">Parallel means GPUs saturate; GPUs saturating means <strong>scale</strong></li>
+</ul>
+</div>
+</div><div class="column" style="width:42%;">
+<p><img data-src="./images/tl-attention-web.png" style="display: block; margin: 0.5em auto 0 auto;;width:82.0%" alt="Six word blocks arranged in a circle, every block connected to every other by thin lines, with one connection highlighted — every token attending to every other token."></p>
+</div></div>
+<aside class="notes">
+<p>“Attention Is All You Need”, Vaswani et al., 2017. Eight authors, listed as equal contributors, order randomised. They were trying to improve machine translation — none of them saw what it would become. It is now the blueprint for every AI you talk to: GPT literally stands for Generative Pretrained <em>Transformer</em>.</p>
+<p>The move sounds absurd on paper: attention was invented as an accessory to the RNN — keeping it while dropping the RNN is like keeping the GPS and getting rid of the car. But it works, because self-attention alone can capture the relationships that matter, and without recurrence the whole sequence processes simultaneously.</p>
+<p>That’s the deep connection back to 2012: AlexNet proved GPUs + scale win, but RNNs couldn’t use that hardware — they read one word at a time. The transformer is the architecture that finally let language soak up all the compute. “Structure is knowledge” again: the structure a language model needs is attention plus a sense of position, and almost nothing else needs to be hard-wired.</p>
+<p>Now let’s open the box and walk through exactly what happens at inference time — this machinery is running every time you watch a model answer token by token.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -508,7 +867,7 @@ flowchart TD
 <div style="display: flex; gap: 0.4em; margin-top: 0.8em; font-family: monospace; font-size: 0.8em;">
 <p><span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;">▁back</span> <span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;">prop</span> <span style="background:#4b9cd3; color:#fff; padding: 0.2em 0.6em; border-radius: 4px;">agation</span></p>
 </div>
-<div style="font-size: 0.65em; color: #888; margin-top: 0.5em;">
+<div style="font-size: 0.65em; color: #555; margin-top: 0.5em;">
 <p>3 tokens</p>
 </div>
 </div></div>
@@ -588,7 +947,7 @@ flowchart TD
 </table>
 </div>
 </div></div>
-<!-- ::: {style="text-align: center; font-size: 0.6em; color: #888; margin-top: 0.4em;"}
+<!-- ::: {style="text-align: center; font-size: 0.6em; color: #555; margin-top: 0.4em;"}
 ::: -->
 <aside class="notes">
 <p>Each token ID maps to a vector of numbers. A positional signal is added so the model knows the order of tokens — “I went to the” is different from “the to went I”.</p>
@@ -738,8 +1097,8 @@ flowchart TD
 </tbody>
 </table>
 </div>
-<div style="font-size: 0.65em; color: #888; margin-top: 0.5em;">
-<p>Only “the” matters - it has been contextualised by attention.</p>
+<div style="font-size: 0.65em; color: #555; margin-top: 0.5em;">
+<p>Only “the” matters — contextualised by attention.</p>
 </div>
 </div></div>
 <aside class="notes">
@@ -795,7 +1154,7 @@ flowchart TD
 <p>[235285] [3806] [576] [573] → <strong>4376 “▁library”</strong></p>
 <p>[235285] [3806] [576] [573] [4376] → <strong>736 “▁this”</strong></p>
 </div>
-<div style="font-size: 0.65em; color: #888; margin-top: 0.5em;">
+<div style="font-size: 0.65em; color: #555; margin-top: 0.5em;">
 <p>full sequence fed back in each loop</p>
 </div>
 </div></div>
@@ -819,10 +1178,10 @@ flowchart TD
           display:block!important;
       }</style></aside>
 </section>
-<section id="transformers-inference-ii-14" class="slide level2" data-auto-animate="true">
+<section id="transformers-inference-ii-14" class="slide level2 nostretch" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
-
-<img data-src="images/tfp-step7-alternate.png" style="display: block; margin: 0 auto;;width:40.0%" data-id="inference-img" class="r-stretch"></section>
+<p><img data-src="images/tfp-step7-alternate.png" style="display: block; margin: 0 auto;;width:36.0%" data-id="inference-img"></p>
+</section>
 <section id="transformers-inference-ii-15" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Transformers: Inference II</h2>
 <div class="columns">
@@ -834,7 +1193,7 @@ flowchart TD
 <p>↓ vocab lookup</p>
 <p>“I went to the library this”</p>
 </div>
-<div style="font-size: 0.65em; color: #888; margin-top: 0.5em;">
+<div style="font-size: 0.65em; color: #555; margin-top: 0.5em;">
 <p>just a lookup table, the inverse of tokenisation</p>
 </div>
 </div></div>
@@ -864,19 +1223,17 @@ flowchart TD
 </section>
 <section id="transformers-summary" class="slide level2">
 <h2>Transformers: Summary</h2>
-<div class="{.incremental&quot;}">
+<div style="font-size: 0.9em;">
 <ul>
-<li>Tokenise: text → sub-word token IDs</li>
-<li>Embed: token IDs → dense vectors (static meaning)</li>
-<li>Self-attention: enrich each vector with context (dynamic meaning)
+<li class="fragment">Tokenise: text → sub-word token IDs</li>
+<li class="fragment">Embed: token IDs → dense vectors (static meaning)</li>
+<li class="fragment">Self-attention: enrich each vector with context (dynamic meaning)
 <ul>
-<li><ul>
-<li>MLP × N layers: transform representations</li>
+<li class="fragment">MLP × N layers: transform representations</li>
 </ul></li>
-</ul></li>
-<li>Predict &amp; sample: last token’s vector × unembedding matrix → next token ID</li>
-<li>Autoregressive loop: append token, feed full sequence back in</li>
-<li>Decode: token IDs → text (lookup table)</li>
+<li class="fragment">Predict &amp; sample: last token’s vector × unembedding matrix → next token ID</li>
+<li class="fragment">Autoregressive loop: append token, feed full sequence back in</li>
+<li class="fragment">Decode: token IDs → text (lookup table)</li>
 </ul>
 </div>
 <aside class="notes">
@@ -1075,23 +1432,15 @@ flowchart TD
           display:block!important;
       }</style></aside>
 </section>
-<section id="agentic-ai" class="slide level2">
-<h2>Agentic AI</h2>
-<p>AI Agents are essentially some scaffolding / loop around LLM(s):</p>
-<ul>
-<li class="fragment">LLM: The reasoning engine. It can plan, evaluate, or decide whether to “act” or “answer.”</li>
-<li class="fragment">System Prompt: Defines the persona, available tools, and operational boundaries.</li>
-<li class="fragment">Working memory: Maintains the state, including history, tool outputs, and the current goal.</li>
-<li class="fragment">Tools: External capabilities like web search, code execution, APIs, or connecting to RAG.</li>
-</ul>
+<section id="act-3" class="slide level2" data-background-color="#003b6f">
+<h2></h2>
+<div style="text-align: center; margin-top: 2.2em;">
+<p><span class="act-kicker">Act III</span></p>
+<p><span class="act-years">2018 – now</span></p>
+<p><span class="act-name">From prediction to agents</span></p>
+</div>
 <aside class="notes">
-<ul>
-<li><p>The LLM is the core reasoning engine. It may also plan out a sequence of steps before action. i.e.&nbsp;CoT is a simple form of agentic reasoning. More complex agents can evaluate their own output and decide whether to “act” (e.g.&nbsp;call a tool) or “answer” (respond to the user).</p></li>
-<li><p>The system prompt. I.e. if it’s financial adviser - it can’t go off track and give medical advice.</p></li>
-<li><p>Working memory: this is held in the contenxt window. Might have to summarise as it goes.</p></li>
-<li><p>Tools allow the LLM to interact with the outside. It doesn’t execute code itself. It generates a tool call, the surrounding framework executes it, and the result is appended back into the context for the LLM to re-reason with.</p></li>
-<li><p>LLM is like a goldfish - completely stateless. All short term memory lives in the context window. The “loop” is managed by the surrounding application code, not the model.</p></li>
-</ul>
+<p>Act three: the machinery you just saw becomes GPT, then an assistant, then something with hands — ending exactly where this afternoon’s hands-on session begins.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1104,8 +1453,265 @@ flowchart TD
           display:block!important;
       }</style></aside>
 </section>
-<section id="agentic-ai-1" class="slide level2">
-<h2>Agentic AI</h2>
+<section id="the-internet-as-a-textbook" class="slide level2">
+<h2>2018: The Internet as a Textbook</h2>
+<div class="timeline-strip">
+<p><span class="tl-stop">1958</span> <span class="tl-sep">›</span> <span class="tl-stop">2012</span> <span class="tl-sep">›</span> <span class="tl-stop">2017</span> <span class="tl-sep">›</span> <span class="tl-stop tl-now">2018</span> <span class="tl-sep">›</span> <span class="tl-stop">2020</span> <span class="tl-sep">›</span> <span class="tl-stop">2022</span> <span class="tl-sep">›</span> <span class="tl-stop">2024</span> <span class="tl-sep">›</span> <span class="tl-stop">now</span></p>
+</div>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="stat-row">
+<p><span class="stat">117M<span class="stat-label">GPT-1, 2018</span></span> <span class="stat-arrow">→</span> <span class="stat">1.5B<span class="stat-label">GPT-2, 2019</span></span></p>
+</div>
+<div style="font-size: 0.82em;">
+<ul>
+<li class="fragment">Take half the transformer, train it on one objective: <strong>predict the next token</strong></li>
+<li class="fragment">The text is its own answer key — no human labelling, so it scales to the internet</li>
+<li class="fragment">Sounds too dumb to matter — but “The capital of France is ___” requires the <em>fact</em></li>
+</ul>
+</div>
+</div><div class="column" style="width:40%;">
+<p><img data-src="./images/tl-textbook.png" style="display: block; margin: 0.5em auto 0 auto;;width:82.0%" alt="A robot sits reading an enormous open book whose pages are made of tiny webpage wireframes, with a stack of more giant books behind it."></p>
+</div></div>
+<aside class="notes">
+<p>The Hello World demo you just saw — “I went to the” → “library” — <em>is</em> this idea. GPT is that exact objective, made enormous.</p>
+<p>Why next-token prediction works: predicting the next word well <em>forces</em> understanding. To finish “The capital of France is ___” you need the fact, not just the grammar. Understanding turned out to be the cheapest way to win at prediction.</p>
+<p>GPT-1 (Radford et al., 2018) reused the 2006 recipe at transformer scale: pretrain on raw text, fine-tune on the small labelled task. GPT-2 (2019) surprised everyone by doing tasks with <em>no</em> fine-tuning at all — zero-shot translation and summarisation emerged as a byproduct of scale. OpenAI initially declared the full model “too dangerous to release” — the field’s first loud public argument about model release.</p>
+<p>But be clear what this was: a brilliant mimic of the <em>shape</em> of writing with no reliable commitment to the <em>substance</em>. It continued text; it couldn’t follow instructions; it stated made-up things with total confidence. Keep that gap in mind — it takes until 2022 to close.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="scaling-laws" class="slide level2">
+<h2>2020: Scaling Laws</h2>
+<div class="era-tagline">
+<p>Bigger was the whole idea</p>
+</div>
+<ul>
+<li class="fragment">Plot loss vs.&nbsp;parameters, data, compute → a straight line on log-log axes</li>
+<li class="fragment">You can <em>forecast</em> a model’s quality before you build it</li>
+<li class="fragment">“The graph turned a leap of faith into a line item”</li>
+<li class="fragment">GPT-3: 175B params — new skills appear that nobody trained in</li>
+</ul>
+<aside class="notes">
+<p>Kaplan et al., January 2020: train 200+ models of different sizes and the loss follows a power law in parameters, data, and compute. A ruler-straight line on a log-log plot. That predictability is what justified spending nine figures on a single training run — you could extrapolate the return before paying.</p>
+<p>GPT-3 (mid-2020, 175B parameters, 100x GPT-2) revealed in-context learning: show it two English→French pairs in the prompt and leave a third hanging, and it translates. The weights are frozen — the prompt doesn’t retrain anything. The examples act as an address, pointing at a skill already coiled in the weights.</p>
+<p>Note the power law is also a statement of diminishing returns — not infinite intelligence, but a reliable exchange rate. And DeepMind’s Chinchilla (2022) corrected the recipe: GPT-3 was lopsided — huge in parameters, starved of data. Data matters as much as size.</p>
+<p>The deflating lesson of this era: the winning move wasn’t insight, it was resources. Remember AlexNet’s bill — “who has the data and the GPUs?” — now with nine zeros. That hangs over everything until 2025, when DeepSeek shows the bill is partly optional (MoE routing + distillation — more on that in the notes when we get to open weights).</p>
+<p>Limit: GPT-3 was optimised to be <em>plausible</em>, not <em>correct</em>. Fluency and truth are different targets — this is where hallucination becomes a household problem.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="nov-2022-chatgpt" class="slide level2">
+<h2>Nov 2022: ChatGPT</h2>
+<div class="timeline-strip">
+<p><span class="tl-stop">1958</span> <span class="tl-sep">›</span> <span class="tl-stop">2012</span> <span class="tl-sep">›</span> <span class="tl-stop">2017</span> <span class="tl-sep">›</span> <span class="tl-stop">2018</span> <span class="tl-sep">›</span> <span class="tl-stop">2020</span> <span class="tl-sep">›</span> <span class="tl-stop tl-now">2022</span> <span class="tl-sep">›</span> <span class="tl-stop">2024</span> <span class="tl-sep">›</span> <span class="tl-stop">now</span></p>
+</div>
+<div class="era-tagline">
+<p>The week everyone found out — the model wasn’t new, the manners were</p>
+</div>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div style="font-size: 0.82em;">
+<ul>
+<li class="fragment">GPT-3 had been sitting in an API for <strong>two years</strong></li>
+<li class="fragment">RLHF: (1) fine-tune on good answers, (2) humans <strong>rank</strong> outputs → reward model, (3) optimise against learned taste</li>
+<li class="fragment">Same 1986 training loop — only the blame signal changed</li>
+</ul>
+</div>
+<div class="fragment stat-row">
+<p><span class="stat">1M<span class="stat-label">users in 5 days</span></span> <span class="stat-arrow">→</span> <span class="stat">100M<span class="stat-label">users in 2 months</span></span></p>
+</div>
+</div><div class="column" style="width:40%;">
+<p><img data-src="./images/tl-rlhf.png" style="display: block; margin: 0.5em auto 0 auto;;width:80.0%" alt="A human hand ranks three answer cards into podium order while a small robot in a chat bubble watches and learns."></p>
+</div></div>
+<aside class="notes">
+<p>You probably remember the week, even if you can’t put a date on it: 30 November 2022.</p>
+<p>The gap between GPT-3 and ChatGPT wasn’t capability — it was <em>intent</em>. A base model continues text; it doesn’t answer you. And you can’t program “be helpful” — it’s a thousand tiny judgment calls. So you show it judgments instead:</p>
+<ol type="1">
+<li>Supervised fine-tuning on human-written good answers.</li>
+<li>Humans rank several model outputs (comparing is cheap, writing is expensive) → train a separate reward model — a machine that has learned human taste.</li>
+<li>Optimise the main model against that reward model.</li>
+</ol>
+<p>This is backpropagation wearing a new coat: same loop from 1986, but the signal changed from “was this the right digit?” to “would a human prefer this?”.</p>
+<p>The interface was the invention — the world didn’t fall for a smarter machine, it fell for a more agreeable one in a chat box.</p>
+<p>The costs of RLHF are the things that annoy you today: sycophancy (rewarded for approval, not truth), reward hacking (Goodhart’s law: when a measure becomes a target, it ceases to be a good measure), and “as an AI language model, I cannot…” — RLHF scar tissue.</p>
+<p>Variant worth knowing: Anthropic’s Constitutional AI (also late 2022) — replace much of the human ranking with the model critiquing itself against a short list of principles written in plain English (RLAIF). It makes the values <em>legible</em> — you can read the constitution — but legible still means someone chose. Whose values? That question doesn’t go away.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-weights-get-out" class="slide level2">
+<h2>2023: The Weights Get Out</h2>
+<div class="era-tagline">
+<p>The year AI escaped the API</p>
+</div>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div style="font-size: 0.82em;">
+<ul>
+<li class="fragment">Feb 2023: Meta’s <strong>Llama</strong> weights leak within a week of release</li>
+<li class="fragment"><strong>Open weights ≠ open source</strong>: you get the baked cake, not the recipe</li>
+<li class="fragment">Quantisation (<code>llama.cpp</code>): frontier-class models on a laptop</li>
+<li class="fragment">This afternoon you’ll use <strong>self-hosted</strong> models — this is why that’s possible</li>
+</ul>
+</div>
+</div><div class="column" style="width:40%;">
+<p><img data-src="./images/tl-cake.png" style="display: block; margin: 0.5em auto 0 auto;;width:82.0%" alt="Hands pass a finished three-layer cake through an open door while the recipe book stays locked in a cabinet — open weights without the recipe."></p>
+</div></div>
+<aside class="notes">
+<p>Until 2023, frontier models lived behind APIs — you could only knock and ask a question through the mail slot. February 2023: Meta releases Llama to researchers; within about a week the weights are torrented to the world. July 2023: Llama 2 is deliberately open for commercial use. The mail slot was gone — people had the whole door.</p>
+<p>Two ideas to keep:</p>
+<p>Open weights is not open source. The weights are the finished, baked cake — you can run it and fine-tune it, but you don’t get the recipe: training data, code, process. You can’t reproduce or fully audit it.</p>
+<p>Quantisation: store each weight in fewer bits — 4 instead of 16 — like a more compressed JPEG. Georgi Gerganov’s llama.cpp put serious models on MacBooks. That plus ollama is why <code>ollama run</code> on your laptop works with the network cable pulled.</p>
+<p>This matters directly for you: the hands-on session runs on Cambridge’s self-hosted LLM service — open-weight models (Devstral, Qwen) running on university hardware. Data sovereignty, cost, and reproducibility arguments all flow from this moment. The DeepSeek shock of January 2025 (frontier-competitive open weights, trained with MoE + distillation at a fraction of the assumed cost) pushed the same door further open.</p>
+<p>The dark side, honestly stated: open weights means anyone can fine-tune the safety training right back out in a few hours. The same fact wearing two faces.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-goldfish-problem-fix-1-rag" class="slide level2">
+<h2>The Goldfish Problem, Fix #1 — RAG</h2>
+<div class="era-tagline">
+<p>Giving a frozen model an open book</p>
+</div>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div style="font-size: 0.82em;">
+<ul>
+<li class="fragment">The model is frozen and stateless — and it <em>bluffs</em> (plausible ≠ correct)</li>
+<li class="fragment">Fine-tuning is the wrong fix: knowledge dissolves into the weights like sugar into water</li>
+<li class="fragment">RAG: chunk → embed → store; at question time retrieve top-k and put it <strong>in the context</strong></li>
+<li class="fragment">Don’t change the model — change what it can <em>see</em></li>
+</ul>
+</div>
+</div><div class="column" style="width:40%;">
+<p><img data-src="./images/tl-goldfish.png" style="display: block; margin: 0.5em auto 0 auto;;width:82.0%" alt="A goldfish in a bowl sits at an exam desk beside a large open reference book — the frozen model taking an open-book exam."></p>
+</div></div>
+<aside class="notes">
+<p>Remember the summary slide: the model is a goldfish — stateless, frozen at its training cutoff, and it will confidently invent a config file that doesn’t exist. The tone is flawless; the content is fiction. This falls straight out of next-token prediction.</p>
+<p>RAG (Retrieval-Augmented Generation, Lewis et al.&nbsp;2020 — the idea predates the chatbot wave) is the closed-book exam turned open-book. The pipeline: split your documents into chunks, embed each chunk (2013’s “meaning becomes location”, industrialised), store the vectors in a vector database. At question time: embed the question, nearest-neighbour search for the most similar chunks, stuff them into the prompt, and instruct the model to answer from them — with citations.</p>
+<p>We didn’t make the model know more — we gave it somewhere to look.</p>
+<p>The limit: RAG is only as good as its retrieval. Bad retrieval makes it authoritatively incorrect — the garbage arrives wearing a source link. Similarity is not the same as relevance, chunking is fiddly, and the context window caps how much you can show it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="tool-use-the-chatbot-grows-hands" class="slide level2">
+<h2>2023: Tool Use — The Chatbot Grows Hands</h2>
+<div class="era-tagline">
+<p>The model never runs anything. It writes the ticket.</p>
+</div>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div style="font-size: 0.82em;">
+<ol type="1">
+<li class="fragment">You hand the model a <strong>menu</strong> of tools</li>
+<li class="fragment">It emits a <strong>structured request</strong> — data, not prose: <code>get_weather(city="Cambridge")</code></li>
+<li class="fragment">Your <strong>harness</strong> runs the real function</li>
+<li class="fragment">The result goes back into the context; the model writes the answer</li>
+</ol>
+</div>
+</div><div class="column" style="width:40%;">
+<p><img data-src="./images/tl-hands.png" style="display: block; margin: 0.5em auto 0 auto;;width:82.0%" alt="A chef robot writes an order ticket and clips it to the kitchen rail; hands on the other side of the pass take the ticket to the stove — the model writes the ticket, the harness cooks."></p>
+</div></div>
+<aside class="notes">
+<p>The model still can’t <em>do</em> anything — tool use is stagecraft built around that limitation. It never executes code; it emits a structured tool call, the surrounding framework executes it, and the result is appended back into the context for the model to re-reason with.</p>
+<p>Division of labour worth memorising: the model is the <em>reasoner</em>, the tools are the <em>hands</em>, the harness is the <em>nervous system</em> connecting them. Like a chef writing a ticket and clipping it to the rail rather than cooking the dish.</p>
+<p>Timeline: ReAct (2022) showed reasoning + acting interleaved cuts hallucination; Toolformer (Feb 2023) let a model teach itself when to call tools; OpenAI shipped function calling June 2023; Anthropic’s tool use went GA 2024. In about eighteen months, the chatbot grew hands.</p>
+<p>“Structure is knowledge” one more time: a bounded menu of tools tells the model something true about the world, and a tool result yanks it back down to the ground — the closest thing we have to an antidote to hallucination.</p>
+<p>The sharp edge arrives on the same wire: we handed real-world power to a system whose defining trait is confident plausibility. Wrong tool, hallucinated arguments, and above all prompt injection — the model reads instructions and data as the same stream of text. Hold that thought for the concerns section.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-agent-loop" class="slide level2">
+<h2>2023–24: The Agent Loop</h2>
+<div class="era-tagline">
+<p>An agent is scaffolding and a loop around an LLM</p>
+</div>
+<div style="font-size: 0.9em; line-height: 1.4;">
+<ul>
+<li class="fragment">LLM: The reasoning engine. It can plan, evaluate, or decide whether to “act” or “answer.”</li>
+<li class="fragment">System Prompt: Defines the persona, available tools, and operational boundaries.</li>
+<li class="fragment">Working memory: Maintains the state, including history, tool outputs, and the current goal.</li>
+<li class="fragment">Tools: External capabilities like web search, code execution, APIs, or connecting to RAG.</li>
+</ul>
+</div>
+<aside class="notes">
+<p>One tool call was never enough — almost nothing worth doing is one command. You find a bug by <em>doing</em>: read, run, read the failure, edit, re-run. Each step depends on what the last one revealed.</p>
+<p>So: put the model in a loop. Reason (just the next move), act (pick a tool), observe (reality talking back), reflect — repeat. Plan, act, observe, repeat. It’s cooking while tasting, not following a recipe with your eyes closed.</p>
+<ul>
+<li>The LLM is the core reasoning engine. CoT is a simple form of agentic reasoning. More complex agents evaluate their own output and decide whether to “act” (call a tool) or “answer” (respond to the user).</li>
+<li>The system prompt constrains the persona — a financial adviser agent shouldn’t give medical advice.</li>
+<li>Working memory is held in the context window; may need summarising as it grows.</li>
+<li>Tools let the LLM affect the outside world — via the harness, never directly.</li>
+</ul>
+<p>Crucially: the loop does not live in the model — a model does one forward pass. The loop lives in application code around it. The model is only half of an agent; the harness is the other half.</p>
+<p>Cautionary tale: AutoGPT (2023) — GPT-4 in an unscoped loop, 100k GitHub stars, and it faceplanted (~24% success on simple shopping tasks). Errors compound around the loop. Autonomy isn’t a switch you flip by putting a good model in a loop — agents work when the loop is <em>scoped</em>, with fences and feedback. That’s exactly what a good coding agent harness provides.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-agent-loop-1" class="slide level2">
+<h2>The Agent Loop</h2>
 <div style="margin-top: 3em;">
 <div class="cell" data-reveal="true" data-layout-align="default">
 <div class="cell-output-display">
@@ -1144,7 +1750,7 @@ flowchart LR
 <p>The context window is limited in size so we have to be quite strategic about what goes in there. We can’t include the entire internet or all our documentation.</p>
 <p>The LLM looks at the context window and decides: ‘Do I need a tool to answer this?’</p>
 <p>If the answer is ‘Yes,’ the agent doesn’t talk to the user yet. Instead, it outputs a specific string (a Tool Call) that the scaffolding recognises. The scaffolding then executes a Skill—like running a Python script or a RAG search—and appends the result back into the window.</p>
-<p>Only when the LLM decides it finally has enough information does it generate the final response for the user.”</p>
+<p>Only when the LLM decides it finally has enough information does it generate the final response for the user.</p>
 <p>The result of that tool—the data it found or the code it ran—is appended back into the Context Window.</p>
 <p>Even though LLMs are entirely stateless, this loop is how we ‘fake’ memory. The LLM now sees the original prompt, its own decision to use a tool, and the tool’s result. It ‘re-reasons’ with this new information.</p>
 <p>The LLM itself is stateless — all state lives in the context window. The “loop” is managed by the surrounding application code, not the model.</p>
@@ -1160,9 +1766,190 @@ flowchart LR
           display:block!important;
       }</style></aside>
 </section>
+<section id="nov-2024-mcp-a-universal-plug-for-agents" class="slide level2">
+<h2>Nov 2024: MCP — A Universal Plug for Agents</h2>
+<div class="timeline-strip">
+<p><span class="tl-stop">1958</span> <span class="tl-sep">›</span> <span class="tl-stop">2012</span> <span class="tl-sep">›</span> <span class="tl-stop">2017</span> <span class="tl-sep">›</span> <span class="tl-stop">2020</span> <span class="tl-sep">›</span> <span class="tl-stop">2022</span> <span class="tl-sep">›</span> <span class="tl-stop tl-now">2024</span> <span class="tl-sep">›</span> <span class="tl-stop">now</span></p>
+</div>
+<div class="columns">
+<div class="column" style="width:58%;">
+<div style="font-size: 0.85em;">
+<ul>
+<li class="fragment">The mess: every agent × every tool = a bespoke, brittle connector (<strong>N×M</strong>)</li>
+<li class="fragment">MCP: one open protocol between agents and tools (<strong>N+M</strong>)</li>
+<li class="fragment">Like USB for peripherals — or LSP for editors</li>
+<li class="fragment">Servers expose <strong>tools</strong> (act), <strong>resources</strong> (read), <strong>prompts</strong> (templates)</li>
+</ul>
+</div>
+</div><div class="column" style="width:42%;">
+<p><img data-src="./images/tl-plug.png" style="display: block; margin: 0.5em auto 0 auto;;width:88.0%" alt="Left: a chaotic tangle of cables between devices. Right: the same devices connected neatly through one central hub — N times M collapses to N plus M."></p>
+</div></div>
+<aside class="notes">
+<p>By 2024, everyone was writing the same integration over and over: this agent needs GitHub, that agent needs Slack, every pairing a bespoke connector. Not one hard problem — the same medium-hard problem solved N×M times.</p>
+<p>Anthropic shipped the Model Context Protocol as an open standard in late November 2024. The sharpest analogy for this audience is LSP: write one language server for Python and every editor that speaks LSP gets Python support for free. Write one MCP server for your instrument, your data store, your NetCDF files — and every MCP-speaking agent can use it. The grid collapses into two lists.</p>
+<p>An MCP server wraps one tool or data source; the MCP client lives in the agent. It standardises three primitives: tools (the function calling from 2023), resources (the read-context instinct from RAG), and prompts (reusable templates). Within a year it was adopted by OpenAI, Google DeepMind, and essentially every coding tool.</p>
+<p>This afternoon you will <em>build one</em> with fastMCP and wire it into opencode — including an MCP server that reads NetCDF files.</p>
+<p>Two caveats to carry in: sometimes the CLI the agent already knows (git, grep) beats a server — tool definitions cost context tokens. And a universal socket is a universal attack surface: treat a third-party MCP server the way you’d treat giving a new hire your production credentials.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="reasoning-models" class="slide level2">
+<h2>2024–25: Reasoning Models</h2>
+<div class="era-tagline">
+<p>The machine that learned to think first</p>
+</div>
+<div class="columns">
+<div class="column" style="width:58%;">
+<div style="font-size: 0.85em;">
+<ul>
+<li class="fragment">Old knob: more compute at <strong>training</strong> time</li>
+<li class="fragment">New knob: more compute at <strong>inference</strong> time — let it <em>think</em> per question</li>
+<li class="fragment">Chain-of-thought as scratch space, baked in via RL on verifiable answers</li>
+<li class="fragment">o1 (Sept 2024), DeepSeek-R1 (Jan 2025, open weights)</li>
+</ul>
+</div>
+</div><div class="column" style="width:42%;">
+<p><img data-src="./images/tl-scratchpad.png" style="display: block; margin: 0.5em auto 0 auto;;width:82.0%" alt="A robot works through a problem on a big sheet of scratch paper covered in diagrams, a lightbulb glowing overhead and a crumpled first attempt on the floor."></p>
+</div></div>
+<aside class="notes">
+<p>You’ve watched a model think — the pause, the “Thinking…” label. Same weights as the fast version; the difference is test-time compute.</p>
+<p>The mechanism: chain-of-thought (write out intermediate steps) boosts accuracy because the model uses its own output as scratch space — each written step gives it something firmer to stand on. Blurting vs.&nbsp;scratch paper. Reasoning models bake this in with reinforcement learning: reward chains that arrive at <em>correct</em> answers — easy to check automatically for maths and code. Underneath, it’s still the 1986 loop.</p>
+<p>Why this matters for your work: reasoning models are a tool you <em>aim</em>, not a default. 10–50x the tokens, and they’ll overthink trivial problems. Use them for the hard step, not the boilerplate.</p>
+<p>The unsettling limit: the visible trace is not guaranteed to be a faithful record of how the model actually reached its answer. It’s a plausible story told alongside the answer, in a font that looks like honesty. Read it as an argument to check, not a verdict to trust.</p>
+<p>(Also in this era: models stopped being just language models — CLIP and vision transformers let image patches be treated as tokens, which is why you can paste a screenshot of a stack trace and have it read. Extraordinary at the gist, unreliable on the exact — miscounts, invented text in dense screenshots.)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="coding-agents" class="slide level2">
+<h2>2025: Coding Agents</h2>
+<div class="timeline-strip">
+<p><span class="tl-stop">1958</span> <span class="tl-sep">›</span> <span class="tl-stop">2012</span> <span class="tl-sep">›</span> <span class="tl-stop">2017</span> <span class="tl-sep">›</span> <span class="tl-stop">2020</span> <span class="tl-sep">›</span> <span class="tl-stop">2022</span> <span class="tl-sep">›</span> <span class="tl-stop">2024</span> <span class="tl-sep">›</span> <span class="tl-stop tl-now">now</span></p>
+</div>
+<div class="era-tagline">
+<p>Where the whole timeline lands — and where this afternoon begins</p>
+</div>
+<div style="font-size: 0.9em;">
+<ul>
+<li class="fragment">Autocomplete (2021) → chat in the sidebar (2022) → <em>it just goes and does it</em> (2024+)</li>
+<li class="fragment">One tool = transformer + next-token + RLHF + tool use + agent loop + MCP</li>
+<li class="fragment">The harness is the other half: if the model is the brain, the harness is the body</li>
+<li class="fragment">The new cost: <strong>verification</strong> — code that looks right and isn’t, just as fast</li>
+</ul>
+</div>
+<aside class="notes">
+<p>This is where the whole timeline converges — and it’s exactly what you’ll use after the break.</p>
+<p>Three moves in the editor: first it finished your sentence (Copilot, 2021 — next-token prediction pointed at a keyboard). Then you could ask it things (instruction-tuned chat, 2022 — a brilliant advisor that never touched the keyboard). Now it goes and does it: opens files, edits, runs the tests, reads the failures, repeats.</p>
+<p>Count the stops it took: the transformer (2017), next-token prediction at scale (2018–20), instruction-following (2022), tool use (2023), the agent loop (2023–24), MCP (2024). Six stops on the timeline; one tool in your terminal.</p>
+<p>And the half nobody sees: the harness. Context management, tool wiring, scoping the loop, feeding back errors. When an agent fails at a task, the fix is at least as often in the harness as in the model — which is good news, because the harness is the part <em>you</em> control. That’s what the opencode session is really about.</p>
+<p>The honest cost: these tools produce code that looks right and isn’t, just as fast as code that is right. Your work shifts from typing to specifying, steering, and verifying — you move from “in the loop” to “on the loop”. The agent’s speed is not the ceiling on what you can build; your judgment is.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-timeline-in-one-slide" class="slide level2 smaller">
+<h2>The Timeline, In One Slide</h2>
+<div class="timeline-table" style="font-size: 0.75em;">
+<table class="caption-top">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 40%">
+<col style="width: 51%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>1958</td>
+<td>Perceptron</td>
+<td>learning by nudging dials</td>
+</tr>
+<tr class="even">
+<td>1986</td>
+<td>Backprop (after the first winter)</td>
+<td>learning who to blame</td>
+</tr>
+<tr class="odd">
+<td>2012</td>
+<td>AlexNet (after the second)</td>
+<td>structure is knowledge; then scale wins</td>
+</tr>
+<tr class="even">
+<td>2017</td>
+<td>Transformer</td>
+<td>attention, read in parallel</td>
+</tr>
+<tr class="odd">
+<td>2020</td>
+<td>GPT-3 + scaling laws</td>
+<td>the internet as a textbook</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td>ChatGPT (RLHF)</td>
+<td>the interface was the invention</td>
+</tr>
+<tr class="odd">
+<td>2023</td>
+<td>Open weights, RAG, tool use</td>
+<td>the chatbot grows hands</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>Agent loop, MCP</td>
+<td>the loop + a universal plug</td>
+</tr>
+<tr class="odd">
+<td>2025</td>
+<td>Reasoning models, coding agents</td>
+<td>think first; meet the work</td>
+</tr>
+</tbody>
+</table>
+</div>
+<aside class="notes">
+<p>The whole arc: a 1958 yes/no machine, taught who to blame in 1986, given structure in 1989, scale in 2012, parallel reading in 2017, the internet in 2018, manners in 2022, hands in 2023, a loop and a universal plug in 2024, and a scratchpad in 2025.</p>
+<p>Nothing on this table is magic. Each row is an understandable move standing on the previous one — and each one was an answer to a specific failure.</p>
+<p>Two things to carry into the afternoon: (1) the concepts you’ll touch — context windows, tool calls, MCP servers, skills — all sit in the last four rows; (2) when a tool misbehaves, you now know which layer to interrogate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="self-study-resources" class="slide level2">
 <h2>Self Study Resources</h2>
 <ul>
+<li>Cordero Core, <a href="https://medium.com/@corderocore"><em>How We Got Here</em></a> — the 25-part history of GenAI this talk is based on (Medium, weekly)</li>
 <li>3Blue1Brown, Language Models Explained:
 <ul>
 <li>Chapters <a href="https://youtu.be/LPZh9BOjkQs?si=AXb6kvl44CQqaCto">4</a>, <a href="https://youtu.be/wjZofJX0v4M?si=-gx_cV-et1yG3aFn">5</a>, <a href="https://youtu.be/eMlx5fFNoYc?si=V8gU3iIsRmNMMIsM">6</a>, <a href="https://youtu.be/eMlx5fFNoYc?si=x01rnOt7jnsku_pa">7</a></li>
@@ -1209,6 +1996,34 @@ flowchart LR
 <li>Ethical</li>
 <li>Environmental</li>
 </ul>
+</section>
+<section id="the-trust-problem" class="slide level2">
+<h2>The Trust Problem</h2>
+<div class="era-tagline">
+<p>Capability outran verification</p>
+</div>
+<ul>
+<li class="fragment">Benchmarks are proxies — and Goodhart applies: a measure made a target stops measuring</li>
+<li class="fragment">Benchmark contamination: the exam leaks into the training data</li>
+<li class="fragment">The weights are <em>grown</em>, not written — interpretability is still a young microscope</li>
+<li class="fragment">The posture: <strong>calibrated trust</strong> — check the diff, not the green tick</li>
+</ul>
+<aside class="notes">
+<p>The last stop on the timeline is the unresolved one. A model passes the eval suite, the demo lands, it ships — and two weeks later it does something in production no test caught.</p>
+<p>Evals like MMLU are fixed exams, and we read the score table like a report card. But Goodhart’s law bites: models optimised toward benchmarks aren’t the same as good models. Worse, benchmarks live on the internet, so they leak into training data — studies have found substantial contamination, with scores dropping double digits on fresh equivalents.</p>
+<p>Alignment (RLHF, Constitutional AI) shapes behaviour but can’t guarantee it: sycophancy, reward hacking, jailbreaks, prompt injection. And mechanistic interpretability — actually reading what’s inside the weights — is real but early: a very good microscope pointed at a cell for the first time.</p>
+<p>The 1958 perceptron you could fully understand. The thing writing your pull requests, you cannot — capability outran verification. The practical posture is neither blind adoption nor blanket refusal: calibrated trust. Review the diff, keep a human accountable, scope what you hand over — treat it like a sharp new hire. The discomfort is the correct response; the concerns on the next slides are where it bites.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="safety" class="slide level2">
 <h2>Safety</h2>
