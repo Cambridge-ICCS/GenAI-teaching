@@ -6,8 +6,9 @@
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
 This repository contains documentation, resources, and code for the `GenAI-teaching` session designed and delivered by Tom
-Meltzer (@TomMelt) and Matt Archer (@ma595) of [ICCS](https://cambridge-iccs.github.io/) and Cordero Core (@cdcore09). All
-materials, including slides, are available such that individuals can cover the course in their own time.
+Meltzer (@TomMelt) and Matt Archer (@ma595) of [ICCS](https://cambridge-iccs.github.io/) and Cordero Core (@cdcore09) of
+[SSEC](https://github.com/uw-ssec). All materials, including slides, are available such that individuals can cover the course in
+their own time.
 
 The course slides can be found here [GenAI-teaching](https://cambridge-iccs.github.io/GenAI-teaching).
 
@@ -81,25 +82,6 @@ Clone the repository locally:
 
 ```bash
 git clone https://github.com/Cambridge-ICCS/GenAI-teaching.git
-```
-
-### Rendering the slides (not required for this course)
-
-To render the slides locally you will need [Quarto](https://quarto.org/docs/get-started/).
-
-The required Quarto extensions can be installed with:
-
-```bash
-quarto add --no-prompt quarto-ext/attribution
-quarto add --no-prompt jmbuhr/quarto-qrcode
-quarto add --no-prompt quarto-ext/pointer
-quarto add --no-prompt herosi/pointer-sync
-```
-
-Then render with:
-
-```bash
-quarto render genai-teaching.qmd
 ```
 
 ## License
