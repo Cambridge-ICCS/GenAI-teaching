@@ -39,7 +39,7 @@ jobs:
 
       - name: Render Quarto Project
         run: |
-          # This takes an unreasonably long time
+          cd slides
           quarto add --no-prompt quarto-ext/attribution
           quarto add --no-prompt jmbuhr/quarto-qrcode
           quarto add --no-prompt quarto-ext/pointer
@@ -52,7 +52,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: pages-test # The branch the action should deploy to.
-          folder: . # The folder the action should deploy.
+          folder: slides    # The folder the action should deploy.
           dry-run: true    # Don't actually push to pages, just test if we can
 
       - name: Deploy pages for main branch
@@ -60,4 +60,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: . # The folder the action should deploy.
+          folder: slides    # The folder the action should deploy.
