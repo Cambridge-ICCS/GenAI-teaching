@@ -42,7 +42,7 @@ def get_variables(path: str) -> str:
 
 
 @mcp.tool()
-def get_variable_shape(path: str, variable_name: str) -> dict:
+def get_variable_shape(path: str, variable_name: str) -> dict | str:
     """
     Reads a NetCDF file from the given path and returns the shape of a specific
     variable.
@@ -54,9 +54,9 @@ def get_variable_shape(path: str, variable_name: str) -> dict:
     Returns:
         A dictionary containing the shape of the specified variable.
         Example: {'temperature': (365, 180, 360)}
-        Returns an error if the variable is not found.
+        Returns an error (as a string) if the variable is not found.
     """
-    pass
+    return dict()
 
 
 if __name__ == "__main__":
