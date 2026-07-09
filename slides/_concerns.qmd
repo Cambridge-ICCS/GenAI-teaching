@@ -1,10 +1,11 @@
 # Gen-AI Concerns
 
+- Trust
 - Safety
 - Ethical
 - Environmental
 
-## The Trust Problem
+## Trust
 
 ::: {.era-tagline}
 Capability outran verification
