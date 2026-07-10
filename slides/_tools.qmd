@@ -242,27 +242,41 @@ Try running the following command
 
 (15 minutes for exercise)
 
-## Skills vs. MCP
+## CLI {.center}
 
-So how do I choose between Skills vs MCP?
+Do we really need MCP or Skills?...
 
-::: {style="font-size: 70%;"}
+## CLI
 
-|                 | MCP Server                                                                                               | `SKILL.md` (Instruction)                                                 |
-| --              | ----                                                                                                     | ----                                                                     |
-| Primary Purpose | **Tool calling** -- Interact with external services or perform short actions.                            | **Domain Expertise** -- Provides workflows, rules, and domain knowledge. |
-| Context/Loading | **Loaded immediately** into context window (regardless of query) reducing effective context window size. | **Lazy loaded** when needed. Will still impact context window.           |
-| Timeout         | **Timeout ~ 1-2 minutes**. Ideal for short, quick function calls                                         | **No timeout**.                                                          |
+- Common CLI tools are already in model weights
+- No authentication
+- No configuration
+
+## CLI
+
+- Try asking model to run CLI commands
+- Don't need to be specific e.g., "are there any untracked files in this repo?"
+- What issues do you foresee?
+
+(5 minutes for exercise)
+
+## MCP vs CLI vs Skill
+
+So how do I choose between MCP, CLI and Skills?
+
+::: {style="font-size: 50%;"}
+
+|                 | MCP Server                                                                                               | CLI                                                                                 | `SKILL.md` (Instruction)                                                 |
+| --              | ----                                                                                                     | ----                                                                                | ----                                                                     |
+| Primary Purpose | **Tool calling** -- Need auth, permissions, audit trails, or remote access? Is data format important?    | **Raw commands** -- Run terminal tools the model already knows (git, grep, docker). | **Domain Expertise** -- Provides workflows, rules, and domain knowledge. |
+| Context/Loading | **Loaded immediately** into context window (regardless of query) reducing effective context window size. | **Zero cost** -- Knowledge is baked into model weights; no schemas loaded.          | **Lazy loaded** when needed. Will still impact context window.           |
+| Timeout         | **Timeout ~ 1-2 minutes**. Ideal for short, quick function calls                                         | **No timeout**.                                                                     | **No timeout**.                                                          |
 
 :::
 
-## Taking it further {.nostretch}
-
-- Live demo of profiling skill
-
-![](./images/skills-opencode-3.png){width=60% fig-align="center"}
-
-![](./images/skills-opencode-4.png){width=60% fig-align="center"}
+::: {.callout-note}
+For a more in-depth comparison check out Cordero's article ["MCP vs CLI: What Your Agents Should Be Using"](https://medium.com/@cdcore/mcp-vs-cli-what-your-agents-should-be-using-69eeb71828a9?sk=5beebb4e0f67b2f5a27845cdb1c50f7a)
+:::
 
 ## Taking it further
 
