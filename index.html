@@ -2509,60 +2509,83 @@ flowchart LR
 </ul>
 <p>(15 minutes for exercise)</p>
 </section>
-<section id="skills-vs.-mcp" class="slide level2">
-<h2>Skills vs.&nbsp;MCP</h2>
-<p>So how do I choose between Skills vs MCP?</p>
-<div style="font-size: 70%;">
-<table class="caption-top">
+<section id="cli" class="slide level2 center">
+<h2>CLI</h2>
+<p>Do we really need MCP or Skills?…</p>
+</section>
+<section id="cli-1" class="slide level2">
+<h2>CLI</h2>
+<ul>
+<li>Common CLI tools are already in model weights</li>
+<li>No authentication</li>
+<li>No configuration</li>
+</ul>
+</section>
+<section id="cli-2" class="slide level2">
+<h2>CLI</h2>
+<ul>
+<li>Try asking model to run CLI commands</li>
+<li>Don’t need to be specific e.g., “are there any untracked files in this repo?”</li>
+<li>What issues do you foresee?</li>
+</ul>
+<p>(5 minutes for exercise)</p>
+</section>
+<section id="mcp-vs-cli-vs-skill" class="slide level2">
+<h2>MCP vs CLI vs Skill</h2>
+<p>So how do I choose between MCP, CLI and Skills?</p>
+<div style="font-size: 50%;">
+<table class="caption-top" style="width:100%;">
 <colgroup>
-<col style="width: 20%">
-<col style="width: 40%">
-<col style="width: 40%">
+<col style="width: 14%">
+<col style="width: 28%">
+<col style="width: 28%">
+<col style="width: 28%">
 </colgroup>
 <thead>
 <tr class="header">
 <th></th>
 <th>MCP Server</th>
+<th>CLI</th>
 <th><code>SKILL.md</code> (Instruction)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Primary Purpose</td>
-<td><strong>Tool calling</strong> – Interact with external services or perform short actions.</td>
+<td><strong>Tool calling</strong> – Need auth, permissions, audit trails, or remote access? Is data format important?</td>
+<td><strong>Raw commands</strong> – Run terminal tools the model already knows (git, grep, docker).</td>
 <td><strong>Domain Expertise</strong> – Provides workflows, rules, and domain knowledge.</td>
 </tr>
 <tr class="even">
 <td>Context/Loading</td>
 <td><strong>Loaded immediately</strong> into context window (regardless of query) reducing effective context window size.</td>
+<td><strong>Zero cost</strong> – Knowledge is baked into model weights; no schemas loaded.</td>
 <td><strong>Lazy loaded</strong> when needed. Will still impact context window.</td>
 </tr>
 <tr class="odd">
 <td>Timeout</td>
 <td><strong>Timeout ~ 1-2 minutes</strong>. Ideal for short, quick function calls</td>
 <td><strong>No timeout</strong>.</td>
+<td><strong>No timeout</strong>.</td>
 </tr>
 </tbody>
 </table>
 </div>
-</section>
-<section id="taking-it-further" class="slide level2 nostretch">
-<h2>Taking it further</h2>
-<ul>
-<li>Live demo of profiling skill</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="./images/skills-opencode-3.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
-</figure>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="./images/skills-opencode-4.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
-</figure>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>For a more in-depth comparison check out Cordero’s article <a href="https://medium.com/@cdcore/mcp-vs-cli-what-your-agents-should-be-using-69eeb71828a9?sk=5beebb4e0f67b2f5a27845cdb1c50f7a">“MCP vs CLI: What Your Agents Should Be Using”</a></p>
+</div>
+</div>
 </div>
 </section>
-<section id="taking-it-further-1" class="slide level2">
+<section id="taking-it-further" class="slide level2">
 <h2>Taking it further</h2>
 <ul>
 <li><code>opencode</code> and other genAI tools often support agents/sub-agents (see <a href="https://opencode.ai/docs/agents/#subagents">docs</a>)</li>
