@@ -1,3 +1,13 @@
+## In collaboration with {.center}
+
+::: {.partner-logos}
+[Institutions behind this session]{.partner-label}
+
+![University of Cambridge — Institute of Computing for Climate Science](images/combined_logo.png){height=90}
+![University of Washington](images/university-of-washington.svg){height=90}
+![Scientific Software Engineering Center, University of Washington](images/uw-ssec-logo.svg){height=90}
+:::
+
 ## Plan
 
 - How we got here: ~70 years of GenAI as a timeline
