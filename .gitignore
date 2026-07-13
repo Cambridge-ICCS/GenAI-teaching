@@ -1,2 +1,10 @@
 /.claude/
 .env
+
+# macOS
+.DS_Store
+
+# Quarto render artifacts (CI installs extensions and renders in slides/)
+/_extensions/
+/genai-teaching_files/
+/index.html
