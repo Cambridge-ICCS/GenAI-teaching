@@ -50,7 +50,7 @@ from the virtual keys page: `Virtual Keys` $\rightarrow$ `Create New Key`.
   "provider": {
     "cam-llm": {
       "options": {
-        "baseURL": "https://llm.hpc.cam.ac.uk/v1",
+        "baseURL": "https://llm.science.ai.cam.ac.uk/v1",
         "apiKey": "{env:CAMLLM_API_KEY}"
       },
       "models": {
