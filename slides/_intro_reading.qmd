@@ -1,4 +1,4 @@
-## Self Study Resources
+# Self Study Resources
 
 - Cordero Core, [*How We Got Here*](https://medium.com/@corderocore) — the 25-part history of GenAI this talk is based on (Medium, weekly)
 - 3Blue1Brown, Language Models Explained:

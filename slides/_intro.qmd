@@ -48,7 +48,7 @@ A recurring pattern to watch for: at almost every stop, the idea wasn't wrong â€
 :::
 
 
-## {#act-1 background-color="#003b6f"}
+# {#act-1 background-color="#003b6f"}
 
 ::: {style="text-align: center; margin-top: 2.2em;"}
 [Act I]{.act-kicker}
@@ -275,7 +275,7 @@ Rosenblatt (d. 1971) and Rumelhart (d. 2011) never saw it.
 :::
 
 
-## {#act-2 background-color="#003b6f"}
+# {#act-2 background-color="#003b6f"}
 
 ::: {style="text-align: center; margin-top: 2.2em;"}
 [Act II]{.act-kicker}
