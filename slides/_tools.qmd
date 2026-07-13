@@ -54,13 +54,10 @@ from the virtual keys page: `Virtual Keys` $\rightarrow$ `Create New Key`.
         "apiKey": "{env:CAMLLM_API_KEY}"
       },
       "models": {
-        "mistralai/Devstral-2-123B-Instruct-2512": {
-          "name": "mistralai/Devstral-2-123B-Instruct-2512"
-        },
-        "Qwen/Qwen3-VL-30B-A3B-Instruct": {
-          "name": "Qwen/Qwen3-VL-30B-A3B-Instruct",
+        "Qwen/Qwen3.6-27B-FP8": {
+          "name": "Qwen/Qwen3.6-27B-FP8",
           "modalities": { "input": ["text", "image"], "output": ["text"] }
-        }
+        },
       }
     }
   },
