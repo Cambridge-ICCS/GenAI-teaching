@@ -3,9 +3,15 @@
 ::: {.partner-logos}
 [Institutions behind this session]{.partner-label}
 
-![University of Cambridge — Institute of Computing for Climate Science](images/combined_logo.png){height=90}
-![University of Washington](images/university-of-washington.svg){height=90}
-![Scientific Software Engineering Center, University of Washington](images/uw-ssec-logo.svg){height=90}
+::: {.partner-tier .partner-host}
+![](images/combined_logo.png){fig-alt="University of Cambridge — Institute of Computing for Climate Science"}
+:::
+
+::: {.partner-tier .partner-affiliates}
+![University of Washington](images/university-of-washington.svg)
+![Scientific Software Engineering Center, University of Washington](images/uw-ssec-logo.svg)
+![eScience Institute, University of Washington](images/escience.png)
+:::
 :::
 
 ## Plan
@@ -45,6 +51,27 @@ This part of the talk is adapted from my series "How We Got Here" — a 25-part 
 The tools you'll use this afternoon — coding agents, MCP servers, skills — look like magic if you meet them cold. They stop looking like magic once you see the chain of problems and fixes that produced them. None of it was ever magic: a sequence of understandable moves, each one standing on the last.
 
 A recurring pattern to watch for: at almost every stop, the idea wasn't wrong — it was early. And the field repeatedly confused "I can't see how" with "it can't be done."
+:::
+
+
+## If You Remember Nothing Else
+
+::: {.incremental style="font-size: 1.05em; line-height: 1.9; margin-top: 1.5em;"}
+1. **Every AI model is the same machine.**
+2. **Your model is only as good as your harness.**
+3. **Generative AI tools are powerful but fragile.**
+:::
+
+::: {.notes}
+Before we start the timeline, here's the whole talk in three sentences. If you drift off after lunch, these are the three things to leave with.
+
+One: every AI model is the same machine. From the 1958 perceptron to the frontier model you'll use this afternoon, it's the same unit — inputs, weights, sum, threshold — arranged and scaled, trained by the same loop. Once you see that, none of it is magic.
+
+Two: your model is only as good as your harness. The model just predicts the next token; everything useful — tools, context, MCP servers, skills — comes from the machinery you wrap around it. That's why the second half of today is about the harness, not the model.
+
+Three: generative AI tools are powerful but fragile. They can do remarkable work and fail silently in the same minute — hallucination, prompt injection, brittle context. Use them, but verify them.
+
+Everything on the timeline is evidence for one of these three.
 :::
 
 
