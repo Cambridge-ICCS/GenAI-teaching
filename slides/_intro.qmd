@@ -8,7 +8,7 @@
 :::
 
 ::: {.partner-tier .partner-affiliates}
-![University of Washington](images/university-of-washington.svg)
+![University of Washington](images/university-of-washington.png)
 ![Scientific Software Engineering Center, University of Washington](images/uw-ssec-logo.svg)
 ![eScience Institute, University of Washington](images/escience.png)
 :::
