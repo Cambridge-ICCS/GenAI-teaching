@@ -48,7 +48,7 @@ And these are just from a software perspective...
 - Massive increase in [water & energy consumption](https://arxiv.org/pdf/2505.09598v5)
 - Accelerating E-Waste and Hardware Churn
 
-# Opinion
+## Opinion
 
 - GenAI usage has parallels to HPC
 - If genAI can help science -- I want to make it:

@@ -1,4 +1,4 @@
-## {#act-3 background-color="#003b6f"}
+# {#act-3 background-color="#003b6f"}
 
 ::: {style="text-align: center; margin-top: 2.2em;"}
 [Act III]{.act-kicker}
