@@ -118,18 +118,16 @@
   font-weight: bold;
 }
 
-/*-- Partner / institution logo row --*/
+/*-- Partner / institution logos: host on top, UW family beneath --*/
 .partner-logos {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.6em;
+  gap: 0.9em;
   margin-top: 0.6em;
 }
 
 .partner-logos img {
-  height: 90px;
   width: auto;
   margin: 0 !important;
   background: none !important;
@@ -137,14 +135,28 @@
   box-shadow: none !important;
 }
 
+.partner-tier p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.8em;
+  margin: 0;
+}
+
+.partner-host img {
+  height: 105px;
+}
+
+.partner-affiliates img {
+  height: 70px;
+}
+
 .partner-label {
-  flex-basis: 100%;
   text-align: center;
   font-size: 0.5em;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: #495057;
-  margin-bottom: 0.2em;
 }
 
 /*-- Recap timeline table --*/
