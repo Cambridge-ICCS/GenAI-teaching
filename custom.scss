@@ -118,6 +118,35 @@
   font-weight: bold;
 }
 
+/*-- Partner / institution logo row --*/
+.partner-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.6em;
+  margin-top: 0.6em;
+}
+
+.partner-logos img {
+  height: 90px;
+  width: auto;
+  margin: 0 !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.partner-label {
+  flex-basis: 100%;
+  text-align: center;
+  font-size: 0.5em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #495057;
+  margin-bottom: 0.2em;
+}
+
 /*-- Recap timeline table --*/
 .timeline-table td:first-child {
   font-family: monospace;
