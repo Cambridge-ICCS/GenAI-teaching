@@ -327,7 +327,12 @@ For a more in-depth comparison check out Cordero's article ["MCP vs CLI: What Yo
 # Thanks for listening
 
 ::: {.partner-logos}
-![University of Cambridge — Institute of Computing for Climate Science](images/combined_logo.png){height=90}
-![University of Washington](images/university-of-washington.svg){height=90}
-![Scientific Software Engineering Center, University of Washington](images/uw-ssec-logo.svg){height=90}
+::: {.partner-tier .partner-host}
+![](images/combined_logo.png){fig-alt="University of Cambridge — Institute of Computing for Climate Science"}
+:::
+
+::: {.partner-tier .partner-affiliates}
+![University of Washington](images/university-of-washington.png)
+![Scientific Software Engineering Center, University of Washington](images/uw-ssec-logo.svg)
+:::
 :::
