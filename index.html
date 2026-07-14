@@ -2163,21 +2163,6 @@ flowchart LR
 </div>
 </div>
 </section>
-<section id="where-is-the-config-file" class="slide level2">
-<h2>Where is the Config File?</h2>
-<p>The <code>opencode</code> config lives at:</p>
-<ul>
-<li><strong>Mac / Linux:</strong> <code>~/.config/opencode/opencode.json</code>
-<ul>
-<li>If <code>$XDG_CONFIG_HOME</code> is set, it uses <code>$XDG_CONFIG_HOME/opencode/opencode.json</code> instead</li>
-</ul></li>
-<li><strong>Windows:</strong> <code>%USERPROFILE%\.config\opencode\opencode.json</code>
-<ul>
-<li>This is <code>.config</code> in your user profile, <strong>not</strong> <code>%APPDATA%</code></li>
-<li>Run <code>opencode</code> once to auto-create the directory, then check with <code>dir %USERPROFILE%\.config\opencode</code></li>
-</ul></li>
-</ul>
-</section>
 <section id="setting-the-api-key" class="slide level2">
 <h2>Setting the API Key</h2>
 <p>Add the key to your shell profile so it’s available every session:</p>
@@ -2208,6 +2193,21 @@ flowchart LR
 </div>
 </div>
 </div>
+</section>
+<section id="where-is-the-config-file" class="slide level2">
+<h2>Where is the Config File?</h2>
+<p>The <code>opencode</code> config lives at:</p>
+<ul>
+<li><strong>Mac / Linux:</strong> <code>~/.config/opencode/opencode.json</code>
+<ul>
+<li>If <code>$XDG_CONFIG_HOME</code> is set, it uses <code>$XDG_CONFIG_HOME/opencode/opencode.json</code> instead</li>
+</ul></li>
+<li><strong>Windows:</strong> <code>%USERPROFILE%\.config\opencode\opencode.json</code>
+<ul>
+<li>This is <code>.config</code> in your user profile, <strong>not</strong> <code>%APPDATA%</code></li>
+<li>Run <code>opencode</code> once to auto-create the directory, then check with <code>dir %USERPROFILE%\.config\opencode</code></li>
+</ul></li>
+</ul>
 </section>
 <section id="opencode-configuration-1" class="slide level2">
 <h2>Opencode Configuration</h2>
