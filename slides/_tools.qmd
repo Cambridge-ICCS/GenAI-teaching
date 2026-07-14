@@ -40,6 +40,39 @@ If you already have access to UoC's LiteLLM
 from the virtual keys page: `Virtual Keys` $\rightarrow$ `Create New Key`.
 :::
 
+## Where is the Config File?
+
+The `opencode` config lives at:
+
+- **Mac / Linux:** `~/.config/opencode/opencode.json`
+  - If `$XDG_CONFIG_HOME` is set, it uses `$XDG_CONFIG_HOME/opencode/opencode.json` instead
+- **Windows:** `%USERPROFILE%\.config\opencode\opencode.json`
+  - This is `.config` in your user profile, **not** `%APPDATA%`
+  - Run `opencode` once to auto-create the directory, then check with `dir %USERPROFILE%\.config\opencode`
+
+## Setting the API Key
+
+Add the key to your shell profile so it's available every session:
+
+- **macOS (zsh):**
+```bash
+echo 'export CAMLLM_API_KEY="your-key-here"' >> ~/.zshrc
+source ~/.zshrc
+```
+- **Linux (bash):**
+```bash
+echo 'export CAMLLM_API_KEY="your-key-here"' >> ~/.bashrc
+source ~/.bashrc
+```
+- **Windows (PowerShell):**
+```powershell
+[Environment]::SetEnvironmentVariable("CAMLLM_API_KEY", "your-key-here", "User")
+```
+
+::: {.callout-note}
+Remember to **replace** `"your-key-here"` with your actual key.
+:::
+
 ## Opencode Configuration
 
 - edit/create `~/.config/opencode/opencode.json`
